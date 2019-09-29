@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/Popcorn/Popcorn/master/Logo.png?token=ACEMF4VBOQ5JSXYDJPUEIV25AOKIW" height="128" width="128" alt="Logo" />
+  <img src="https://raw.githubusercontent.com/bbougot/Popcorn/master/Logo.png" height="128" width="128" alt="Logo" />
   <br />
   Popcorn
 </h1>
