@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>net472</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AssemblyTitle>Popcorn.Utils</AssemblyTitle>
+    <Product>Popcorn</Product>
+    <Copyright>Copyright © 2019</Copyright>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <Platforms>x86</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.af" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.ar" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.bg" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.bn-BD" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.cs" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.da" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.de" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.el" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.es" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.fa" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.fi-FI" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.fr" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.fr-BE" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.he" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.hr" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.hu" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.id" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.it" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.ja" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.lv" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.ms-MY" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.mt" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.nb" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.nb-NO" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.nl" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.pl" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.pt" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.ro" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.ru" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.sk" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.sl" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.sr" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.sr-Latn" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.sv" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.tr" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.uk" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.uz-Cyrl-UZ" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.uz-Latn-UZ" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.vi" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.zh-CN" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.zh-Hans" Version="2.6.2" />
+    <PackageReference Include="Humanizer.Core.zh-Hant" Version="2.6.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+</Project>
