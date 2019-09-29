@@ -29,22 +29,19 @@ Popcorn is a simple application which lets you watch any movie or TV show instan
 ## Supported platforms
 Windows 7+ is supported (Windows 7, 8, 8.1, 10).
 
-## Installation
-Download installer [here](https://github.com/Popcorn/Popcorn/releases/download/v1.0.0/PopcornInstaller.exe) 
-
 ## Mockups
 
 ### Home Page
-![Home Page](https://github.com/Popcorn/Popcorn/blob/master/Screenshots/Screen1.jpg)
+![Home Page](https://raw.githubusercontent.com/bbougot/Popcorn/master/Screenshots/Screen1.jpg)
 
 ### Movie Page
-![Movie Page](https://github.com/Popcorn/Popcorn/blob/master/Screenshots/Screen2.jpg)
+![Movie Page](https://raw.githubusercontent.com/bbougot/Popcorn/master/Screenshots/Screen2.jpg)
 
 ### Show Page
-![Show Page](https://github.com/Popcorn/Popcorn/blob/master/Screenshots/Screen3.jpg)
+![Show Page](https://raw.githubusercontent.com/bbougot/Popcorn/master/Screenshots/Screen3.jpg)
 
 ### Actor Page
-![Show Page](https://github.com/Popcorn/Popcorn/blob/master/Screenshots/Screen4.jpg)
+![Show Page](https://raw.githubusercontent.com/bbougot/Popcorn/master/Screenshots/Screen4.jpg)
 
 ## License
 If you distribute a copy or make a fork of the project, you have to credit this project as source.
