@@ -20,6 +20,7 @@ using Popcorn.Services.Subtitles;
 using Popcorn.Events;
 using Popcorn.Services.Cache;
 using Popcorn.ViewModels.Pages.Home.Movie.Details;
+using System.Threading;
 
 namespace Popcorn.ViewModels.Pages.Player
 {
@@ -102,6 +103,8 @@ namespace Popcorn.ViewModels.Pages.Player
         /// The playing progress
         /// </summary>
         private readonly IProgress<double> _playingProgress;
+
+        private readonly SemaphoreSlim Semaphore = new SemaphoreSlim(1, 1);
 
         /// <summary>
         /// Initializes a new instance of the MediaPlayerViewModel class.
@@ -316,8 +319,10 @@ namespace Popcorn.ViewModels.Pages.Player
 
         public async Task ChangeSubtitle(Subtitle subtitle)
         {
+            if (Semaphore.CurrentCount == 0) return;
             try
             {
+                await Semaphore.WaitAsync();
                 if (subtitle.LanguageName !=
                     LocalizationProviderHelper.GetLocalizedValue<string>("NoneLabel") &&
                     subtitle.LanguageName != LocalizationProviderHelper.GetLocalizedValue<string>("CustomLabel"))
@@ -355,6 +360,10 @@ namespace Popcorn.ViewModels.Pages.Player
             catch (Exception ex)
             {
                 Logger.Trace(ex);
+            }
+            finally
+            {
+                Semaphore.Release();
             }
         }
 

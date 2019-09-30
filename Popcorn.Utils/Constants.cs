@@ -23,7 +23,7 @@ namespace Popcorn.Utils
         /// <summary>
         /// Endpoint to API
         /// </summary>
-        public const string PopcornApi = "https://popcorn-app.azurewebsites.net/api";
+        public const string PopcornApi = "https://popcornapi.azurewebsites.net/api";
 
         /// <summary>
         /// Open Subtitles User Agent
@@ -90,7 +90,7 @@ namespace Popcorn.Utils
         /// <summary>
         /// Url of the server updates
         /// </summary>
-        public const string GithubRepository = "https://github.com/popcorn-windows/popcorn";
+        public const string GithubRepository = "https://github.com/bbougot/Popcorn";
 
         /// <summary>
         /// Default request timeout

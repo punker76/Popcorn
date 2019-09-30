@@ -1,1 +1,1 @@
-The project is hosted [here](https://github.com/Popcorn/Popcorn).
+The project is hosted [here](https://github.com/bbougot/Popcorn).

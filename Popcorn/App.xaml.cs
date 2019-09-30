@@ -51,7 +51,6 @@ namespace Popcorn
         {
             DispatcherHelper.Initialize();
             LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
-            BlobCache.ApplicationName = "Popcorn";
         }
 
         /// <summary>
@@ -79,7 +78,7 @@ namespace Popcorn
             Unosquare.FFME.Library.FFmpegDirectory = Constants.FFmpegPath;
             try
             {
-                SQLitePCL.Batteries.Init();
+                Akavache.Sqlite3.Registrations.Start("Popcorn", () => SQLitePCL.Batteries_V2.Init());
                 var userService = SimpleIoc.Default.GetInstance<IUserService>();
                 await userService.GetUser();
             }

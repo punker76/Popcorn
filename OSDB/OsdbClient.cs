@@ -138,7 +138,7 @@ namespace OSDB
 
         private async Task DecodeAndWriteFile(string destinationfile, byte[] decompressed)
         {
-            using (var subFile = new StreamWriter(destinationfile, false, Encoding.UTF8))
+            using (var subFile = File.Open(destinationfile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
                 var cdo = new CharsetDetectionObserver();
                 var detector = new Detector(6);
@@ -151,7 +151,8 @@ namespace OSDB
                     : (string.IsNullOrEmpty(probable) || probable == "nomatch" ? "UTF-8" : probable));
 
                 var str = Encoding.Convert(enc, Encoding.UTF8, decompressed);
-                await subFile.WriteAsync(WebUtility.HtmlDecode(Encoding.UTF8.GetString(str)));
+                var output = Encoding.UTF8.GetBytes(WebUtility.HtmlDecode(Encoding.UTF8.GetString(str)));
+                await subFile.WriteAsync(output, 0, output.Length);
             }
         }
 

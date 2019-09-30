@@ -260,8 +260,10 @@ namespace Popcorn.UserControls.Player
                     var url = new Uri(vm.CurrentSubtitle.FilePath);
                     if (url.IsFile || url.IsUnc)
                     {
-                        if (System.IO.File.Exists(vm.CurrentSubtitle.FilePath))
+                        if (System.IO.File.Exists(vm.CurrentSubtitle.FilePath) && e.Options.SubtitlesSource != vm.CurrentSubtitle.FilePath)
+                        {
                             e.Options.SubtitlesSource = vm.CurrentSubtitle.FilePath;
+                        }
                     }
                 }
                 catch (Exception ex)

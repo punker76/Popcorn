@@ -5,16 +5,26 @@
         <version>1.0.0</version>
         <title>Popcorn</title>
         <authors>Popcorn</authors>
-        <projectUrl>https://github.com/Popcorn/Popcorn</projectUrl>
+        <projectUrl>https://github.com/bbougot/Popcorn</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/Popcorn/Popcorn/master/Popcorn/icon.ico</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A Powerful and Fast Popcorn Time Client</description>
         <releaseNotes>Initial release.</releaseNotes>
     </metadata>
     <files>        
+        <file src="af\Humanizer.resources.dll" target="lib\net45\af\Humanizer.resources.dll" />
+        <file src="ar\Humanizer.resources.dll" target="lib\net45\ar\Humanizer.resources.dll" />
+        <file src="bg\Humanizer.resources.dll" target="lib\net45\bg\Humanizer.resources.dll" />
+        <file src="bn-BD\Humanizer.resources.dll" target="lib\net45\bn-BD\Humanizer.resources.dll" />
+        <file src="cs\Humanizer.resources.dll" target="lib\net45\cs\Humanizer.resources.dll" />
+        <file src="da\Humanizer.resources.dll" target="lib\net45\da\Humanizer.resources.dll" />
+        <file src="de\Humanizer.resources.dll" target="lib\net45\de\Humanizer.resources.dll" />
         <file src="de-DE\Popcorn.resources.dll" target="lib\net45\de-DE\Popcorn.resources.dll" />
+        <file src="el\Humanizer.resources.dll" target="lib\net45\el\Humanizer.resources.dll" />
         <file src="en\Popcorn.resources.dll" target="lib\net45\en\Popcorn.resources.dll" />
         <file src="es\Popcorn.resources.dll" target="lib\net45\es\Popcorn.resources.dll" />
+        <file src="es\Humanizer.resources.dll" target="lib\net45\es\Humanizer.resources.dll" />
+        <file src="fa\Humanizer.resources.dll" target="lib\net45\fa\Humanizer.resources.dll" />
         <file src="FFmpeg\avcodec-58.dll" target="lib\net45\FFmpeg\avcodec-58.dll" />
         <file src="FFmpeg\avdevice-58.dll" target="lib\net45\FFmpeg\avdevice-58.dll" />
         <file src="FFmpeg\avfilter-7.dll" target="lib\net45\FFmpeg\avfilter-7.dll" />
@@ -24,60 +34,161 @@
         <file src="FFmpeg\SoundTouch.dll" target="lib\net45\FFmpeg\SoundTouch.dll" />
         <file src="FFmpeg\swresample-3.dll" target="lib\net45\FFmpeg\swresample-3.dll" />
         <file src="FFmpeg\swscale-5.dll" target="lib\net45\FFmpeg\swscale-5.dll" />
-        <file src="fr\Popcorn.resources.dll" target="lib\net45\fr\Popcorn.resources.dll" />        
-        <file src="x64\e_sqlite3.dll" target="lib\net45\x64\e_sqlite3.dll" />
-		<file src="x64\SQLite.Interop.dll" target="lib\net45\x64\SQLite.Interop.dll" />
-        <file src="x86\e_sqlite3.dll" target="lib\net45\x86\e_sqlite3.dll" />
-		<file src="x86\SQLite.Interop.dll" target="lib\net45\x86\SQLite.Interop.dll" />        
-        <file src="api-ms-win-core-console-l1-1-0.dll" target="lib\net45\api-ms-win-core-console-l1-1-0.dll" />
-        <file src="api-ms-win-core-datetime-l1-1-0.dll" target="lib\net45\api-ms-win-core-datetime-l1-1-0.dll" />
-        <file src="api-ms-win-core-debug-l1-1-0.dll" target="lib\net45\api-ms-win-core-debug-l1-1-0.dll" />
-        <file src="api-ms-win-core-errorhandling-l1-1-0.dll" target="lib\net45\api-ms-win-core-errorhandling-l1-1-0.dll" />
-        <file src="api-ms-win-core-file-l1-1-0.dll" target="lib\net45\api-ms-win-core-file-l1-1-0.dll" />
-        <file src="api-ms-win-core-file-l1-2-0.dll" target="lib\net45\api-ms-win-core-file-l1-2-0.dll" />
-        <file src="api-ms-win-core-file-l2-1-0.dll" target="lib\net45\api-ms-win-core-file-l2-1-0.dll" />
-        <file src="api-ms-win-core-handle-l1-1-0.dll" target="lib\net45\api-ms-win-core-handle-l1-1-0.dll" />
-        <file src="api-ms-win-core-heap-l1-1-0.dll" target="lib\net45\api-ms-win-core-heap-l1-1-0.dll" />
-        <file src="api-ms-win-core-interlocked-l1-1-0.dll" target="lib\net45\api-ms-win-core-interlocked-l1-1-0.dll" />
-        <file src="api-ms-win-core-libraryloader-l1-1-0.dll" target="lib\net45\api-ms-win-core-libraryloader-l1-1-0.dll" />
-        <file src="api-ms-win-core-localization-l1-2-0.dll" target="lib\net45\api-ms-win-core-localization-l1-2-0.dll" />
-        <file src="api-ms-win-core-memory-l1-1-0.dll" target="lib\net45\api-ms-win-core-memory-l1-1-0.dll" />
-        <file src="api-ms-win-core-namedpipe-l1-1-0.dll" target="lib\net45\api-ms-win-core-namedpipe-l1-1-0.dll" />
-        <file src="api-ms-win-core-processenvironment-l1-1-0.dll" target="lib\net45\api-ms-win-core-processenvironment-l1-1-0.dll" />
-        <file src="api-ms-win-core-processthreads-l1-1-0.dll" target="lib\net45\api-ms-win-core-processthreads-l1-1-0.dll" />
-        <file src="api-ms-win-core-processthreads-l1-1-1.dll" target="lib\net45\api-ms-win-core-processthreads-l1-1-1.dll" />
-        <file src="api-ms-win-core-profile-l1-1-0.dll" target="lib\net45\api-ms-win-core-profile-l1-1-0.dll" />
-        <file src="api-ms-win-core-rtlsupport-l1-1-0.dll" target="lib\net45\api-ms-win-core-rtlsupport-l1-1-0.dll" />
-        <file src="api-ms-win-core-string-l1-1-0.dll" target="lib\net45\api-ms-win-core-string-l1-1-0.dll" />
-        <file src="api-ms-win-core-synch-l1-1-0.dll" target="lib\net45\api-ms-win-core-synch-l1-1-0.dll" />
-        <file src="api-ms-win-core-synch-l1-2-0.dll" target="lib\net45\api-ms-win-core-synch-l1-2-0.dll" />
-        <file src="api-ms-win-core-sysinfo-l1-1-0.dll" target="lib\net45\api-ms-win-core-sysinfo-l1-1-0.dll" />
-        <file src="api-ms-win-core-timezone-l1-1-0.dll" target="lib\net45\api-ms-win-core-timezone-l1-1-0.dll" />
-        <file src="api-ms-win-core-util-l1-1-0.dll" target="lib\net45\api-ms-win-core-util-l1-1-0.dll" />
-        <file src="api-ms-win-crt-conio-l1-1-0.dll" target="lib\net45\api-ms-win-crt-conio-l1-1-0.dll" />
-        <file src="api-ms-win-crt-convert-l1-1-0.dll" target="lib\net45\api-ms-win-crt-convert-l1-1-0.dll" />
-        <file src="api-ms-win-crt-environment-l1-1-0.dll" target="lib\net45\api-ms-win-crt-environment-l1-1-0.dll" />
-        <file src="api-ms-win-crt-filesystem-l1-1-0.dll" target="lib\net45\api-ms-win-crt-filesystem-l1-1-0.dll" />
-        <file src="api-ms-win-crt-heap-l1-1-0.dll" target="lib\net45\api-ms-win-crt-heap-l1-1-0.dll" />
-        <file src="api-ms-win-crt-locale-l1-1-0.dll" target="lib\net45\api-ms-win-crt-locale-l1-1-0.dll" />
-        <file src="api-ms-win-crt-math-l1-1-0.dll" target="lib\net45\api-ms-win-crt-math-l1-1-0.dll" />
-        <file src="api-ms-win-crt-multibyte-l1-1-0.dll" target="lib\net45\api-ms-win-crt-multibyte-l1-1-0.dll" />
-        <file src="api-ms-win-crt-private-l1-1-0.dll" target="lib\net45\api-ms-win-crt-private-l1-1-0.dll" />
-        <file src="api-ms-win-crt-process-l1-1-0.dll" target="lib\net45\api-ms-win-crt-process-l1-1-0.dll" />
-        <file src="api-ms-win-crt-runtime-l1-1-0.dll" target="lib\net45\api-ms-win-crt-runtime-l1-1-0.dll" />
-        <file src="api-ms-win-crt-stdio-l1-1-0.dll" target="lib\net45\api-ms-win-crt-stdio-l1-1-0.dll" />
-        <file src="api-ms-win-crt-string-l1-1-0.dll" target="lib\net45\api-ms-win-crt-string-l1-1-0.dll" />
-        <file src="api-ms-win-crt-time-l1-1-0.dll" target="lib\net45\api-ms-win-crt-time-l1-1-0.dll" />
-        <file src="api-ms-win-crt-utility-l1-1-0.dll" target="lib\net45\api-ms-win-crt-utility-l1-1-0.dll" />
-        <file src="ApplicationInsights.config" target="lib\net45\ApplicationInsights.config" />       
-        <file src="concrt140.dll" target="lib\net45\concrt140.dll" />       
-        <file src="msvcp140.dll" target="lib\net45\msvcp140.dll" />
-        <file src="msvcp140_1.dll" target="lib\net45\msvcp140_1.dll" />        
+        <file src="fi-FI\Humanizer.resources.dll" target="lib\net45\fi-FI\Humanizer.resources.dll" />
+        <file src="fr\Humanizer.resources.dll" target="lib\net45\fr\Humanizer.resources.dll" />
+        <file src="fr\Popcorn.resources.dll" target="lib\net45\fr\Popcorn.resources.dll" />   
+        <file src="fr-BE\Humanizer.resources.dll" target="lib\net45\fr-BE\Humanizer.resources.dll" />
+        <file src="he\Humanizer.resources.dll" target="lib\net45\he\Humanizer.resources.dll" />
+        <file src="hr\Humanizer.resources.dll" target="lib\net45\hr\Humanizer.resources.dll" />
+        <file src="hu\Humanizer.resources.dll" target="lib\net45\hu\Humanizer.resources.dll" />
+        <file src="id\Humanizer.resources.dll" target="lib\net45\id\Humanizer.resources.dll" />
+        <file src="it\Humanizer.resources.dll" target="lib\net45\it\Humanizer.resources.dll" />
+        <file src="ja\Humanizer.resources.dll" target="lib\net45\ja\Humanizer.resources.dll" />
+        <file src="lv\Humanizer.resources.dll" target="lib\net45\lv\Humanizer.resources.dll" />
+        <file src="ms-MY\Humanizer.resources.dll" target="lib\net45\ms-MY\Humanizer.resources.dll" />
+        <file src="mt\Humanizer.resources.dll" target="lib\net45\mt\Humanizer.resources.dll" />
+        <file src="nb\Humanizer.resources.dll" target="lib\net45\nb\Humanizer.resources.dll" />
+        <file src="nb-NO\Humanizer.resources.dll" target="lib\net45\nb-NO\Humanizer.resources.dll" />
+        <file src="nl\Humanizer.resources.dll" target="lib\net45\nl\Humanizer.resources.dll" />
+        <file src="pl\Humanizer.resources.dll" target="lib\net45\pl\Humanizer.resources.dll" />
+        <file src="pt\Humanizer.resources.dll" target="lib\net45\pt\Humanizer.resources.dll" />
+        <file src="ro\Humanizer.resources.dll" target="lib\net45\ro\Humanizer.resources.dll" />
+        <file src="ru\Humanizer.resources.dll" target="lib\net45\ru\Humanizer.resources.dll" />
+        <file src="runtimes\win-arm\native\e_sqlite3.dll" target="lib\net45\runtimes\win-arm\native\e_sqlite3.dll" />
+        <file src="runtimes\win-x64\native\e_sqlite3.dll" target="lib\net45\runtimes\win-x64\native\e_sqlite3.dll" />
+        <file src="runtimes\win-x86\native\e_sqlite3.dll" target="lib\net45\runtimes\win-x86\native\e_sqlite3.dll" />
+        <file src="sk\Humanizer.resources.dll" target="lib\net45\sk\Humanizer.resources.dll" />
+        <file src="sl\Humanizer.resources.dll" target="lib\net45\sl\Humanizer.resources.dll" />
+        <file src="sr\Humanizer.resources.dll" target="lib\net45\sr\Humanizer.resources.dll" />
+        <file src="sr-Latn\Humanizer.resources.dll" target="lib\net45\sr-Latn\Humanizer.resources.dll" />
+        <file src="sv\Humanizer.resources.dll" target="lib\net45\sv\Humanizer.resources.dll" />
+        <file src="tr\Humanizer.resources.dll" target="lib\net45\tr\Humanizer.resources.dll" />
+        <file src="uk\Humanizer.resources.dll" target="lib\net45\uk\Humanizer.resources.dll" />
+        <file src="uz-Cyrl-UZ\Humanizer.resources.dll" target="lib\net45\uz-Cyrl-UZ\Humanizer.resources.dll" />
+        <file src="uz-Latn-UZ\Humanizer.resources.dll" target="lib\net45\uz-Latn-UZ\Humanizer.resources.dll" />
+        <file src="uk\Humanizer.resources.dll" target="lib\net45\uk\Humanizer.resources.dll" />
+        <file src="VCRuntime\api-ms-win-core-console-l1-1-0.dll" target="lib\net45\api-ms-win-core-console-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-datetime-l1-1-0.dll" target="lib\net45\api-ms-win-core-datetime-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-debug-l1-1-0.dll" target="lib\net45\api-ms-win-core-debug-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-errorhandling-l1-1-0.dll" target="lib\net45\api-ms-win-core-errorhandling-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-file-l1-1-0.dll" target="lib\net45\api-ms-win-core-file-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-file-l1-2-0.dll" target="lib\net45\api-ms-win-core-file-l1-2-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-file-l2-1-0.dll" target="lib\net45\api-ms-win-core-file-l2-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-handle-l1-1-0.dll" target="lib\net45\api-ms-win-core-handle-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-heap-l1-1-0.dll" target="lib\net45\api-ms-win-core-heap-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-interlocked-l1-1-0.dll" target="lib\net45\api-ms-win-core-interlocked-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-libraryloader-l1-1-0.dll" target="lib\net45\api-ms-win-core-libraryloader-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-localization-l1-2-0.dll" target="lib\net45\api-ms-win-core-localization-l1-2-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-memory-l1-1-0.dll" target="lib\net45\api-ms-win-core-memory-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-namedpipe-l1-1-0.dll" target="lib\net45\api-ms-win-core-namedpipe-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-processenvironment-l1-1-0.dll" target="lib\net45\api-ms-win-core-processenvironment-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-processthreads-l1-1-0.dll" target="lib\net45\api-ms-win-core-processthreads-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-processthreads-l1-1-1.dll" target="lib\net45\api-ms-win-core-processthreads-l1-1-1.dll" />
+        <file src="VCRuntime\api-ms-win-core-profile-l1-1-0.dll" target="lib\net45\api-ms-win-core-profile-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-rtlsupport-l1-1-0.dll" target="lib\net45\api-ms-win-core-rtlsupport-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-string-l1-1-0.dll" target="lib\net45\api-ms-win-core-string-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-synch-l1-1-0.dll" target="lib\net45\api-ms-win-core-synch-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-synch-l1-2-0.dll" target="lib\net45\api-ms-win-core-synch-l1-2-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-sysinfo-l1-1-0.dll" target="lib\net45\api-ms-win-core-sysinfo-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-timezone-l1-1-0.dll" target="lib\net45\api-ms-win-core-timezone-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-core-util-l1-1-0.dll" target="lib\net45\api-ms-win-core-util-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-conio-l1-1-0.dll" target="lib\net45\api-ms-win-crt-conio-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-convert-l1-1-0.dll" target="lib\net45\api-ms-win-crt-convert-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-environment-l1-1-0.dll" target="lib\net45\api-ms-win-crt-environment-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-filesystem-l1-1-0.dll" target="lib\net45\api-ms-win-crt-filesystem-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-heap-l1-1-0.dll" target="lib\net45\api-ms-win-crt-heap-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-locale-l1-1-0.dll" target="lib\net45\api-ms-win-crt-locale-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-math-l1-1-0.dll" target="lib\net45\api-ms-win-crt-math-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-multibyte-l1-1-0.dll" target="lib\net45\api-ms-win-crt-multibyte-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-private-l1-1-0.dll" target="lib\net45\api-ms-win-crt-private-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-process-l1-1-0.dll" target="lib\net45\api-ms-win-crt-process-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-runtime-l1-1-0.dll" target="lib\net45\api-ms-win-crt-runtime-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-stdio-l1-1-0.dll" target="lib\net45\api-ms-win-crt-stdio-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-string-l1-1-0.dll" target="lib\net45\api-ms-win-crt-string-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-time-l1-1-0.dll" target="lib\net45\api-ms-win-crt-time-l1-1-0.dll" />
+        <file src="VCRuntime\api-ms-win-crt-utility-l1-1-0.dll" target="lib\net45\api-ms-win-crt-utility-l1-1-0.dll" />
+        <file src="VCRuntime\concrt140.dll" target="lib\net45\concrt140.dll" />       
+        <file src="VCRuntime\msvcp140.dll" target="lib\net45\msvcp140.dll" />
+        <file src="VCRuntime\msvcp140_1.dll" target="lib\net45\msvcp140_1.dll" />    
+        <file src="VCRuntime\ucrtbase.dll" target="lib\net45\ucrtbase.dll" />
+        <file src="VCRuntime\vccorlib140.dll" target="lib\net45\vccorlib140.dll" />
+        <file src="VCRuntime\vcruntime140.dll" target="lib\net45\vcruntime140.dll" />    
+        <file src="vi\Humanizer.resources.dll" target="lib\net45\vi\Humanizer.resources.dll" />
+        <file src="zh-CN\Humanizer.resources.dll" target="lib\net45\zh-CN\Humanizer.resources.dll" />
+        <file src="zh-Hans\Humanizer.resources.dll" target="lib\net45\zh-Hans\Humanizer.resources.dll" />
+        <file src="zh-Hant\Humanizer.resources.dll" target="lib\net45\zh-Hant\Humanizer.resources.dll" />
+        <file src="Akavache.Core.dll" target="lib\net45\Akavache.Core.dll" />       
+        <file src="Akavache.Sqlite3.dll" target="lib\net45\Akavache.Sqlite3.dll" />       
+        <file src="ApplicationInsights.config" target="lib\net45\ApplicationInsights.config" />     
+        <file src="AsyncEnumerable.dll" target="lib\net45\AsyncEnumerable.dll" />        
+        <file src="CommonServiceLocator.dll" target="lib\net45\CommonServiceLocator.dll" />        
+        <file src="ControlzEx.dll" target="lib\net45\ControlzEx.dll" />        
+        <file src="DeltaCompressionDotNet.dll" target="lib\net45\DeltaCompressionDotNet.dll" />        
+        <file src="e_sqlite3.dll" target="lib\net45\e_sqlite3.dll" />        
+        <file src="Enterwell.Clients.Wpf.Notifications.dll" target="lib\net45\Enterwell.Clients.Wpf.Notifications.dll" />        
+        <file src="ffme.win.dll" target="lib\net45\ffme.win.dll" />        
+        <file src="FFmpeg.AutoGen.dll" target="lib\net45\FFmpeg.AutoGen.dll" />        
+        <file src="GalaSoft.MvvmLight.dll" target="lib\net45\GalaSoft.MvvmLight.dll" />        
+        <file src="GalaSoft.MvvmLight.Extras.dll" target="lib\net45\GalaSoft.MvvmLight.Extras.dll" />        
+        <file src="GalaSoft.MvvmLight.Platform.dll" target="lib\net45\GalaSoft.MvvmLight.Platform.dll" />        
+        <file src="Gu.Wpf.Adorners.dll" target="lib\net45\Gu.Wpf.Adorners.dll" />        
+        <file src="Humanizer.dll" target="lib\net45\Humanizer.dll" />        
+        <file src="libvideo.dll" target="lib\net45\libvideo.dll" />        
+        <file src="LoadingIndicators.WPF.dll" target="lib\net45\LoadingIndicators.WPF.dll" />        
         <file src="ltnet.dll" target="lib\net45\ltnet.dll" />        
+        <file src="MahApps.Metro.dll" target="lib\net45\MahApps.Metro.dll" />        
+        <file src="MahApps.Metro.IconPacks.dll" target="lib\net45\MahApps.Metro.IconPacks.dll" />        
+        <file src="Markdown.dll" target="lib\net45\Markdown.dll" />        
+        <file src="Microsoft.AI.Agent.Intercept.dll" target="lib\net45\Microsoft.AI.Agent.Intercept.dll" />        
+        <file src="Microsoft.AI.DependencyCollector.dll" target="lib\net45\Microsoft.AI.DependencyCollector.dll" />        
+        <file src="Microsoft.AI.PerfCounterCollector.dll" target="lib\net45\Microsoft.AI.PerfCounterCollector.dll" />        
+        <file src="Microsoft.AI.ServerTelemetryChannel.dll" target="lib\net45\Microsoft.AI.ServerTelemetryChannel.dll" />        
+        <file src="Microsoft.AI.Web.dll" target="lib\net45\Microsoft.AI.Web.dll" />        
+        <file src="Microsoft.AI.WindowsServer.dll" target="lib\net45\Microsoft.AI.WindowsServer.dll" />        
+        <file src="Microsoft.ApplicationInsights.dll" target="lib\net45\Microsoft.ApplicationInsights.dll" />        
+        <file src="Microsoft.ApplicationInsights.NLogTarget.dll" target="lib\net45\Microsoft.ApplicationInsights.NLogTarget.dll" />        
+        <file src="Microsoft.AspNet.TelemetryCorrelation.dll" target="lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll" />        
+        <file src="Microsoft.WindowsAPICodePack.dll" target="lib\net45\Microsoft.WindowsAPICodePack.dll" />        
+        <file src="Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net45\Microsoft.WindowsAPICodePack.Shell.dll" />        
+        <file src="Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />        
+        <file src="Mono.Cecil.dll" target="lib\net45\Mono.Cecil.dll" />        
+        <file src="Mono.Cecil.Mdb.dll" target="lib\net45\Mono.Cecil.Mdb.dll" />        
+        <file src="Mono.Cecil.Pdb.dll" target="lib\net45\Mono.Cecil.Pdb.dll" />        
+        <file src="Mono.Cecil.Rocks.dll" target="lib\net45\Mono.Cecil.Rocks.dll" />        
+        <file src="NChardet.dll" target="lib\net45\NChardet.dll" />
+        <file src="NetBike.Xml.dll" target="lib\net45\NetBike.Xml.dll" />
+        <file src="Newtonsoft.Json.Bson.dll" target="lib\net45\Newtonsoft.Json.Bson.dll" />
+        <file src="Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
+        <file src="NLog.dll" target="lib\net45\NLog.dll" />
+        <file src="NuGet.Squirrel.dll" target="lib\net45\NuGet.Squirrel.dll" />
+        <file src="OSDB.dll" target="lib\net45\OSDB.dll" />
+        <file src="Polly.dll" target="lib\net45\Polly.dll" />
         <file src="Popcorn.exe" target="lib\net45\Popcorn.exe" />
-        <file src="Popcorn.exe.config" target="lib\net45\Popcorn.exe.config" />        
-        <file src="ucrtbase.dll" target="lib\net45\ucrtbase.dll" />
-        <file src="vccorlib140.dll" target="lib\net45\vccorlib140.dll" />
-        <file src="vcruntime140.dll" target="lib\net45\vcruntime140.dll" />
+        <file src="Popcorn.exe.config" target="lib\net45\Popcorn.exe.config" />
+        <file src="Popcorn.Utils.dll" target="lib\net45\Popcorn.Utils.dll" />
+        <file src="RestSharp.dll" target="lib\net45\RestSharp.dll" />
+        <file src="RunProcessAsTask.dll" target="lib\net45\RunProcessAsTask.dll" />
+        <file src="SharpCompress.dll" target="lib\net45\SharpCompress.dll" />
+        <file src="Splat.dll" target="lib\net45\Splat.dll" />
+        <file src="SQLitePCLRaw.batteries_v2.dll" target="lib\net45\SQLitePCLRaw.batteries_v2.dll" />
+        <file src="SQLitePCLRaw.core.dll" target="lib\net45\SQLitePCLRaw.core.dll" />
+        <file src="SQLitePCLRaw.nativelibrary.dll" target="lib\net45\SQLitePCLRaw.nativelibrary.dll" />
+        <file src="SQLitePCLRaw.provider.dynamic_cdecl.dll" target="lib\net45\SQLitePCLRaw.provider.dynamic_cdecl.dll" />
+        <file src="Squirrel.dll" target="lib\net45\Squirrel.dll" />
+        <file src="SubtitlesParser.dll" target="lib\net45\SubtitlesParser.dll" />
+        <file src="System.Buffers.dll" target="lib\net45\System.Buffers.dll" />
+        <file src="System.Diagnostics.DiagnosticSource.dll" target="lib\net45\System.Diagnostics.DiagnosticSource.dll" />
+        <file src="System.Memory.dll" target="lib\net45\System.Memory.dll" />
+        <file src="System.Numerics.Vectors.dll" target="lib\net45\System.Numerics.Vectors.dll" />
+        <file src="System.Reactive.dll" target="lib\net45\System.Reactive.dll" />
+        <file src="System.Runtime.CompilerServices.Unsafe.dll" target="lib\net45\System.Runtime.CompilerServices.Unsafe.dll" />
+        <file src="System.Security.Cryptography.ProtectedData.dll" target="lib\net45\System.Security.Cryptography.ProtectedData.dll" />
+        <file src="System.Threading.Tasks.Extensions.dll" target="lib\net45\System.Threading.Tasks.Extensions.dll" />
+        <file src="System.ValueTuple.dll" target="lib\net45\System.ValueTuple.dll" />
+        <file src="System.Windows.Interactivity.dll" target="lib\net45\System.Windows.Interactivity.dll" />
+        <file src="TMDbLib.dll" target="lib\net45\TMDbLib.dll" />
+        <file src="Utf8Json.dll" target="lib\net45\Utf8Json.dll" />
+        <file src="WPFLocalizeExtension.dll" target="lib\net45\WPFLocalizeExtension.dll" />
+        <file src="XAMLMarkupExtensions.dll" target="lib\net45\XAMLMarkupExtensions.dll" />
     </files>
 </package>
