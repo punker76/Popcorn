@@ -29,6 +29,9 @@ Popcorn is a simple application which lets you watch any movie or TV show instan
 ## Supported platforms
 Windows 7+ is supported (Windows 7, 8, 8.1, 10).
 
+## Installation
+Download installer [here](https://github.com/bbougot/Popcorn/releases/download/v1.0.0/Setup.exe).
+
 ## Mockups
 
 ### Home Page
