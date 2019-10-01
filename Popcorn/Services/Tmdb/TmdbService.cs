@@ -14,11 +14,12 @@ namespace Popcorn.Services.Tmdb
         private AsyncLazy<TMDbClient> _client { get; } = new AsyncLazy<TMDbClient>(async () =>
         {
             var tcs = new TaskCompletionSource<TMDbClient>();
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 try
                 {
                     var client = new TMDbClient(Constants.TmDbClientId, true);
+                    await client.GetConfigAsync();
                     if (string.IsNullOrEmpty(client.DefaultLanguage))
                         client.DefaultLanguage = "en";
                     tcs.SetResult(client);

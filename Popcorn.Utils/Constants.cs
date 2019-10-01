@@ -13,7 +13,7 @@ namespace Popcorn.Utils
         /// <summary>
         /// App version
         /// </summary>
-        public const string AppVersion = "1.0.0";
+        public const string AppVersion = "1.0.1";
 
         /// <summary>
         /// Copyright
@@ -33,7 +33,7 @@ namespace Popcorn.Utils
         /// <summary>
         /// Client ID for TMDb
         /// </summary>
-        public const string TmDbClientId = "54dbd5454854772fae002a47535b994a";
+        public const string TmDbClientId = "8070f26701f7189c9737ed750cd22029";
 
         /// <summary>
         /// Path to the FFmpeg shared libs
