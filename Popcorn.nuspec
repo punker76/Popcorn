@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Popcorn</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <title>Popcorn</title>
         <authors>Popcorn</authors>
         <projectUrl>https://github.com/bbougot/Popcorn</projectUrl>
