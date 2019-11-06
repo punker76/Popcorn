@@ -4,7 +4,7 @@
   Popcorn
 </h1>
 
-<h3 align="center">A Powerful and Fast Popcorn Time Client</h3>
+<h3 align="center">A Powerful and Fast Popcorn Time</h3>
 
 <div align="center">
   <a target="_blank" href="https://github.com/Popcorn/Popcorn/pulls">
