@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Akavache;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -15,9 +13,9 @@ using Popcorn.Helpers;
 using Popcorn.Initializers;
 using Popcorn.Services.User;
 using Popcorn.Utils;
+using Popcorn.ViewModels;
 using Popcorn.ViewModels.Windows;
 using Popcorn.Windows;
-using RunProcessAsTask;
 using WPFLocalizeExtension.Engine;
 
 namespace Popcorn
@@ -67,25 +65,16 @@ namespace Popcorn
         /// On startup, register synchronization context
         /// </summary>
         /// <param name="e"></param>
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             TelemetryConfiguration.Active.TelemetryInitializers.Add(new PopcornApplicationInsightsInitializer());
             ApplicationInsightsHelper.Initialize();
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             base.OnStartup(e);
             WatchStart = Stopwatch.StartNew();
             Logger.Info(
                 "Popcorn starting...");
             Unosquare.FFME.Library.FFmpegDirectory = Constants.FFmpegPath;
-            try
-            {
-                Akavache.Sqlite3.Registrations.Start("Popcorn", () => SQLitePCL.Batteries_V2.Init());
-                var userService = SimpleIoc.Default.GetInstance<IUserService>();
-                await userService.GetUser();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-            }
         }
 
         /// <summary>
@@ -134,7 +123,7 @@ namespace Popcorn
             }
         }
 
-        private void OnStartup(object sender, StartupEventArgs e)
+        private async void OnStartup(object sender, StartupEventArgs e)
         {
             var splashScreenThread = new Thread(() =>
             {
@@ -148,6 +137,18 @@ namespace Popcorn
             splashScreenThread.SetApartmentState(ApartmentState.STA);
             splashScreenThread.Start();
 
+            ViewModelLocator.Setup();
+            try
+            {
+                Akavache.Sqlite3.Registrations.Start("Popcorn", SQLitePCL.Batteries_V2.Init);
+                var userService = SimpleIoc.Default.GetInstance<IUserService>();
+                await userService.GetUser();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
+
             var mainWindow = new MainWindow {Topmost = true};
             MainWindow = mainWindow;
             mainWindow.Loaded += async (sender2, e2) =>
@@ -156,6 +157,7 @@ namespace Popcorn
                     await _windowLoadedSemaphore.WaitAsync();
                     if (!WatchStart.IsRunning)
                         return;
+
                     _splashScreenDispatcher.BeginInvokeShutdown(DispatcherPriority.Background);
                     mainWindow.Activate();
                     if (mainWindow.DataContext is WindowViewModel vm)

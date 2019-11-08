@@ -234,13 +234,12 @@ namespace Popcorn.ViewModels.Pages.Home.Settings.ApplicationSettings
         {
             try
             {
-                var user = await _userService.GetUser();
                 FileHelper.CreateFolders();
                 RefreshCacheSize();
-                DownloadLimit = user.DownloadLimit;
-                UploadLimit = user.UploadLimit;
-                var defaultSubtitleLanguage = user.DefaultSubtitleLanguage;
-                DefaultHdQuality = user.DefaultHdQuality;
+                DownloadLimit = _userService.GetDownloadLimit();
+                UploadLimit = _userService.GetUploadLimit();
+                var defaultSubtitleLanguage = _userService.GetDefaultSubtitleLanguage();
+                DefaultHdQuality = _userService.GetDefaultHdQuality();
                 AvailableLanguages = new ObservableCollection<Language>(_userService.GetAvailableLanguages());
                 SelectedLanguage = _userService.GetCurrentLanguage();
                 LoadingSubtitles = true;

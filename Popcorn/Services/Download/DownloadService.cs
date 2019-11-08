@@ -1,13 +1,10 @@
 ﻿using Popcorn.Utils;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ltnet;
 using NLog;
-using System.IO;
 using GalaSoft.MvvmLight.Messaging;
 using Popcorn.Extensions;
 using Popcorn.Helpers;

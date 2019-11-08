@@ -42,6 +42,7 @@ namespace Popcorn.Controls
             {
                 _aniVerticalScrollBar = aniVScroll;
             }
+
             _aniVerticalScrollBar.ValueChanged += VScrollBar_ValueChanged;
 
             ScrollBar aniHScroll = GetTemplateChild("PART_AniHorizontalScrollBar") as ScrollBar;
@@ -49,6 +50,7 @@ namespace Popcorn.Controls
             {
                 _aniHorizontalScrollBar = aniHScroll;
             }
+
             _aniHorizontalScrollBar.ValueChanged += HScrollBar_ValueChanged;
 
             PreviewMouseWheel += CustomPreviewMouseWheel;

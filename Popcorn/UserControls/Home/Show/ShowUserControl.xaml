@@ -89,7 +89,7 @@
     <Grid>
         <controls:SplitView IsPaneOpen="True">
             <controls:SplitView.Pane>
-                <Grid>
+                <Grid DataContext="{Binding}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="80" />
                         <RowDefinition Height="*" />
@@ -158,14 +158,12 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Orientation="Horizontal">
-                                                <Rectangle
+                                                <iconPacks:PackIconModern
                                                     Width="20"
                                                     Height="18"
-                                                    Fill="White">
-                                                    <Rectangle.OpacityMask>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_medical_pulse}" />
-                                                    </Rectangle.OpacityMask>
-                                                </Rectangle>
+                                                    Margin="0,12,0,0"
+                                                    Foreground="White"
+                                                    Kind="MedicalPulse" />
                                                 <TextBlock
                                                     Margin="10,0,0,0"
                                                     VerticalAlignment="Center"
@@ -194,14 +192,12 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Orientation="Horizontal">
-                                                <Rectangle
+                                                <iconPacks:PackIconModern
                                                     Width="20"
-                                                    Height="19"
-                                                    Fill="White">
-                                                    <Rectangle.OpacityMask>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_star}" />
-                                                    </Rectangle.OpacityMask>
-                                                </Rectangle>
+                                                    Height="18"
+                                                    Margin="0,12,0,0"
+                                                    Foreground="White"
+                                                    Kind="Star" />
                                                 <TextBlock
                                                     Margin="10,0,0,0"
                                                     VerticalAlignment="Center"
@@ -230,15 +226,12 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Orientation="Horizontal">
-                                                <Rectangle
+                                                <iconPacks:PackIconModern
                                                     Width="20"
-                                                    Height="20"
-                                                    VerticalAlignment="Center"
-                                                    Fill="White">
-                                                    <Rectangle.OpacityMask>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_calendar}" />
-                                                    </Rectangle.OpacityMask>
-                                                </Rectangle>
+                                                    Height="18"
+                                                    Margin="0,12,0,0"
+                                                    Foreground="White"
+                                                    Kind="Calendar" />
                                                 <TextBlock
                                                     Margin="10,0,0,0"
                                                     VerticalAlignment="Center"
@@ -301,15 +294,12 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Orientation="Horizontal">
-                                                <Rectangle
+                                                <iconPacks:PackIconModern
                                                     Width="20"
-                                                    Height="25"
-                                                    VerticalAlignment="Center"
-                                                    Fill="White">
-                                                    <Rectangle.OpacityMask>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_page_search}" />
-                                                    </Rectangle.OpacityMask>
-                                                </Rectangle>
+                                                    Height="18"
+                                                    Margin="0,12,0,0"
+                                                    Foreground="White"
+                                                    Kind="PageSearch" />
                                                 <TextBlock
                                                     Margin="10,0,0,0"
                                                     VerticalAlignment="Center"
@@ -349,14 +339,12 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Orientation="Horizontal">
-                                                <Rectangle
+                                                <iconPacks:PackIconModern
                                                     Width="20"
                                                     Height="18"
-                                                    Fill="White">
-                                                    <Rectangle.OpacityMask>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_heart}" />
-                                                    </Rectangle.OpacityMask>
-                                                </Rectangle>
+                                                    Margin="0,12,0,0"
+                                                    Foreground="White"
+                                                    Kind="Heart" />
                                                 <TextBlock
                                                     Margin="10,0,0,0"
                                                     VerticalAlignment="Center"

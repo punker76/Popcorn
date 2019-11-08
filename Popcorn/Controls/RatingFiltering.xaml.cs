@@ -39,7 +39,7 @@ namespace Popcorn.Controls
         /// </summary>
         public double RatingValue
         {
-            get => (double)GetValue(RatingValueProperty);
+            get => (double) GetValue(RatingValueProperty);
             set
             {
                 if (value < 0)
@@ -90,8 +90,7 @@ namespace Popcorn.Controls
         /// <param name="e">Event args</param>
         private void ToggleStar(object sender, RoutedEventArgs e)
         {
-            var button = sender as ToggleButton;
-            if (button == null)
+            if (!(sender is ToggleButton button))
                 return;
 
             if (button.Name == "StarOne")
@@ -246,8 +245,8 @@ namespace Popcorn.Controls
             {
                 var star = StarOne.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.DarkOrange;
                 path.Opacity = 0.8;
             }
@@ -259,8 +258,8 @@ namespace Popcorn.Controls
             {
                 var star = StarOne.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.White;
                 path.Opacity = 1.0;
             }
@@ -274,8 +273,8 @@ namespace Popcorn.Controls
             {
                 var star = StarTwo.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.DarkOrange;
                 path.Opacity = 0.8;
             }
@@ -289,8 +288,8 @@ namespace Popcorn.Controls
             {
                 var star = StarTwo.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.White;
                 path.Opacity = 1.0;
             }
@@ -304,8 +303,8 @@ namespace Popcorn.Controls
             {
                 var star = StarThree.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.DarkOrange;
                 path.Opacity = 0.8;
             }
@@ -319,8 +318,8 @@ namespace Popcorn.Controls
             {
                 var star = StarThree.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.White;
                 path.Opacity = 1.0;
             }
@@ -334,8 +333,8 @@ namespace Popcorn.Controls
             {
                 var star = StarFour.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.DarkOrange;
                 path.Opacity = 0.8;
             }
@@ -349,8 +348,8 @@ namespace Popcorn.Controls
             {
                 var star = StarFour.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.White;
                 path.Opacity = 1.0;
             }
@@ -364,8 +363,8 @@ namespace Popcorn.Controls
             {
                 var star = StarFive.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.DarkOrange;
                 path.Opacity = 0.8;
             }
@@ -379,8 +378,8 @@ namespace Popcorn.Controls
             {
                 var star = StarFive.FindChild<Rectangle>("star");
                 var brush = star.OpacityMask as VisualBrush;
-                var visual = brush.Visual as Canvas;
-                var path = visual.Children[0] as Path;
+                var visual = brush?.Visual as Canvas;
+                var path = visual?.Children[0] as Path;
                 path.Fill = Brushes.White;
                 path.Opacity = 1.0;
             }

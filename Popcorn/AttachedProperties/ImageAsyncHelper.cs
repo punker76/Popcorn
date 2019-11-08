@@ -106,7 +106,7 @@ namespace Popcorn.AttachedProperties
                                         if (imageType == ImageType.Thumbnail)
                                         {
                                             var errorThumbnail = resourceDictionary["ImageError"] as DrawingImage;
-                                            errorThumbnail.Freeze();
+                                            errorThumbnail?.Freeze();
                                             image.RenderTransformOrigin = new Point(0.5d, 0.5d);
                                             image.Stretch = Stretch.None;
                                             image.Source = errorThumbnail;
@@ -132,7 +132,7 @@ namespace Popcorn.AttachedProperties
                                         DispatcherHelper.CheckBeginInvokeOnUI(() =>
                                         {
                                             var loadingImage = resourceDictionary["ImageLoading"] as DrawingImage;
-                                            loadingImage.Freeze();
+                                            loadingImage?.Freeze();
 
                                             #region Create Loading Animation
 
@@ -236,7 +236,7 @@ namespace Popcorn.AttachedProperties
                                         if (imageType == ImageType.Thumbnail)
                                         {
                                             var errorThumbnail = resourceDictionary["ImageError"] as DrawingImage;
-                                            errorThumbnail.Freeze();
+                                            errorThumbnail?.Freeze();
 
                                             image.RenderTransformOrigin = new Point(0.5d, 0.5d);
                                             image.RenderTransform = new TransformGroup();
@@ -259,7 +259,7 @@ namespace Popcorn.AttachedProperties
                                     if (imageType == ImageType.Thumbnail)
                                     {
                                         var errorThumbnail = resourceDictionary["ImageError"] as DrawingImage;
-                                        errorThumbnail.Freeze();
+                                        errorThumbnail?.Freeze();
 
                                         image.RenderTransformOrigin = new Point(0.5d, 0.5d);
                                         image.RenderTransform = new TransformGroup();

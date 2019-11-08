@@ -265,8 +265,8 @@
                                     Orientation="Horizontal">
                                     <ToggleButton
                                         x:Name="Seen"
-                                        Width="50"
-                                        Height="50"
+                                        Width="40"
+                                        Height="40"
                                         VerticalAlignment="Center"
                                         Command="{Binding DataContext.SetWatchedMovieCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tabs:MovieTab}}, Mode=OneTime}"
                                         CommandParameter="{Binding Mode=OneTime}"
@@ -275,16 +275,17 @@
                                         Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                         Visibility="Collapsed">
                                         <iconPacks:PackIconModern
-                                            Width="30"
-                                            Height="30"
+                                            Width="20"
+                                            Height="20"
                                             VerticalAlignment="Center"
                                             Foreground="White"
                                             Kind="Eye" />
                                     </ToggleButton>
                                     <ToggleButton
                                         x:Name="Like"
-                                        Width="50"
-                                        Height="50"
+                                        Width="40"
+                                        Height="40"
+                                        Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Command="{Binding DataContext.SetFavoriteMovieCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tabs:MovieTab}}, Mode=OneTime}"
                                         CommandParameter="{Binding Mode=OneTime}"

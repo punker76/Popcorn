@@ -110,8 +110,8 @@
             Height="7"
             Margin="0,10,0,0"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Stretch"
             VerticalAlignment="Center"
+            HorizontalContentAlignment="Stretch"
             Foreground="{StaticResource MahApps.Brushes.Accent}"
             Maximum="{Binding Source={x:Static constants:Constants.MinimumMovieBuffering}}"
             Minimum="0.0"
@@ -128,6 +128,6 @@
             controls:ControlsHelper.ContentCharacterCasing="Normal"
             Command="{Binding StopDownloadingMovieCommand}"
             Content="{lex:LocText CancelButton}"
-            Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
+            Style="{DynamicResource MahApps.Styles.Button.Square}" />
     </Grid>
 </UserControl>

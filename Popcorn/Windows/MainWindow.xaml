@@ -82,7 +82,7 @@
     </i:Interaction.Triggers>
 
     <controls:MetroWindow.WindowButtonCommands>
-        <controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" Visibility="{Binding ApplicationService.IsMediaPlaying, Converter={StaticResource BoolToVisibilityConverter}}" />
+        <controls:WindowButtonCommands Style="{DynamicResource MahApps.Styles.WindowButtonCommands.Clean.Win10}" Visibility="{Binding ApplicationService.IsMediaPlaying, Converter={StaticResource BoolToVisibilityConverter}}" />
     </controls:MetroWindow.WindowButtonCommands>
 
     <controls:MetroWindow.RightWindowCommands>

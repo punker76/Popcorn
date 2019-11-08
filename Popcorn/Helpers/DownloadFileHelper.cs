@@ -50,9 +50,9 @@ namespace Popcorn.Helpers
                         return new Tuple<string, string, Exception>(remotePath, localPath, null);
                 }
 
-                var direcory = Path.GetDirectoryName(localPath);
-                if (!string.IsNullOrEmpty(direcory) && !Directory.Exists(direcory))
-                    Directory.CreateDirectory(direcory);
+                var directory = Path.GetDirectoryName(localPath);
+                if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
 
                 try
                 {

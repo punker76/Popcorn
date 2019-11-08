@@ -12,7 +12,7 @@ namespace Popcorn.Controls.Movie
         /// </summary>
         public static readonly DependencyProperty MaxNumberOfMoviesProperty =
             DependencyProperty.Register("MaxNumberOfMovies",
-                typeof (double), typeof (MovieNumberSummary),
+                typeof(double), typeof(MovieNumberSummary),
                 new PropertyMetadata(0d, OnNumberOfMoviesChanged));
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Popcorn.Controls.Movie
         /// </summary>
         public static readonly DependencyProperty CurrentNumberOfMoviesProperty =
             DependencyProperty.Register("CurrentNumberOfMovies",
-                typeof (double), typeof (MovieNumberSummary),
+                typeof(double), typeof(MovieNumberSummary),
                 new PropertyMetadata(0d, OnNumberOfMoviesChanged));
 
         /// <summary>

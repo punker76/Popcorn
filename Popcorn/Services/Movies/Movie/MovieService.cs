@@ -18,7 +18,6 @@ using Polly;
 using Polly.Timeout;
 using Popcorn.Extensions;
 using Popcorn.Services.Tmdb;
-using Popcorn.ViewModels.Pages.Home.Settings;
 using Popcorn.ViewModels.Pages.Home.Settings.ApplicationSettings;
 using TMDbLib.Objects.Find;
 using TMDbLib.Objects.People;
@@ -62,14 +61,15 @@ namespace Popcorn.Services.Movies.Movie
 
                         var timeoutPolicy =
                             Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond,
-                                TimeoutStrategy.Pessimistic);
+                                TimeoutStrategy.Optimistic);
                         try
                         {
                             await timeoutPolicy.ExecuteAsync(async () =>
                             {
                                 try
                                 {
-                                    var movie = await (await _tmdbService.GetClient).GetMovieAsync(movieToTranslate.ImdbId,
+                                    var movie = await (await _tmdbService.GetClient).GetMovieAsync(
+                                        movieToTranslate.ImdbId,
                                         MovieMethods.Credits);
                                     if (movieToTranslate is MovieJson refMovie)
                                     {
@@ -80,7 +80,8 @@ namespace Popcorn.Services.Movies.Movie
                                     }
                                     else if (movieToTranslate is MovieLightJson refMovieLight)
                                     {
-                                        refMovieLight.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
+                                        refMovieLight.TranslationLanguage =
+                                            (await _tmdbService.GetClient).DefaultLanguage;
                                         refMovieLight.Title = movie?.Title;
                                         refMovieLight.Genres = movie?.Genres != null
                                             ? string.Join(", ", movie.Genres?.Select(a => a.Name))
@@ -130,7 +131,7 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<MovieJson> GetMovieAsync(string imdbCode, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -151,7 +152,9 @@ namespace Popcorn.Services.Movies.Movie
 
                         movie = JsonSerializer.Deserialize<MovieJson>(response.RawBytes);
                         movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
-                        movie.TmdbId = (await (await _tmdbService.GetClient).GetMovieAsync(movie.ImdbId)).Id;
+                        movie.TmdbId =
+                            (await (await _tmdbService.GetClient).GetMovieAsync(movie.ImdbId,
+                                cancellationToken: cancellation)).Id;
                     }
                     catch (Exception exception) when (exception is TaskCanceledException)
                     {
@@ -191,7 +194,7 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<MovieLightJson> GetMovieLightAsync(string imdbCode, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -251,7 +254,7 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<IEnumerable<MovieLightJson>> GetMoviesSimilarAsync(MovieJson movie, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -309,7 +312,7 @@ namespace Popcorn.Services.Movies.Movie
             GenreJson genre = null)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -399,7 +402,7 @@ namespace Popcorn.Services.Movies.Movie
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -476,7 +479,7 @@ namespace Popcorn.Services.Movies.Movie
             GenreJson genre = null)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -563,7 +566,7 @@ namespace Popcorn.Services.Movies.Movie
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -637,7 +640,8 @@ namespace Popcorn.Services.Movies.Movie
         /// <returns>Task</returns>
         public async Task TranslateMovie(IMovie movieToTranslate)
         {
-            if (movieToTranslate.TranslationLanguage == null || (await _tmdbService.GetClient).DefaultLanguage == "en" &&
+            if (movieToTranslate.TranslationLanguage == null ||
+                (await _tmdbService.GetClient).DefaultLanguage == "en" &&
                 movieToTranslate.TranslationLanguage == (await _tmdbService.GetClient).DefaultLanguage) return;
             _moviesToTranslateObservable.OnNext(movieToTranslate);
         }
@@ -651,7 +655,7 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<string> GetMovieTrailerAsync(MovieJson movie, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -660,7 +664,8 @@ namespace Popcorn.Services.Movies.Movie
                     var uri = string.Empty;
                     try
                     {
-                        var tmdbMovie = await (await _tmdbService.GetClient).GetMovieAsync(movie.ImdbId, MovieMethods.Videos);
+                        var tmdbMovie =
+                            await (await _tmdbService.GetClient).GetMovieAsync(movie.ImdbId, MovieMethods.Videos);
                         var trailers = tmdbMovie?.Videos;
                         if (trailers != null && trailers.Results.Any())
                         {
@@ -754,7 +759,7 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<IEnumerable<MovieLightJson>> GetMovieFromCast(string imdbCode, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>

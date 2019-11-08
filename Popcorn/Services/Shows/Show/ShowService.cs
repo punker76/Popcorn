@@ -14,11 +14,9 @@ using Polly;
 using Polly.Timeout;
 using Popcorn.Services.Tmdb;
 using Popcorn.Utils.Exceptions;
-using Popcorn.ViewModels.Pages.Home.Settings;
 using Popcorn.ViewModels.Pages.Home.Settings.ApplicationSettings;
 using Utf8Json;
 using VideoLibrary;
-using Video = TMDbLib.Objects.General.Video;
 
 namespace Popcorn.Services.Shows.Show
 {
@@ -57,7 +55,7 @@ namespace Popcorn.Services.Shows.Show
         public async Task<ShowJson> GetShowAsync(string imdbId, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -134,7 +132,7 @@ namespace Popcorn.Services.Shows.Show
         public async Task<ShowLightJson> GetShowLightAsync(string imdbId, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -192,7 +190,7 @@ namespace Popcorn.Services.Shows.Show
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -262,7 +260,7 @@ namespace Popcorn.Services.Shows.Show
             GenreJson genre = null)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -341,7 +339,7 @@ namespace Popcorn.Services.Shows.Show
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -411,7 +409,7 @@ namespace Popcorn.Services.Shows.Show
         public async Task<string> GetShowTrailerAsync(ShowJson show, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>

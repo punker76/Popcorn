@@ -133,9 +133,10 @@
                 <Button
                     Margin="5,15,0,0"
                     HorizontalAlignment="Left"
+                    mah:ControlsHelper.ContentCharacterCasing="Normal"
                     Command="{Binding ShowLicenseCommand}"
                     Content="{lex:LocText ShowLicenseLabel}"
-                    Style="{DynamicResource MetroFlatButton}" />
+                    Style="{DynamicResource MahApps.Styles.Button.Square}" />
             </StackPanel>
 
             <StackPanel Margin="20,10">

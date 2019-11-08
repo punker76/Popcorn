@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using FontStyle = System.Windows.FontStyle;
@@ -14,12 +10,18 @@ namespace Popcorn.Controls
     {
         public static readonly DependencyProperty FontSize2Property =
             DependencyProperty.Register("FontSize2", typeof(int), typeof(CombiLabel), new PropertyMetadata(null));
+
         public static readonly DependencyProperty FontWeight2Property =
-            DependencyProperty.Register("FontWeight2", typeof(FontWeight), typeof(CombiLabel), new PropertyMetadata(null));
+            DependencyProperty.Register("FontWeight2", typeof(FontWeight), typeof(CombiLabel),
+                new PropertyMetadata(null));
+
         public static readonly DependencyProperty FontStyle2Property =
-            DependencyProperty.Register("FontStyle2", typeof(FontStyle), typeof(CombiLabel), new PropertyMetadata(null));
+            DependencyProperty.Register("FontStyle2", typeof(FontStyle), typeof(CombiLabel),
+                new PropertyMetadata(null));
+
         public static readonly DependencyProperty Content2Property =
             DependencyProperty.Register("Content2", typeof(object), typeof(CombiLabel), new PropertyMetadata(null));
+
         public static readonly DependencyProperty Foreground2Property =
             DependencyProperty.Register("Foreground2", typeof(Brush), typeof(CombiLabel), new PropertyMetadata(null));
 
@@ -32,21 +34,21 @@ namespace Popcorn.Controls
 
         public FontWeight FontWeight2
         {
-            get { return (FontWeight)GetValue(FontWeight2Property); }
+            get { return (FontWeight) GetValue(FontWeight2Property); }
 
             set { SetValue(FontWeight2Property, value); }
         }
 
         public object Content2
         {
-            get { return (object)GetValue(Content2Property); }
+            get { return (object) GetValue(Content2Property); }
 
             set { SetValue(Content2Property, value); }
         }
 
         public Brush Foreground2
         {
-            get { return (Brush)GetValue(Foreground2Property); }
+            get { return (Brush) GetValue(Foreground2Property); }
 
             set { SetValue(Foreground2Property, value); }
         }
@@ -55,7 +57,8 @@ namespace Popcorn.Controls
         {
             //This OverrideMetadata call tells the system that this element wants to provide a style that is different than its base class.
             //This style is defined in themes\generic.xaml
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CombiLabel), new FrameworkPropertyMetadata(typeof(CombiLabel)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CombiLabel),
+                new FrameworkPropertyMetadata(typeof(CombiLabel)));
         }
     }
 }

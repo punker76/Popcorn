@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Security.Principal;
 
 namespace Popcorn.Utils

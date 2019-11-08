@@ -47,7 +47,7 @@ namespace Popcorn.Services.Movies.Trailer
         public async Task LoadTrailerAsync(MovieJson movie, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 await timeoutPolicy.ExecuteAsync(async cancellation =>

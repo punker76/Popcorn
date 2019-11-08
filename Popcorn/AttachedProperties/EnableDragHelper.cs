@@ -18,11 +18,12 @@ namespace Popcorn.AttachedProperties
         private static void OnLoaded(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var uiElement = dependencyObject as UIElement;
-            if (uiElement == null || (dependencyPropertyChangedEventArgs.NewValue is bool) == false)
+            if (!(dependencyObject is UIElement uiElement) ||
+                dependencyPropertyChangedEventArgs.NewValue is bool == false)
             {
                 return;
             }
+
             if ((bool) dependencyPropertyChangedEventArgs.NewValue)
             {
                 uiElement.MouseMove += UiElementOnMouseMove;
@@ -36,13 +37,12 @@ namespace Popcorn.AttachedProperties
 
         private static void UiElementOnMouseMove(object sender, MouseEventArgs mouseEventArgs)
         {
-            var uiElement = sender as UIElement;
-            if (uiElement != null && mouseEventArgs.LeftButton == MouseButtonState.Pressed)
+            if (sender is UIElement uiElement && mouseEventArgs.LeftButton == MouseButtonState.Pressed)
             {
                 DependencyObject parent = uiElement;
-                int avoidInfiniteLoop = 0;
+                var avoidInfiniteLoop = 0;
                 // Search up the visual tree to find the first parent window.
-                while ((parent is Window) == false)
+                while (parent is Window == false)
                 {
                     parent = VisualTreeHelper.GetParent(parent);
                     avoidInfiniteLoop++;
@@ -52,6 +52,7 @@ namespace Popcorn.AttachedProperties
                         return;
                     }
                 }
+
                 var window = parent as Window;
                 window.DragMove();
             }

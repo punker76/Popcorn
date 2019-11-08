@@ -21,38 +21,40 @@ namespace Popcorn.AttachedProperties
         /// </summary>
         /// <remarks>When TabContent.IsCached is true, visual state of each tab is preserved (cached), even when the tab is hidden</remarks>
         public static readonly DependencyProperty IsCachedProperty =
-            DependencyProperty.RegisterAttached("IsCached", typeof (bool), typeof (TabContent),
+            DependencyProperty.RegisterAttached("IsCached", typeof(bool), typeof(TabContent),
                 new UIPropertyMetadata(false, OnIsCachedChanged));
 
         /// <summary>
         /// Used instead of TabControl.ContentTemplate for cached tabs
         /// </summary>
         public static readonly DependencyProperty TemplateProperty =
-            DependencyProperty.RegisterAttached("Template", typeof (DataTemplate), typeof (TabContent),
+            DependencyProperty.RegisterAttached("Template", typeof(DataTemplate), typeof(TabContent),
                 new UIPropertyMetadata(null));
 
         /// <summary>
         /// Used instead of TabControl.ContentTemplateSelector for cached tabs
         /// </summary>
         public static readonly DependencyProperty TemplateSelectorProperty =
-            DependencyProperty.RegisterAttached("TemplateSelector", typeof (DataTemplateSelector), typeof (TabContent),
+            DependencyProperty.RegisterAttached("TemplateSelector", typeof(DataTemplateSelector), typeof(TabContent),
                 new UIPropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for InternalTabControl.  This enables animation, styling, binding, etc...
-        [EditorBrowsable(EditorBrowsableState.Never)] public static readonly DependencyProperty
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly DependencyProperty
             InternalTabControlProperty =
-                DependencyProperty.RegisterAttached("InternalTabControl", typeof (TabControl), typeof (TabContent),
+                DependencyProperty.RegisterAttached("InternalTabControl", typeof(TabControl), typeof(TabContent),
                     new UIPropertyMetadata(null, OnInternalTabControlChanged));
 
         // Using a DependencyProperty as the backing store for InternalCachedContent.  This enables animation, styling, binding, etc...
-        [EditorBrowsable(EditorBrowsableState.Never)] public static readonly DependencyProperty
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly DependencyProperty
             InternalCachedContentProperty =
-                DependencyProperty.RegisterAttached("InternalCachedContent", typeof (ContentControl),
-                    typeof (TabContent), new UIPropertyMetadata(null));
+                DependencyProperty.RegisterAttached("InternalCachedContent", typeof(ContentControl),
+                    typeof(TabContent), new UIPropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for InternalContentManager.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InternalContentManagerProperty =
-            DependencyProperty.RegisterAttached("InternalContentManager", typeof (object), typeof (TabContent),
+            DependencyProperty.RegisterAttached("InternalContentManager", typeof(object), typeof(TabContent),
                 new UIPropertyMetadata(null));
 
         public static bool GetIsCached(DependencyObject obj) => (bool) obj.GetValue(IsCachedProperty);
@@ -128,8 +130,8 @@ namespace Popcorn.AttachedProperties
 
             var context = new ParserContext {XamlTypeMapper = new XamlTypeMapper(new string[0])};
 
-            context.XamlTypeMapper.AddMappingProcessingInstruction("b", typeof (TabContent).Namespace,
-                typeof (TabContent).Assembly.FullName);
+            context.XamlTypeMapper.AddMappingProcessingInstruction("b", typeof(TabContent).Namespace,
+                typeof(TabContent).Assembly.FullName);
 
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("b", "b");
@@ -190,7 +192,7 @@ namespace Popcorn.AttachedProperties
         private static void EnsureContentTemplateIsNotModified(TabControl tabControl)
         {
             var descriptor = DependencyPropertyDescriptor.FromProperty(TabControl.ContentTemplateProperty,
-                typeof (TabControl));
+                typeof(TabControl));
             descriptor.AddValueChanged(tabControl, (sender, args) =>
             {
                 throw new InvalidOperationException(

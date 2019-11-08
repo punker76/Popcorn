@@ -319,7 +319,7 @@
                             Command="{Binding GoToTMDbCommand}"
                             CommandParameter="{Binding Show.TmdbId}"
                             Content="TMDb"
-                            Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
+                            Style="{DynamicResource MahApps.Styles.Button.Square}" />
                         <Button
                             Width="100"
                             Height="30"
@@ -329,7 +329,7 @@
                             Command="{Binding PlayTrailerCommand}"
                             Content="{lex:LocText TrailerButton}"
                             IsTabStop="False"
-                            Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
+                            Style="{DynamicResource MahApps.Styles.Button.Square}" />
                     </StackPanel>
                     <controls:AnimatedScrollViewer
                         Grid.Row="3"
@@ -390,7 +390,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     HorizontalAlignment="Stretch">
-                    <ListView x:Name="EpisodesDetails">
+                    <ListView x:Name="EpisodesDetails" Style="{StaticResource MahApps.Styles.ListView}">
                         <ListView.Template>
                             <ControlTemplate>
                                 <controls:AnimatedScrollViewer>
@@ -398,6 +398,9 @@
                                 </controls:AnimatedScrollViewer>
                             </ControlTemplate>
                         </ListView.Template>
+                        <ListView.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource MahApps.Styles.ListViewItem}" TargetType="{x:Type ListViewItem}" />
+                        </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate DataType="{x:Type episode:EpisodeShowJson}">
                                 <StackPanel Margin="10,15" Orientation="Horizontal">
@@ -452,7 +455,7 @@
                         controls1:ControlsHelper.ContentCharacterCasing="Normal"
                         Command="{Binding StopLoadingTrailerCommand}"
                         Content="{lex:LocText CancelButton}"
-                        Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
+                        Style="{DynamicResource MahApps.Styles.Button.Square}"
                         Visibility="{Binding IsTrailerLoading, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
                 </StackPanel>
             </Grid>
@@ -483,7 +486,7 @@
                 controls1:ControlsHelper.ContentCharacterCasing="Normal"
                 Command="{Binding StopLoadingShowCommand}"
                 Content="{lex:LocText CancelButton}"
-                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
+                Style="{DynamicResource MahApps.Styles.Button.Square}"
                 Visibility="{Binding IsShowLoading, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
         </StackPanel>
     </Grid>

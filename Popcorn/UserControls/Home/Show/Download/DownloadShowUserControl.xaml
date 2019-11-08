@@ -125,6 +125,6 @@
             controls:ControlsHelper.ContentCharacterCasing="Normal"
             Command="{Binding StopDownloadingEpisodeCommand}"
             Content="{lex:LocText CancelButton}"
-            Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
+            Style="{DynamicResource MahApps.Styles.Button.Square}" />
     </Grid>
 </UserControl>
