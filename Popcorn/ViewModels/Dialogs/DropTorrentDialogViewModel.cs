@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using NLog;
+using Popcorn.Enums;
 using Popcorn.Messaging;
 using Popcorn.Models.Bandwidth;
 using Popcorn.Models.Media;

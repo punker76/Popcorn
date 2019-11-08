@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Popcorn.Utils
+namespace Popcorn.Extensions
 {
     public static class PathExtensions
     {

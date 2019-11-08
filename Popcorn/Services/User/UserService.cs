@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Akavache;
 using GalaSoft.MvvmLight.Messaging;
 using NLog;
+using Popcorn.Helpers;
 using Popcorn.Messaging;
 using Popcorn.Models.Localization;
 using Popcorn.Models.Movie;

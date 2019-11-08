@@ -126,7 +126,7 @@ namespace Popcorn.ViewModels.Pages.Home.Movie.Tabs
 
             _tabNameGenerator = tabNameGenerator;
             TabName = tabNameGenerator.Invoke();
-            MaxMoviesPerPage = Utils.Constants.MaxMoviesPerPage;
+            MaxMoviesPerPage = Helpers.Constants.MaxMoviesPerPage;
             CancellationLoadingMovies = new CancellationTokenSource();
         }
 

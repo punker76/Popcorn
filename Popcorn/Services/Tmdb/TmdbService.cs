@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Popcorn.Helpers;
 using Popcorn.Utils;
 using TMDbLib.Client;
 

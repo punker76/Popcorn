@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using Popcorn.Enums;
 using Popcorn.Utils;
 
 namespace Popcorn.Messaging

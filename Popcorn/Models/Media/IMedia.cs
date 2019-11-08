@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OSDB.Models;
+using Popcorn.Enums;
 using Popcorn.Models.Torrent;
 using Popcorn.Utils;
 

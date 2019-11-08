@@ -1,9 +1,9 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.65">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net472</TargetFramework>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>Popcorn</AssemblyTitle>
     <Product>Popcorn</Product>
@@ -56,6 +56,7 @@
   <ItemGroup>
     <PackageReference Include="akavache.sqlite3" Version="6.9.10" />
     <PackageReference Include="AsyncEnumerator" Version="4.0.1" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
     <PackageReference Include="Enterwell.Clients.Wpf.Notifications" Version="1.4.2" />
     <PackageReference Include="FFME.Windows" Version="4.1.310">
       <PrivateAssets>all</PrivateAssets>
@@ -136,12 +137,6 @@
     <PackageReference Include="XAMLMarkupExtensions" Version="1.5.1" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Markdown\Project.md" />
     <EmbeddedResource Include="Markdown\License.md" />
     <EmbeddedResource Include="Markdown\Legal.md" />
@@ -172,9 +167,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Markdown\Markdown.csproj" />
     <ProjectReference Include="..\OSDB\OSDB.csproj" />
-    <ProjectReference Include="..\Popcorn.Utils\Popcorn.Utils.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico">
@@ -184,24 +177,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Resources\AnimatedScrollViewer.xaml" />
-    <Page Include="Resources\CombiLabel.xaml" />
-    <Page Include="Resources\FlowDocumentScrollViewerCustomStyle.xaml" />
-    <Page Include="Resources\FlyoutHeader.xaml" />
-    <Page Include="Resources\HomeTabControlStyle.xaml" />
-    <Page Include="Resources\HotKey.xaml" />
-    <Page Include="Resources\Icons.xaml" />
-    <Page Include="Resources\IconsNonShared.xaml" />
-    <Page Include="Resources\ImageLoading.xaml" />
-    <Page Include="Resources\Markdown.xaml" />
-    <Page Include="Resources\Player.xaml" />
-    <Page Include="Resources\Ripple.xaml" />
-    <Page Include="Resources\SettingsTabControlStyle.xaml" />
-    <Page Include="Resources\Shadows.xaml" />
-    <Page Include="Resources\SplitView.xaml" />
-    <Page Include="Resources\Windows10ToggleSwitch.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Update="FFmpeg\avcodec-58.dll">

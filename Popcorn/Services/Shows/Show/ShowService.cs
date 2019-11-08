@@ -13,7 +13,8 @@ using GalaSoft.MvvmLight.Ioc;
 using Polly;
 using Polly.Timeout;
 using Popcorn.Services.Tmdb;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
+using Popcorn.Helpers;
 using Popcorn.ViewModels.Pages.Home.Settings.ApplicationSettings;
 using Utf8Json;
 using VideoLibrary;
@@ -55,13 +56,13 @@ namespace Popcorn.Services.Shows.Show
         public async Task<ShowJson> GetShowAsync(string imdbId, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}/{show}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddUrlSegment("show", imdbId);
@@ -132,13 +133,13 @@ namespace Popcorn.Services.Shows.Show
         public async Task<ShowLightJson> GetShowLightAsync(string imdbId, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}/light/{show}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddUrlSegment("show", imdbId);
@@ -190,14 +191,14 @@ namespace Popcorn.Services.Shows.Show
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
                     var wrapper = new ShowLightResponse();
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
                     request.AddUrlSegment("segment", "shows");
                     request.AddUrlSegment("subsegment", "ids");
@@ -260,7 +261,7 @@ namespace Popcorn.Services.Shows.Show
             GenreJson genre = null)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -268,12 +269,12 @@ namespace Popcorn.Services.Shows.Show
                     var watch = Stopwatch.StartNew();
                     var wrapper = new ShowLightResponse();
                     if (limit < 1 || limit > 50)
-                        limit = Utils.Constants.MaxShowsPerPage;
+                        limit = Constants.MaxShowsPerPage;
 
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddParameter("limit", limit);
@@ -339,7 +340,7 @@ namespace Popcorn.Services.Shows.Show
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -347,12 +348,12 @@ namespace Popcorn.Services.Shows.Show
                     var watch = Stopwatch.StartNew();
                     var wrapper = new ShowLightResponse();
                     if (limit < 1 || limit > 50)
-                        limit = Utils.Constants.MaxShowsPerPage;
+                        limit = Constants.MaxShowsPerPage;
 
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddParameter("limit", limit);
@@ -409,7 +410,7 @@ namespace Popcorn.Services.Shows.Show
         public async Task<string> GetShowTrailerAsync(ShowJson show, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>

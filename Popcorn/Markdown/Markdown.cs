@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Markdown
+namespace Popcorn.Markdown
 {
     public class Markdown : DependencyObject
     {
@@ -138,7 +138,7 @@ namespace Markdown
         }
 
         public static readonly DependencyProperty AssetPathRootProperty =
-            DependencyProperty.Register("AssetPathRoot", typeof(string), typeof(Markdown), new PropertyMetadata(null));
+            DependencyProperty.Register("AssetPathRoot", typeof(string), typeof(Markdown), new PropertyMetadata(Environment.CurrentDirectory));
 
         public Markdown()
         {

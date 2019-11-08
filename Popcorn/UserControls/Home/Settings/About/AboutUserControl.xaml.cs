@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using NLog;
 using Popcorn.Controls;
 using Popcorn.Messaging;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 
 namespace Popcorn.UserControls.Home.Settings.About
 {

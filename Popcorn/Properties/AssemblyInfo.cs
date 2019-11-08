@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using Popcorn.Helpers;
 using Popcorn.Utils;
 
 [assembly: ComVisible(false)]

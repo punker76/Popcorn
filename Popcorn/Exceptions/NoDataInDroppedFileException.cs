@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Popcorn.Utils.Exceptions
+namespace Popcorn.Exceptions
 {
     [Serializable]
-    public class TrailerNotAvailableException : Exception
+    public class NoDataInDroppedFileException : Exception
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public TrailerNotAvailableException()
+        public NoDataInDroppedFileException()
         {
         }
 
@@ -16,7 +16,7 @@ namespace Popcorn.Utils.Exceptions
         /// Constructor
         /// </summary>
         /// <param name="message">Message</param>
-        public TrailerNotAvailableException(string message) : base(message)
+        public NoDataInDroppedFileException(string message) : base(message)
         {
         }
     }

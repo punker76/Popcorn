@@ -1,4 +1,4 @@
-﻿namespace Popcorn.Utils
+﻿namespace Popcorn.Enums
 {
     public enum MediaType
     {

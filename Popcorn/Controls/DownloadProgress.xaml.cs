@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Popcorn.Enums;
 using Popcorn.Helpers;
 using Popcorn.Utils;
 
@@ -111,8 +112,8 @@ namespace Popcorn.Controls
                         $"{LocalizationProviderHelper.GetLocalizedValue<string>("CurrentlyPlayingLabel")} : {Title}";
                 else
                     DisplayText.Text = Rate >= 1000.0
-                        ? $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Utils.Constants.MinimumMovieBuffering), 0)} % ({Rate / 1000d} MB/s)"
-                        : $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Utils.Constants.MinimumMovieBuffering), 0)} % ({Rate} kB/s)";
+                        ? $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Constants.MinimumMovieBuffering), 0)} % ({Rate / 1000d} MB/s)"
+                        : $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Constants.MinimumMovieBuffering), 0)} % ({Rate} kB/s)";
             }
             else if (Type == MediaType.Show)
             {
@@ -121,8 +122,8 @@ namespace Popcorn.Controls
                         $"{LocalizationProviderHelper.GetLocalizedValue<string>("CurrentlyPlayingLabel")} : {Title}";
                 else
                     DisplayText.Text = Rate >= 1000.0
-                        ? $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Utils.Constants.MinimumShowBuffering), 0)} % ({Rate / 1000d} MB/s)"
-                        : $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Utils.Constants.MinimumShowBuffering), 0)} % ({Rate} kB/s)";
+                        ? $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Constants.MinimumShowBuffering), 0)} % ({Rate / 1000d} MB/s)"
+                        : $"{LocalizationProviderHelper.GetLocalizedValue<string>("BufferingLabel")} : {Math.Round(Progress * (100d / Constants.MinimumShowBuffering), 0)} % ({Rate} kB/s)";
             }
         }
     }

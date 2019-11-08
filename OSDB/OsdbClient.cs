@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 using NChardet;
 using NetBike.Xml;
 using OSDB.Backend;
+using OSDB.Helpers;
 using OSDB.Models;
-using Popcorn.Utils;
 using RestSharp;
 
 namespace OSDB

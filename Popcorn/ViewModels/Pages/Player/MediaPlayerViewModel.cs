@@ -21,6 +21,7 @@ using Popcorn.Events;
 using Popcorn.Services.Cache;
 using Popcorn.ViewModels.Pages.Home.Movie.Details;
 using System.Threading;
+using Popcorn.Enums;
 
 namespace Popcorn.ViewModels.Pages.Player
 {

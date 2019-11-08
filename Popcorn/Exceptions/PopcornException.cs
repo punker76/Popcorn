@@ -1,14 +1,17 @@
 ﻿using System;
 
-namespace Popcorn.Utils.Exceptions
+namespace Popcorn.Exceptions
 {
+    /// <summary>
+    /// Popcorn exception
+    /// </summary>
     [Serializable]
-    public class NoDataInDroppedFileException : Exception
+    public class PopcornException : Exception
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public NoDataInDroppedFileException()
+        public PopcornException()
         {
         }
 
@@ -16,7 +19,7 @@ namespace Popcorn.Utils.Exceptions
         /// Constructor
         /// </summary>
         /// <param name="message">Message</param>
-        public NoDataInDroppedFileException(string message) : base(message)
+        public PopcornException(string message) : base(message)
         {
         }
     }

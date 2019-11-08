@@ -126,7 +126,7 @@ namespace Popcorn.ViewModels.Pages.Home.Show.Tabs
 
             _tabNameGenerator = tabNameGenerator;
             TabName = tabNameGenerator.Invoke();
-            MaxShowsPerPage = Utils.Constants.MaxShowsPerPage;
+            MaxShowsPerPage = Helpers.Constants.MaxShowsPerPage;
             CancellationLoadingShows = new CancellationTokenSource();
         }
 

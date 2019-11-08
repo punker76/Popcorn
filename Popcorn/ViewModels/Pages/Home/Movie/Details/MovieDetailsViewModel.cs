@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using NLog;
 using NuGet;
+using Popcorn.Enums;
 using Popcorn.Extensions;
 using Popcorn.Helpers;
 using Popcorn.Messaging;
@@ -25,7 +26,7 @@ using Popcorn.ViewModels.Pages.Home.Movie.Download;
 using Popcorn.Services.Cache;
 using Popcorn.Services.Download;
 using Popcorn.Services.User;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 using Popcorn.ViewModels.Pages.Home.Settings;
 using Popcorn.ViewModels.Pages.Home.Settings.ApplicationSettings;
 
@@ -282,7 +283,7 @@ namespace Popcorn.ViewModels.Pages.Home.Movie.Details
                 this,
                 message =>
                 {
-                    if (message.Type == Utils.MediaType.Movie)
+                    if (message.Type == MediaType.Movie)
                     {
                         StopPlayingTrailer();
                     }

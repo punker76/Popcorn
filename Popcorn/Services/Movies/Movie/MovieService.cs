@@ -13,10 +13,11 @@ using TMDbLib.Objects.Movies;
 using GalaSoft.MvvmLight.Ioc;
 using Popcorn.Models.Genres;
 using Popcorn.Models.User;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 using Polly;
 using Polly.Timeout;
 using Popcorn.Extensions;
+using Popcorn.Helpers;
 using Popcorn.Services.Tmdb;
 using Popcorn.ViewModels.Pages.Home.Settings.ApplicationSettings;
 using TMDbLib.Objects.Find;
@@ -60,7 +61,7 @@ namespace Popcorn.Services.Movies.Movie
                             return;
 
                         var timeoutPolicy =
-                            Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond,
+                            Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond,
                                 TimeoutStrategy.Optimistic);
                         try
                         {
@@ -103,7 +104,7 @@ namespace Popcorn.Services.Movies.Movie
                         catch (Exception ex)
                         {
                             Logger.Warn(
-                                $"Movie {movieToTranslate.ImdbId} has not been translated in {Utils.Constants.DefaultRequestTimeoutInSecond} seconds. Error {ex.Message}");
+                                $"Movie {movieToTranslate.ImdbId} has not been translated in {Constants.DefaultRequestTimeoutInSecond} seconds. Error {ex.Message}");
                         }
                     });
             }
@@ -131,14 +132,14 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<MovieJson> GetMovieAsync(string imdbCode, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
 
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}/{movie}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("movie", imdbCode);
@@ -194,14 +195,14 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<MovieLightJson> GetMovieLightAsync(string imdbCode, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
 
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}/light/{movie}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("movie", imdbCode);
@@ -254,7 +255,7 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<IEnumerable<MovieLightJson>> GetMoviesSimilarAsync(MovieJson movie, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -312,7 +313,7 @@ namespace Popcorn.Services.Movies.Movie
             GenreJson genre = null)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -320,12 +321,12 @@ namespace Popcorn.Services.Movies.Movie
                     var watch = Stopwatch.StartNew();
                     var wrapper = new MovieLightResponse();
                     if (limit < 1 || limit > 50)
-                        limit = Utils.Constants.MaxMoviesPerPage;
+                        limit = Constants.MaxMoviesPerPage;
 
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddParameter("limit", limit);
@@ -402,14 +403,14 @@ namespace Popcorn.Services.Movies.Movie
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
                     var wrapper = new MovieLightResponse();
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("subsegment", "ids");
@@ -479,7 +480,7 @@ namespace Popcorn.Services.Movies.Movie
             GenreJson genre = null)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -487,12 +488,12 @@ namespace Popcorn.Services.Movies.Movie
                     var watch = Stopwatch.StartNew();
                     var wrapper = new MovieLightResponse();
                     if (limit < 1 || limit > 50)
-                        limit = Utils.Constants.MaxMoviesPerPage;
+                        limit = Constants.MaxMoviesPerPage;
 
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("subsegment", "similar");
@@ -566,7 +567,7 @@ namespace Popcorn.Services.Movies.Movie
             CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -574,12 +575,12 @@ namespace Popcorn.Services.Movies.Movie
                     var watch = Stopwatch.StartNew();
                     var wrapper = new MovieLightResponse();
                     if (limit < 1 || limit > 50)
-                        limit = Utils.Constants.MaxMoviesPerPage;
+                        limit = Constants.MaxMoviesPerPage;
 
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddParameter("limit", limit);
@@ -655,7 +656,7 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<string> GetMovieTrailerAsync(MovieJson movie, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -759,14 +760,14 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<IEnumerable<MovieLightJson>> GetMovieFromCast(string imdbCode, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
                     var wrapper = new MovieLightResponse();
-                    var restClient = new RestClient(Utils.Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi);
                     var request = new RestRequest("/movies/cast/{segment}", Method.GET);
                     request.AddUrlSegment("segment", imdbCode);
                     try

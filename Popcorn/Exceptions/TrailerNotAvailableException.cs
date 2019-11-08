@@ -1,17 +1,14 @@
 ﻿using System;
 
-namespace Popcorn.Utils.Exceptions
+namespace Popcorn.Exceptions
 {
-    /// <summary>
-    /// Popcorn exception
-    /// </summary>
     [Serializable]
-    public class PopcornException : Exception
+    public class TrailerNotAvailableException : Exception
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public PopcornException()
+        public TrailerNotAvailableException()
         {
         }
 
@@ -19,7 +16,7 @@ namespace Popcorn.Utils.Exceptions
         /// Constructor
         /// </summary>
         /// <param name="message">Message</param>
-        public PopcornException(string message) : base(message)
+        public TrailerNotAvailableException(string message) : base(message)
         {
         }
     }

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using ltnet;
 using NLog;
 using GalaSoft.MvvmLight.Messaging;
+using Popcorn.Enums;
 using Popcorn.Extensions;
 using Popcorn.Helpers;
 using Popcorn.Messaging;
 using Popcorn.Models.Bandwidth;
 using Popcorn.Models.Media;
 using Popcorn.Services.Cache;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 
 namespace Popcorn.Services.Download
 {

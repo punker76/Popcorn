@@ -2,8 +2,9 @@
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Reflection;
+using Popcorn.Extensions;
 
-namespace Popcorn.Utils
+namespace Popcorn.Helpers
 {
     /// <summary>
     /// Constants of the project
@@ -24,12 +25,7 @@ namespace Popcorn.Utils
         /// Endpoint to API
         /// </summary>
         public const string PopcornApi = "https://popcornapi.azurewebsites.net/api";
-
-        /// <summary>
-        /// Open Subtitles User Agent
-        /// </summary>
-        public const string OsdbUa = "Popcorn v1.0";
-
+        
         /// <summary>
         /// Client ID for TMDb
         /// </summary>
@@ -96,15 +92,5 @@ namespace Popcorn.Utils
         /// Default request timeout
         /// </summary>
         public const int DefaultRequestTimeoutInSecond = 15;
-
-        /// <summary>
-        /// Endpoint to OpenSubtitles XML Api
-        /// </summary>
-        public const string OpenSubtitlesXmlRpcEndpoint = "https://api.opensubtitles.org:443/xml-rpc";
-
-        /// <summary>
-        /// Endpoint to OpenSubtitles REST Api
-        /// </summary>
-        public const string OpenSubtitlesRestApiEndpoint = "https://rest.opensubtitles.org";
     }
 }
