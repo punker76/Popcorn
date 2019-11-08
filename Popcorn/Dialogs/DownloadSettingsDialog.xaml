@@ -86,7 +86,7 @@
                         ItemsSource="{Binding Media.AvailableSubtitles}"
                         SelectedItem="{Binding Media.SelectedSubtitle, UpdateSourceTrigger=PropertyChanged}">
                         <controls:SplitButton.ListBoxStyle>
-                            <Style BasedOn="{StaticResource MetroListBox}" TargetType="{x:Type ListBox}">
+                            <Style BasedOn="{StaticResource MahApps.Styles.ListBox}" TargetType="{x:Type ListBox}">
                                 <Setter Property="MaxHeight" Value="200" />
                                 <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
                                 <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
@@ -173,7 +173,7 @@
                 controls:ControlsHelper.ContentCharacterCasing="Normal"
                 Command="{Binding Path=DownloadCommand}"
                 Content="{lex:LocText WatchButton}"
-                Style="{StaticResource AccentedSquareButtonStyle}" />
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
             <Button
                 Width="100"
                 Height="35"
@@ -182,7 +182,7 @@
                 controls:ControlsHelper.ContentCharacterCasing="Normal"
                 Command="{Binding Path=CancelCommand}"
                 Content="{lex:LocText CancelLabel}"
-                Style="{StaticResource AccentedSquareButtonStyle}" />
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
         </StackPanel>
     </Grid>
 </dialogs:CustomDialog>

@@ -77,7 +77,7 @@
                 Height="7"
                 Margin="0,15,0,0"
                 VerticalAlignment="Center"
-                Foreground="{StaticResource AccentColorBrush}"
+                Foreground="{StaticResource MahApps.Brushes.Accent}"
                 Maximum="4.0"
                 Minimum="0.0"
                 Value="{Binding DownloadProgress}" />
@@ -90,7 +90,7 @@
                 controls:ControlsHelper.ContentCharacterCasing="Normal"
                 Command="{Binding CancelCommand}"
                 Content="{lex:LocText CancelButton}"
-                Style="{StaticResource AccentedSquareButtonStyle}" />
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
         </StackPanel>
         <Rectangle
             Grid.Row="1"

@@ -254,7 +254,7 @@
                                     CommandParameter="{Binding Mode=OneTime}"
                                     IsChecked="{Binding IsFavorite}"
                                     Opacity="0.0"
-                                    Style="{DynamicResource MetroCircleToggleButtonStyle}"
+                                    Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                     Visibility="Collapsed">
                                     <Rectangle
                                         Width="20"
@@ -366,7 +366,7 @@
                 Command="{Binding ReloadShows}"
                 Content="{lex:LocText ReloadLabel}"
                 FontSize="18"
-                Style="{StaticResource AccentedSquareButtonStyle}" />
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -319,7 +319,7 @@
                             Command="{Binding GoToTMDbCommand}"
                             CommandParameter="{Binding Show.TmdbId}"
                             Content="TMDb"
-                            Style="{DynamicResource SquareButtonStyle}" />
+                            Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
                         <Button
                             Width="100"
                             Height="30"
@@ -329,7 +329,7 @@
                             Command="{Binding PlayTrailerCommand}"
                             Content="{lex:LocText TrailerButton}"
                             IsTabStop="False"
-                            Style="{DynamicResource SquareButtonStyle}" />
+                            Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
                     </StackPanel>
                     <controls:AnimatedScrollViewer
                         Grid.Row="3"
@@ -433,7 +433,7 @@
                     VerticalAlignment="Center"
                     Orientation="Vertical">
                     <controls1:ProgressRing
-                        Foreground="{StaticResource AccentColorBrush}"
+                        Foreground="{StaticResource MahApps.Brushes.Accent}"
                         IsActive="True"
                         Visibility="{Binding IsTrailerLoading, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
                     <TextBlock
@@ -452,7 +452,7 @@
                         controls1:ControlsHelper.ContentCharacterCasing="Normal"
                         Command="{Binding StopLoadingTrailerCommand}"
                         Content="{lex:LocText CancelButton}"
-                        Style="{DynamicResource SquareButtonStyle}"
+                        Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
                         Visibility="{Binding IsTrailerLoading, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
                 </StackPanel>
             </Grid>
@@ -483,7 +483,7 @@
                 controls1:ControlsHelper.ContentCharacterCasing="Normal"
                 Command="{Binding StopLoadingShowCommand}"
                 Content="{lex:LocText CancelButton}"
-                Style="{DynamicResource SquareButtonStyle}"
+                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
                 Visibility="{Binding IsShowLoading, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
         </StackPanel>
     </Grid>

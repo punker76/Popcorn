@@ -27,7 +27,7 @@
 
             <Style
                 x:Key="ListBoxItemContainerStyle"
-                BasedOn="{StaticResource MetroListBoxItem}"
+                BasedOn="{StaticResource MahApps.Styles.ListBoxItem}"
                 TargetType="{x:Type ListBoxItem}">
                 <Setter Property="Background" Value="#11171c" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -36,7 +36,7 @@
 
             <Style
                 x:Key="ListBoxButtons"
-                BasedOn="{StaticResource MetroListBox}"
+                BasedOn="{StaticResource MahApps.Styles.ListBox}"
                 TargetType="{x:Type ListBox}">
                 <Setter Property="Background" Value="#11171c" />
                 <Setter Property="BorderThickness" Value="0" />
@@ -493,7 +493,7 @@
                             Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth, Mode=OneWay}"
                             Margin="10,10,0,10"
                             EllipseDiameter="5"
-                            Foreground="{StaticResource AccentColorBrush}"
+                            Foreground="{StaticResource MahApps.Brushes.Accent}"
                             IsIndeterminate="True"
                             Maximum="100"
                             Minimum="0">

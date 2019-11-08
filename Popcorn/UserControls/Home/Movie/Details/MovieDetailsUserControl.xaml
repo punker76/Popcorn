@@ -206,7 +206,7 @@
                                         Command="{Binding SetWatchedMovieCommand}"
                                         CommandParameter="{Binding Movie.HasBeenSeen}"
                                         IsChecked="{Binding Movie.HasBeenSeen}"
-                                        Style="{DynamicResource MetroCircleToggleButtonStyle}"
+                                        Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                         ToolTip="Seen">
                                         <iconPacks:PackIconModern
                                             Width="30"
@@ -224,7 +224,7 @@
                                         Command="{Binding SetFavoriteMovieCommand}"
                                         CommandParameter="{Binding Movie.IsFavorite}"
                                         IsChecked="{Binding Movie.IsFavorite}"
-                                        Style="{DynamicResource MetroCircleToggleButtonStyle}"
+                                        Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                         ToolTip="Liked">
                                         <Rectangle
                                             Width="20"
@@ -360,7 +360,7 @@
                                         Command="{Binding GoToTmdbCommand}"
                                         CommandParameter="{Binding Movie.TmdbId}"
                                         Content="TMDb"
-                                        Style="{DynamicResource SquareButtonStyle}" />
+                                        Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
                                     <Button
                                         Width="100"
                                         Height="30"
@@ -371,7 +371,7 @@
                                         Command="{Binding PlayTrailerCommand}"
                                         Content="{lex:LocText TrailerButton}"
                                         IsTabStop="False"
-                                        Style="{DynamicResource SquareButtonStyle}" />
+                                        Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
                                     <Button
                                         Width="100"
                                         Height="30"
@@ -382,7 +382,7 @@
                                         Command="{Binding PlayMovieCommand}"
                                         Content="{lex:LocText WatchButton}"
                                         IsTabStop="False"
-                                        Style="{DynamicResource SquareButtonStyle}" />
+                                        Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
                                 </WrapPanel>
                             </Grid>
                         </DockPanel>
@@ -704,7 +704,7 @@
                     <controls:ProgressRing
                         Grid.Row="1"
                         VerticalAlignment="Center"
-                        Foreground="{StaticResource AccentColorBrush}"
+                        Foreground="{StaticResource MahApps.Brushes.Accent}"
                         IsActive="True"
                         Visibility="{Binding LoadingSimilar, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
                     <TextBlock
@@ -730,7 +730,7 @@
                 Orientation="Vertical">
                 <controls:ProgressRing
                     VerticalAlignment="Center"
-                    Foreground="{StaticResource AccentColorBrush}"
+                    Foreground="{StaticResource MahApps.Brushes.Accent}"
                     IsActive="True"
                     Visibility="{Binding IsTrailerLoading, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
                 <TextBlock
@@ -751,7 +751,7 @@
                     controls:ControlsHelper.ContentCharacterCasing="Normal"
                     Command="{Binding StopLoadingTrailerCommand}"
                     Content="{lex:LocText CancelButton}"
-                    Style="{DynamicResource SquareButtonStyle}"
+                    Style="{DynamicResource MahApps.Styles.Button.MetroSquare}"
                     Visibility="{Binding IsTrailerLoading, Converter={StaticResource BoolToInverseVisibilityConverter}}" />
             </StackPanel>
         </Grid>
@@ -781,7 +781,7 @@
                 controls:ControlsHelper.ContentCharacterCasing="Normal"
                 Command="{Binding StopLoadingMovieCommand}"
                 Content="{lex:LocText CancelButton}"
-                Style="{DynamicResource SquareButtonStyle}" />
+                Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
         </StackPanel>
     </Grid>
 </UserControl>

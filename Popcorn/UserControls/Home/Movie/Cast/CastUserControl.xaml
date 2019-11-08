@@ -81,7 +81,7 @@
         <controls:MetroProgressBar
             Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth, Mode=OneWay}"
             EllipseDiameter="6"
-            Foreground="{StaticResource AccentColorBrush}"
+            Foreground="{StaticResource MahApps.Brushes.Accent}"
             IsIndeterminate="True"
             Style="{StaticResource ProgressBarOnLoading}" />
         <Grid Opacity="0.0" Style="{StaticResource AnimationContentOnLoading}">

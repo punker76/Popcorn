@@ -26,20 +26,20 @@
                 Data="M 0,0 A 180,180 180 1 1 1,1 Z"
                 Fill="Transparent"
                 Stretch="Fill"
-                Stroke="{DynamicResource AccentColorBrush}"
+                Stroke="{DynamicResource MahApps.Brushes.Accent}"
                 StrokeThickness="2.5"
                 UseLayoutRounding="True" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsDragging" Value="true">
-                <Setter TargetName="grip" Property="Fill" Value="{DynamicResource AccentColorBrush}" />
-                <Setter TargetName="grip" Property="Stroke" Value="{DynamicResource AccentColorBrush}" />
+                <Setter TargetName="grip" Property="Fill" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter TargetName="grip" Property="Stroke" Value="{DynamicResource MahApps.Brushes.Accent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="grip" Property="Visibility" Value="Hidden" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="true">
-                <Setter TargetName="grip" Property="Fill" Value="{DynamicResource AccentColorBrush}" />
+                <Setter TargetName="grip" Property="Fill" Value="{DynamicResource MahApps.Brushes.Accent}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -59,7 +59,7 @@
                         ClipToBounds="True"
                         Visibility="Visible">
                         <Rectangle
-                            Fill="{DynamicResource AccentColorBrush}"
+                            Fill="{DynamicResource MahApps.Brushes.Accent}"
                             RadiusX="1"
                             RadiusY="1" />
                     </Border>
@@ -115,7 +115,7 @@
                 x:Name="grip"
                 Width="8"
                 Height="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}}"
-                Fill="{DynamicResource AccentColorBrush}"
+                Fill="{DynamicResource MahApps.Brushes.Accent}"
                 RadiusX="3"
                 RadiusY="3"
                 Stretch="Fill"
@@ -130,7 +130,7 @@
                 <Setter TargetName="grip" Property="Fill" Value="{StaticResource CustomSliderBackgroundBrush}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="true">
-                <Setter TargetName="grip" Property="Fill" Value="{DynamicResource AccentColorBrush}" />
+                <Setter TargetName="grip" Property="Fill" Value="{DynamicResource MahApps.Brushes.Accent}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -151,7 +151,7 @@
                         Visibility="Visible">
                         <Rectangle
                             Margin="4,0,-4,0"
-                            Fill="{DynamicResource AccentColorBrush}"
+                            Fill="{DynamicResource MahApps.Brushes.Accent}"
                             RadiusX="1"
                             RadiusY="1" />
                     </Border>

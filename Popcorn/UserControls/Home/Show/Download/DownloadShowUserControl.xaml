@@ -109,7 +109,7 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Center"
             HorizontalContentAlignment="Stretch"
-            Foreground="{StaticResource AccentColorBrush}"
+            Foreground="{StaticResource MahApps.Brushes.Accent}"
             Maximum="{Binding Source={x:Static constants:Constants.MinimumShowBuffering}}"
             Minimum="0.0"
             Value="{Binding EpisodeDownloadProgress}" />
@@ -125,6 +125,6 @@
             controls:ControlsHelper.ContentCharacterCasing="Normal"
             Command="{Binding StopDownloadingEpisodeCommand}"
             Content="{lex:LocText CancelButton}"
-            Style="{DynamicResource SquareButtonStyle}" />
+            Style="{DynamicResource MahApps.Styles.Button.MetroSquare}" />
     </Grid>
 </UserControl>

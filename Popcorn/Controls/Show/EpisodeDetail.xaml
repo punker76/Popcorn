@@ -41,7 +41,7 @@
                         Command="{Binding PlayCommand, ElementName=EpisodeDetailUc}"
                         Content="Watch"
                         FontSize="14"
-                        Style="{DynamicResource SquareButtonStyle}" />
+                        Style="{StaticResource MahApps.Styles.Button.MetroSquare}" />
                 </Grid>
                 <StackPanel
                     Grid.Row="1"

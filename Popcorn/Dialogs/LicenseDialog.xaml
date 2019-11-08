@@ -66,6 +66,6 @@
             mah:ControlsHelper.ContentCharacterCasing="Normal"
             Command="{Binding CloseCommand}"
             Content="{lex:LocText CloseLabel}"
-            Style="{StaticResource AccentedSquareButtonStyle}" />
+            Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
     </Grid>
 </mah:CustomDialog>
