@@ -230,6 +230,11 @@ namespace Popcorn.ViewModels.Windows
         public ICommand CloseMoviePageCommand { get; private set; }
 
         /// <summary>
+        /// Command used to close cast page
+        /// </summary>
+        public ICommand CloseCastPageCommand { get; private set; }
+
+        /// <summary>
         /// Command used to close show page
         /// </summary>
         public ICommand CloseShowPageCommand { get; private set; }
@@ -651,6 +656,11 @@ namespace Popcorn.ViewModels.Windows
                 {
                     NavigationService.GoBack();
                 }
+            });
+
+            CloseCastPageCommand = new RelayCommand(() =>
+            {
+                IsCastFlyoutOpen = false;
             });
 
             MainWindowClosingCommand = new RelayCommand(async () =>

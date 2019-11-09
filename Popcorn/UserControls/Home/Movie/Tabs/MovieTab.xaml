@@ -275,8 +275,8 @@
                                         Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                         Visibility="Collapsed">
                                         <iconPacks:PackIconModern
-                                            Width="20"
-                                            Height="20"
+                                            Width="30"
+                                            Height="30"
                                             VerticalAlignment="Center"
                                             Foreground="White"
                                             Kind="Eye" />

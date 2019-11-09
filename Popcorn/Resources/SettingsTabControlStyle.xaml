@@ -143,7 +143,7 @@
                             <Setter TargetName="Underline" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:TabControlHelper.UnderlineSelectedBrush), Mode=OneWay}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="false">
-                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource GrayNormalBrush}" />
+                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.GrayNormal}" />
                         </Trigger>
 
                         <MultiDataTrigger>
@@ -162,7 +162,7 @@
                         </MultiDataTrigger>
 
                         <Trigger SourceName="Border" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource BlackBrush}" />
+                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Black}" />
                             <Setter TargetName="Underline" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:TabControlHelper.UnderlineMouseOverBrush), Mode=OneWay}" />
                         </Trigger>
 
@@ -188,7 +188,7 @@
                                 <Condition SourceName="Border" Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource HighlightBrush}" />
+                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}" />
                             <Setter TargetName="Underline" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:TabControlHelper.UnderlineMouseOverSelectedBrush), Mode=OneWay}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
