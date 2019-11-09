@@ -22,12 +22,12 @@ namespace Popcorn.Helpers
         public static string UserAgent;
         public static string Version;
 
-        public static void Initialize()
+        public static void Initialize(TelemetryConfiguration configuration)
         {
             try
             {
                 TelemetryClient =
-                    new TelemetryClient(TelemetryConfiguration.Active);
+                    new TelemetryClient(configuration);
                 UserName = Environment.UserName;
                 OperatingSystem = Environment.OSVersion.ToString();
                 Type = "PC";

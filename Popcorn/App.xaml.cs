@@ -67,9 +67,9 @@ namespace Popcorn
         /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
-            TelemetryConfiguration.Active.TelemetryInitializers.Add(new PopcornApplicationInsightsInitializer());
-            ApplicationInsightsHelper.Initialize();
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            var config = TelemetryConfiguration.CreateDefault();
+            config.TelemetryInitializers.Add(new PopcornApplicationInsightsInitializer());
+            ApplicationInsightsHelper.Initialize(config);
             base.OnStartup(e);
             WatchStart = Stopwatch.StartNew();
             Logger.Info(

@@ -3,6 +3,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>Popcorn</AssemblyTitle>
@@ -10,6 +12,7 @@
     <Copyright>Copyright © 2019</Copyright>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <Platforms>x86</Platforms>
   </PropertyGroup>
   <PropertyGroup>
@@ -18,23 +21,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
-      <Output TaskParameter="Assemblies" ItemName="Popcorn" />
-    </GetAssemblyIdentity>
-    <PropertyGroup>
-      <Version>@(Popcorn->'%(Version)')</Version>
-    </PropertyGroup>
-    <ItemGroup>
-      <Version Include="$(Version)" />
-      <Major Include="$(Version.Split('.')[0])" />
-      <Minor Include="$(Version.Split('.')[1])" />
-      <Build Include="$(Version.Split('.')[2])" />
-      <Revision Include="$(Version.Split('.')[3])" />
-    </ItemGroup>
-    <Exec Condition="'$(Configuration)' == 'Release'" Command="C:\Users\Famille\Documents\GitHub\Popcorn\NuGet.exe pack C:\Users\Famille\Documents\GitHub\Popcorn\Popcorn.nuspec -Version @(Major).@(Minor).@(Build) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
-    <Exec Condition="'$(Configuration)' == 'Release'" Command="C:\Users\Famille\Documents\GitHub\Popcorn\packages\squirrel.windows.updated\0.0.1\tools\Squirrel.exe --framework-version net472 --releasify $(OutDir)Popcorn.@(Major).@(Minor).@(Build).nupkg -g C:\Users\Famille\Documents\GitHub\Popcorn\Popcorn\InstallLoader.gif --no-msi --setupIcon C:\Users\Famille\Documents\GitHub\Popcorn\Popcorn\icon.ico" />
-  </Target>
   <ItemGroup>
     <Resource Remove="Resources\AnimatedScrollViewer.xaml" />
     <Resource Remove="Resources\CombiLabel.xaml" />
