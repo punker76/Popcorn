@@ -11,7 +11,6 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using NLog;
-using NuGet;
 using Popcorn.Enums;
 using Popcorn.Extensions;
 using Popcorn.Helpers;

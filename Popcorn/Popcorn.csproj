@@ -114,7 +114,6 @@
     <PackageReference Include="RestSharp" Version="106.6.10" />
     <PackageReference Include="RunProcessAsTask" Version="1.2.4" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.2" />
-    <PackageReference Include="squirrel.windows.updated" Version="0.0.1" />
     <PackageReference Include="SubtitlesParser" Version="1.4.8" />
     <PackageReference Include="TMDbLib" Version="1.4.0" />
     <PackageReference Include="Utf8Json" Version="1.3.7" />

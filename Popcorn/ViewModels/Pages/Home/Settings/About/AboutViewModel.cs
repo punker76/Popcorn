@@ -1,21 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.IO;
 using System.Windows.Input;
 using Enterwell.Clients.Wpf.Notifications;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
 using NLog;
 using Popcorn.Extensions;
 using Popcorn.Helpers;
 using Popcorn.Messaging;
-using Popcorn.Utils;
-using Squirrel;
 
 namespace Popcorn.ViewModels.Pages.Home.Settings.About
 {
@@ -133,88 +125,6 @@ namespace Popcorn.ViewModels.Pages.Home.Settings.About
                 await StartUpdateProcessAsync();
             });
 #endif
-        }
-
-        /// <summary>
-        /// Look for update then download and apply if any
-        /// </summary>
-        private async Task StartUpdateProcessAsync()
-        {
-            var watchStart = Stopwatch.StartNew();
-
-            Logger.Info(
-                "Looking for updates...");
-            try
-            {
-                using (var updateManager = await UpdateManager.GitHubUpdateManager(Constants.GithubRepository))
-                {
-                    var updateInfo = await updateManager.CheckForUpdate();
-                    if (updateInfo == null)
-                    {
-                        Logger.Error(
-                            "Problem while trying to check new updates.");
-                        return;
-                    }
-
-                    if (updateInfo.ReleasesToApply.Any())
-                    {
-                        Messenger.Default.Send(new UpdateAvailableMessage());
-                        UpdateAvailable = true;
-                        Logger.Info(
-                            $"A new update has been found!\n Currently installed version: {updateInfo.CurrentlyInstalledVersion?.Version?.Version.Major}.{updateInfo.CurrentlyInstalledVersion?.Version?.Version.Minor}.{updateInfo.CurrentlyInstalledVersion?.Version?.Version.Build} - New update: {updateInfo.FutureReleaseEntry?.Version?.Version.Major}.{updateInfo.FutureReleaseEntry?.Version?.Version.Minor}.{updateInfo.FutureReleaseEntry?.Version?.Version.Build}");
-
-                        UpdateDownloading = true;
-                        await updateManager.DownloadReleases(updateInfo.ReleasesToApply,
-                            progress => { UpdateDownloadProgress = progress; });
-                        UpdateDownloading = false;
-                        UpdateApplying = true;
-                        _updateFilePath = await updateManager.ApplyReleases(updateInfo,
-                            progress => { UpdateApplyProgress = progress; });
-                        UpdateApplying = false;
-                        UpdateApplied = true;
-                        Logger.Info(
-                            "A new update has been applied.");
-                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                        {
-                            _manager.CreateMessage()
-                                .Accent("#1751C3")
-                                .Background("#333")
-                                .HasBadge("Info")
-                                .HasMessage(LocalizationProviderHelper.GetLocalizedValue<string>("UpdateApplied"))
-                                .Dismiss().WithButton(LocalizationProviderHelper.GetLocalizedValue<string>("Restart"),
-                                    async button =>
-                                    {
-                                        Logger.Info(
-                                            "Restarting...");
-
-                                        await UpdateManager.RestartAppWhenExited($@"{_updateFilePath}\Popcorn.exe",
-                                            "updated");
-                                        Application.Current.MainWindow.Close();
-                                    })
-                                .Dismiss().WithButton(
-                                    LocalizationProviderHelper.GetLocalizedValue<string>("LaterLabel"),
-                                    button => { })
-                                .Queue();
-                        });
-                    }
-                    else
-                    {
-                        UpdateAvailable = false;
-                        Logger.Info(
-                            "No update available.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(
-                    $"Something went wrong when trying to update app. {ex.Message}");
-            }
-
-            watchStart.Stop();
-            var elapsedStartMs = watchStart.ElapsedMilliseconds;
-            Logger.Info(
-                $"Finished looking for updates in {elapsedStartMs}.");
         }
 
         /// <summary>

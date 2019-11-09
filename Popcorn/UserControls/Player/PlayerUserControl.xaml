@@ -296,7 +296,7 @@
                     Maximum="1"
                     Minimum="0"
                     SmallChange="0.05"
-                    Style="{StaticResource MahApps.Styles.Slider.Win10}"
+                    Style="{StaticResource MahApps.Styles.Slider}"
                     Value="{Binding Path=Volume, ElementName=Media}" />
             </StatusBarItem>
             <StatusBarItem

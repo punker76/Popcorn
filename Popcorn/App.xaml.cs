@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +11,6 @@ using NLog;
 using Popcorn.Helpers;
 using Popcorn.Initializers;
 using Popcorn.Services.User;
-using Popcorn.Utils;
 using Popcorn.ViewModels;
 using Popcorn.ViewModels.Windows;
 using Popcorn.Windows;
