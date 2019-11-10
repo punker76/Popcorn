@@ -104,6 +104,7 @@ namespace Popcorn.UserControls.Player
             InitializeComponent();
             Loaded += OnLoaded;
             Media.MediaOpened += OnMediaOpened;
+            Media.RendererOptions.UseLegacyAudioOut = true;
             MediaElement.FFmpegMessageLogged += OnMediaFFmpegMessageLogged;
             PauseCommand = new RelayCommand(async () => { await PauseMedia(); }, MediaPlayerPauseCanExecute);
             PlayCommand = new RelayCommand(async () => { await PlayMedia(); }, MediaPlayerPlayCanExecute);
