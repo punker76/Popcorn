@@ -118,13 +118,6 @@ namespace Popcorn.ViewModels.Pages.Home.Settings.About
             {
                 await Messenger.Default.SendAsync(new ShowLicenseDialogMessage());
             });
-
-#if !DEBUG
-            Task.Run(async () =>
-            {
-                await StartUpdateProcessAsync();
-            });
-#endif
         }
 
         /// <summary>
