@@ -30,7 +30,7 @@ Popcorn is a simple application which lets you watch any movie or TV show instan
 Windows 7+ is supported (Windows 7, 8, 8.1, 10).
 
 ## Installation
-Download installer [here](https://github.com/bbougot/Popcorn/releases/download/v1.0.2/Setup.exe).
+Download standalone application [here](https://github.com/bbougot/Popcorn/releases/download/v2.0.0/Popcorn.exe).
 
 ## Mockups
 
