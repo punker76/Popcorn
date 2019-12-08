@@ -43,9 +43,7 @@
     <PackageReference Include="AsyncEnumerator" Version="4.0.2" />
     <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
     <PackageReference Include="Enterwell.Clients.Wpf.Notifications" Version="1.4.2" />
-    <PackageReference Include="FFME.Windows" Version="4.2.320">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="FFME.Windows" Version="4.2.320" />
     <PackageReference Include="Gu.Wpf.Adorners" Version="1.5.2" />
     <PackageReference Include="Humanizer" Version="2.7.9" />
     <PackageReference Include="Humanizer.Core" Version="2.7.9" />
