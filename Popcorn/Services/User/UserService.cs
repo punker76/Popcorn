@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Akavache;
 using GalaSoft.MvvmLight.Messaging;
 using NLog;
+using Popcorn.Helpers;
 using Popcorn.Messaging;
 using Popcorn.Models.Localization;
 using Popcorn.Models.Movie;
@@ -333,6 +334,24 @@ namespace Popcorn.Services.User
         }
 
         /// <summary>
+        /// Get the download limit
+        /// </summary>
+        /// <returns></returns>
+        public int GetDownloadLimit()
+        {
+            return User.DownloadLimit;
+        }
+
+        /// <summary>
+        /// Get the upload limit
+        /// </summary>
+        /// <returns></returns>
+        public int GetUploadLimit()
+        {
+            return User.UploadLimit;
+        }
+
+        /// <summary>
         /// Set default HD quality
         /// </summary>
         /// <param name="hd"></param>
@@ -350,6 +369,24 @@ namespace Popcorn.Services.User
         public void SetDefaultSubtitleLanguage(string englishName)
         {
             User.DefaultSubtitleLanguage = englishName;
+        }
+
+        /// <summary>
+        /// Get default subtitle language
+        /// </summary>
+        /// <returns></returns>
+        public string GetDefaultSubtitleLanguage()
+        {
+            return User.DefaultSubtitleLanguage;
+        }
+
+        /// <summary>
+        /// Get HD quality
+        /// </summary>
+        /// <returns></returns>
+        public bool GetDefaultHdQuality()
+        {
+            return User.DefaultHdQuality;
         }
 
         /// <summary>

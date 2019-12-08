@@ -17,7 +17,7 @@ using Popcorn.Messaging;
 using Popcorn.Models.Bandwidth;
 using Popcorn.Services.Application;
 using Popcorn.Utils;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -104,6 +104,7 @@ namespace Popcorn.UserControls.Player
             InitializeComponent();
             Loaded += OnLoaded;
             Media.MediaOpened += OnMediaOpened;
+            Media.RendererOptions.UseLegacyAudioOut = true;
             MediaElement.FFmpegMessageLogged += OnMediaFFmpegMessageLogged;
             PauseCommand = new RelayCommand(async () => { await PauseMedia(); }, MediaPlayerPauseCanExecute);
             PlayCommand = new RelayCommand(async () => { await PlayMedia(); }, MediaPlayerPlayCanExecute);
@@ -225,7 +226,7 @@ namespace Popcorn.UserControls.Player
                 vm.BandwidthRate.ProgressChanged += OnBandwidthChanged;
             }
 
-            if (vm.MediaType == Utils.MediaType.Trailer)
+            if (vm.MediaType == Enums.MediaType.Trailer)
             {
                 DownloadProgress.Visibility = Visibility.Collapsed;
             }

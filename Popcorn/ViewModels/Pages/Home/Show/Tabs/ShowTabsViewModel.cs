@@ -10,8 +10,8 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using NLog;
-using NuGet;
 using Popcorn.Comparers;
+using Popcorn.Extensions;
 using Popcorn.Helpers;
 using Popcorn.Messaging;
 using Popcorn.Models.Genres;
@@ -126,7 +126,7 @@ namespace Popcorn.ViewModels.Pages.Home.Show.Tabs
 
             _tabNameGenerator = tabNameGenerator;
             TabName = tabNameGenerator.Invoke();
-            MaxShowsPerPage = Utils.Constants.MaxShowsPerPage;
+            MaxShowsPerPage = Helpers.Constants.MaxShowsPerPage;
             CancellationLoadingShows = new CancellationTokenSource();
         }
 

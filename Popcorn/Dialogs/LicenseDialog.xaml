@@ -7,9 +7,8 @@
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:local="clr-namespace:Popcorn.Dialogs"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-    xmlns:markdown="clr-namespace:Markdown;assembly=Markdown"
+    xmlns:markdown="clr-namespace:Popcorn.Markdown"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -17,7 +16,6 @@
         <Grid.Resources>
             <markdown:Markdown
                 x:Key="Markdown"
-                AssetPathRoot="{x:Static system:Environment.CurrentDirectory}"
                 DocumentStyle="{StaticResource DocumentStyle}"
                 Heading1Style="{StaticResource H1Style}"
                 Heading2Style="{StaticResource H2Style}"
@@ -66,6 +64,6 @@
             mah:ControlsHelper.ContentCharacterCasing="Normal"
             Command="{Binding CloseCommand}"
             Content="{lex:LocText CloseLabel}"
-            Style="{StaticResource AccentedSquareButtonStyle}" />
+            Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
     </Grid>
 </mah:CustomDialog>

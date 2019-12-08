@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using OSDB.Models;
+using Popcorn.Enums;
 using Popcorn.Extensions;
 using Popcorn.Helpers;
 using Popcorn.Messaging;

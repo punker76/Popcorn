@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using GalaSoft.MvvmLight.Messaging;
 using Popcorn.Controls;
 using Popcorn.Extensions;
-using Popcorn.Helpers;
 using Popcorn.Messaging;
 using Popcorn.Utils;
 using Popcorn.ViewModels.Windows;
@@ -28,6 +25,8 @@ namespace Popcorn.Windows
         /// </summary>
         public MainWindow()
         {
+            EventManager.RegisterClassHandler(typeof(FrameworkElement), FrameworkElement.GotFocusEvent,
+                new RoutedEventHandler(RemoveFocusVisualStyle), true);
             Initialized += OnInitialized;
             InitializeComponent();
             Application.Current.Exit += OnExit;
@@ -74,6 +73,11 @@ namespace Popcorn.Windows
                     BeginAnimation(OpacityProperty, da);
                 }
             });
+        }
+
+        private void RemoveFocusVisualStyle(object sender, RoutedEventArgs e)
+        {
+            (sender as FrameworkElement).FocusVisualStyle = null;
         }
 
         private void OnExit(object sender, ExitEventArgs e)
@@ -123,9 +127,9 @@ namespace Popcorn.Windows
             var searchBox =
                 this.FindChild<TextBox>("SearchBox");
             if (e.Key == Key.F3 || (Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift &&
-                     e.Key == Key.F)
+                e.Key == Key.F)
             {
-                searchBox.Focus();
+                searchBox?.Focus();
             }
         }
 

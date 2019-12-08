@@ -246,15 +246,15 @@
                                     x:Name="Like"
                                     Grid.Row="2"
                                     Grid.Column="1"
-                                    Width="50"
-                                    Height="50"
+                                    Width="40"
+                                    Height="40"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Command="{Binding DataContext.SetFavoriteShowCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tabs:ShowTab}}, Mode=OneTime}"
                                     CommandParameter="{Binding Mode=OneTime}"
                                     IsChecked="{Binding IsFavorite}"
                                     Opacity="0.0"
-                                    Style="{DynamicResource MetroCircleToggleButtonStyle}"
+                                    Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                     Visibility="Collapsed">
                                     <Rectangle
                                         Width="20"
@@ -366,7 +366,7 @@
                 Command="{Binding ReloadShows}"
                 Content="{lex:LocText ReloadLabel}"
                 FontSize="18"
-                Style="{StaticResource AccentedSquareButtonStyle}" />
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
         </StackPanel>
     </Grid>
 </UserControl>

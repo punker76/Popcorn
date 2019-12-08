@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight.Messaging;
 using ltnet;
 using NLog;
 using OSDB.Models;
+using Popcorn.Enums;
 using Popcorn.Helpers;
 using Popcorn.Models.Episode;
 using Popcorn.Models.Media;

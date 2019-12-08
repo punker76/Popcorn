@@ -5,15 +5,7 @@ VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Popcorn", "Popcorn\Popcorn.csproj", "{B4796033-A539-4A9E-B0BF-05A5217C769A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Popcorn.Utils", "Popcorn.Utils\Popcorn.Utils.csproj", "{5CA8B099-3924-46FA-829F-53250E4D6C56}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSDB", "OSDB\OSDB.csproj", "{B3CDE803-4AD2-4EF9-A4E4-901F84A550DC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown", "Markdown\Markdown.csproj", "{173AF8E7-966A-4519-A07C-B6DB5FBAB412}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extras", "Extras", "{21BB550B-A1AF-411B-A446-F34BE3A71B14}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Popcorn.Tests", "Popcorn.Tests\Popcorn.Tests.csproj", "{4B32C184-79C8-4BD8-9D7A-29B4AF7021AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,29 +17,13 @@ Global
 		{B4796033-A539-4A9E-B0BF-05A5217C769A}.Debug|x86.Build.0 = Debug|x86
 		{B4796033-A539-4A9E-B0BF-05A5217C769A}.Release|x86.ActiveCfg = Release|x86
 		{B4796033-A539-4A9E-B0BF-05A5217C769A}.Release|x86.Build.0 = Release|x86
-		{5CA8B099-3924-46FA-829F-53250E4D6C56}.Debug|x86.ActiveCfg = Debug|x86
-		{5CA8B099-3924-46FA-829F-53250E4D6C56}.Debug|x86.Build.0 = Debug|x86
-		{5CA8B099-3924-46FA-829F-53250E4D6C56}.Release|x86.ActiveCfg = Release|x86
-		{5CA8B099-3924-46FA-829F-53250E4D6C56}.Release|x86.Build.0 = Release|x86
 		{B3CDE803-4AD2-4EF9-A4E4-901F84A550DC}.Debug|x86.ActiveCfg = Debug|x86
 		{B3CDE803-4AD2-4EF9-A4E4-901F84A550DC}.Debug|x86.Build.0 = Debug|x86
 		{B3CDE803-4AD2-4EF9-A4E4-901F84A550DC}.Release|x86.ActiveCfg = Release|x86
 		{B3CDE803-4AD2-4EF9-A4E4-901F84A550DC}.Release|x86.Build.0 = Release|x86
-		{173AF8E7-966A-4519-A07C-B6DB5FBAB412}.Debug|x86.ActiveCfg = Debug|x86
-		{173AF8E7-966A-4519-A07C-B6DB5FBAB412}.Debug|x86.Build.0 = Debug|x86
-		{173AF8E7-966A-4519-A07C-B6DB5FBAB412}.Release|x86.ActiveCfg = Release|x86
-		{173AF8E7-966A-4519-A07C-B6DB5FBAB412}.Release|x86.Build.0 = Release|x86
-		{4B32C184-79C8-4BD8-9D7A-29B4AF7021AC}.Debug|x86.ActiveCfg = Debug|x86
-		{4B32C184-79C8-4BD8-9D7A-29B4AF7021AC}.Debug|x86.Build.0 = Debug|x86
-		{4B32C184-79C8-4BD8-9D7A-29B4AF7021AC}.Release|x86.ActiveCfg = Release|x86
-		{4B32C184-79C8-4BD8-9D7A-29B4AF7021AC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{B3CDE803-4AD2-4EF9-A4E4-901F84A550DC} = {21BB550B-A1AF-411B-A446-F34BE3A71B14}
-		{173AF8E7-966A-4519-A07C-B6DB5FBAB412} = {21BB550B-A1AF-411B-A446-F34BE3A71B14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7129ABEC-9949-4849-BF32-18C3C06A6C55}

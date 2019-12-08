@@ -7,9 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-    xmlns:markdown="clr-namespace:Markdown;assembly=Markdown"
+    xmlns:markdown="clr-namespace:Popcorn.Markdown"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
     d:DesignHeight="450"
     d:DesignWidth="800"
     DataContext="{Binding About, Source={StaticResource Locator}}"
@@ -20,7 +19,6 @@
             <converters:UpdateLabelConverter x:Key="UpdateLabelConverter" />
             <markdown:Markdown
                 x:Key="Markdown"
-                AssetPathRoot="{x:Static system:Environment.CurrentDirectory}"
                 DocumentStyle="{StaticResource DocumentStyle}"
                 Heading1Style="{StaticResource H1Style}"
                 Heading2Style="{StaticResource H2Style}"
@@ -50,7 +48,7 @@
                     Content="{lex:LocText AboutLabel}"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}" />
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
                 <StackPanel
                     Margin="0,10,0,5"
                     VerticalAlignment="Center"
@@ -89,38 +87,6 @@
                         FontWeight="Bold"
                         Foreground="White"
                         Text="{Binding Version}" />
-                    <StackPanel
-                        Margin="10,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding UpdateDownloading, Converter={StaticResource BoolToInverseVisibilityConverter}}">
-                            <mah:MetroProgressBar
-                                VerticalAlignment="Center"
-                                Foreground="{DynamicResource AccentColorBrush}"
-                                IsIndeterminate="False"
-                                Maximum="100"
-                                Minimum="0"
-                                Value="{Binding UpdateDownloadProgress}" />
-                            <TextBlock
-                                Margin="5,0,0,0"
-                                VerticalAlignment="Center"
-                                Text="{Binding UpdateDownloadProgress, Converter={StaticResource UpdateLabelConverter}, ConverterParameter=DownloadingUpdate}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding UpdateApplying, Converter={StaticResource BoolToInverseVisibilityConverter}}">
-                            <mah:MetroProgressBar
-                                VerticalAlignment="Center"
-                                Foreground="{DynamicResource AccentColorBrush}"
-                                IsIndeterminate="False"
-                                Maximum="100"
-                                Minimum="0"
-                                Value="{Binding UpdateApplyProgress}" />
-                            <TextBlock
-                                Margin="5,0,0,0"
-                                VerticalAlignment="Center"
-                                Text="{Binding UpdateApplyProgress, Converter={StaticResource UpdateLabelConverter}, ConverterParameter=ApplyingUpdate}" />
-                        </StackPanel>
-                    </StackPanel>
                 </StackPanel>
                 <TextBlock
                     Margin="5,5,0,0"
@@ -133,9 +99,10 @@
                 <Button
                     Margin="5,15,0,0"
                     HorizontalAlignment="Left"
+                    mah:ControlsHelper.ContentCharacterCasing="Normal"
                     Command="{Binding ShowLicenseCommand}"
                     Content="{lex:LocText ShowLicenseLabel}"
-                    Style="{DynamicResource MetroFlatButton}" />
+                    Style="{DynamicResource MahApps.Styles.Button.Square}" />
             </StackPanel>
 
             <StackPanel Margin="20,10">
@@ -143,7 +110,7 @@
                     Content="Project"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}" />
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
                 <FlowDocumentScrollViewer
                     Margin="-13,-10,0,0"
                     Document="{Binding Project, Converter={StaticResource TextToFlowDocumentConverter}}"
@@ -157,7 +124,7 @@
                     Content="Legal"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}" />
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
                 <FlowDocumentScrollViewer
                     Margin="-13,-10,0,0"
                     Document="{Binding Legal, Converter={StaticResource TextToFlowDocumentConverter}}"

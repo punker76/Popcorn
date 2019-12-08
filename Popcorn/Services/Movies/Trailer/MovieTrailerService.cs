@@ -7,11 +7,12 @@ using GalaSoft.MvvmLight.Messaging;
 using NLog;
 using Polly;
 using Polly.Timeout;
+using Popcorn.Enums;
 using Popcorn.Helpers;
 using Popcorn.Messaging;
 using Popcorn.Models.Movie;
 using Popcorn.Services.Movies.Movie;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 
 namespace Popcorn.Services.Movies.Trailer
 {
@@ -47,7 +48,7 @@ namespace Popcorn.Services.Movies.Trailer
         public async Task LoadTrailerAsync(MovieJson movie, CancellationToken ct)
         {
             var timeoutPolicy =
-                Policy.TimeoutAsync(Utils.Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Pessimistic);
+                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
             try
             {
                 await timeoutPolicy.ExecuteAsync(async cancellation =>
@@ -63,7 +64,7 @@ namespace Popcorn.Services.Movies.Trailer
                                 new ManageExceptionMessage(
                                     new TrailerNotAvailableException(
                                         LocalizationProviderHelper.GetLocalizedValue<string>("TrailerNotAvailable"))));
-                            Messenger.Default.Send(new StopPlayingTrailerMessage(Utils.MediaType.Movie));
+                            Messenger.Default.Send(new StopPlayingTrailerMessage(MediaType.Movie));
                             return;
                         }
 
@@ -87,7 +88,7 @@ namespace Popcorn.Services.Movies.Trailer
                                                 new ManageExceptionMessage(
                                                     new TrailerNotAvailableException(
                                                         LocalizationProviderHelper.GetLocalizedValue<string>("TrailerNotAvailable"))));
-                                            Messenger.Default.Send(new StopPlayingTrailerMessage(Utils.MediaType.Movie));
+                                            Messenger.Default.Send(new StopPlayingTrailerMessage(MediaType.Movie));
                                             return;
                                         }
                                     }
@@ -100,7 +101,7 @@ namespace Popcorn.Services.Movies.Trailer
                                         new ManageExceptionMessage(
                                             new TrailerNotAvailableException(
                                                 LocalizationProviderHelper.GetLocalizedValue<string>("TrailerNotAvailable"))));
-                                    Messenger.Default.Send(new StopPlayingTrailerMessage(Utils.MediaType.Movie));
+                                    Messenger.Default.Send(new StopPlayingTrailerMessage(MediaType.Movie));
                                     return;
                                 }
                             }
@@ -112,7 +113,7 @@ namespace Popcorn.Services.Movies.Trailer
                                     new ManageExceptionMessage(
                                         new TrailerNotAvailableException(
                                             LocalizationProviderHelper.GetLocalizedValue<string>("TrailerNotAvailable"))));
-                                Messenger.Default.Send(new StopPlayingTrailerMessage(Utils.MediaType.Movie));
+                                Messenger.Default.Send(new StopPlayingTrailerMessage(MediaType.Movie));
                                 return;
                             }
 
@@ -121,15 +122,15 @@ namespace Popcorn.Services.Movies.Trailer
                             Messenger.Default.Send(new PlayTrailerMessage(trailer, movie.Title,
                                 () =>
                                 {
-                                    Messenger.Default.Send(new StopPlayingTrailerMessage(Utils.MediaType.Movie));
-                                }, Utils.MediaType.Movie));
+                                    Messenger.Default.Send(new StopPlayingTrailerMessage(MediaType.Movie));
+                                }, MediaType.Movie));
                         }
                     }
                     catch (Exception exception) when (exception is TaskCanceledException)
                     {
                         Logger.Debug(
                             "GetMovieTrailerAsync cancelled.");
-                        Messenger.Default.Send(new StopPlayingTrailerMessage(Utils.MediaType.Movie));
+                        Messenger.Default.Send(new StopPlayingTrailerMessage(MediaType.Movie));
                     }
                     catch (Exception exception)
                     {
@@ -140,7 +141,7 @@ namespace Popcorn.Services.Movies.Trailer
                                 new TrailerNotAvailableException(
                                     LocalizationProviderHelper.GetLocalizedValue<string>(
                                         "TrailerNotAvailable"))));
-                        Messenger.Default.Send(new StopPlayingTrailerMessage(Utils.MediaType.Movie));
+                        Messenger.Default.Send(new StopPlayingTrailerMessage(MediaType.Movie));
                     }
                 }, ct);
             }

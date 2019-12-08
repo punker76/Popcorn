@@ -31,9 +31,10 @@ namespace Popcorn.ViewModels
     /// </summary>
     public class ViewModelLocator
     {
-        static ViewModelLocator()
+        public static void Setup()
         {
             #region Services
+
             var tmdbService = new TmdbService();
             var movieService = new MovieService(tmdbService);
             var showService = new ShowService(tmdbService);

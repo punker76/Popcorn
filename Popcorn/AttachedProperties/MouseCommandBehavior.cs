@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace Popcorn.AttachedProperties
@@ -19,14 +14,15 @@ namespace Popcorn.AttachedProperties
             DependencyProperty.RegisterAttached("MouseDownCommand",
                 typeof(ICommand),
                 typeof(MouseCommandBehavior),
-                new FrameworkPropertyMetadata(null, (obj, e) => OnMouseCommandChanged(obj, (ICommand)e.NewValue, false)));
+                new FrameworkPropertyMetadata(null,
+                    (obj, e) => OnMouseCommandChanged(obj, (ICommand) e.NewValue, false)));
 
         ///
         /// Gets the MouseDownCommand property
         ///
         public static ICommand GetMouseDownCommand(DependencyObject d)
         {
-            return (ICommand)d.GetValue(MouseDownCommandProperty);
+            return (ICommand) d.GetValue(MouseDownCommandProperty);
         }
 
         ///
@@ -44,14 +40,15 @@ namespace Popcorn.AttachedProperties
             DependencyProperty.RegisterAttached("MouseUpCommand",
                 typeof(ICommand),
                 typeof(MouseCommandBehavior),
-                new FrameworkPropertyMetadata(null, new PropertyChangedCallback((obj, e) => OnMouseCommandChanged(obj, (ICommand)e.NewValue, true))));
+                new FrameworkPropertyMetadata(null,
+                    (obj, e) => OnMouseCommandChanged(obj, (ICommand) e.NewValue, true)));
 
         ///
         /// Gets the MouseUpCommand property
         ///
         public static ICommand GetMouseUpCommand(DependencyObject d)
         {
-            return (ICommand)d.GetValue(MouseUpCommandProperty);
+            return (ICommand) d.GetValue(MouseUpCommandProperty);
         }
 
         ///
@@ -71,7 +68,7 @@ namespace Popcorn.AttachedProperties
         {
             if (command == null) return;
 
-            var element = (FrameworkElement)d;
+            var element = (FrameworkElement) d;
 
             if (isMouseUp)
                 element.PreviewMouseUp += (obj, e) => command.Execute(null);

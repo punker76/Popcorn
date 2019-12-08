@@ -22,6 +22,7 @@ using NLog;
 using OSDB.Models;
 using Polly.Timeout;
 using Popcorn.Dialogs;
+using Popcorn.Enums;
 using Popcorn.Extensions;
 using Popcorn.Helpers;
 using Popcorn.Messaging;
@@ -29,7 +30,7 @@ using Popcorn.Services.Application;
 using Popcorn.Services.Cache;
 using Popcorn.Services.User;
 using Popcorn.Utils;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 using Popcorn.ViewModels.Dialogs;
 using Popcorn.ViewModels.Pages.Player;
 using Popcorn.Services.Subtitles;
@@ -227,6 +228,11 @@ namespace Popcorn.ViewModels.Windows
         /// Command used to close movie page
         /// </summary>
         public ICommand CloseMoviePageCommand { get; private set; }
+
+        /// <summary>
+        /// Command used to close cast page
+        /// </summary>
+        public ICommand CloseCastPageCommand { get; private set; }
 
         /// <summary>
         /// Command used to close show page
@@ -650,6 +656,11 @@ namespace Popcorn.ViewModels.Windows
                 {
                     NavigationService.GoBack();
                 }
+            });
+
+            CloseCastPageCommand = new RelayCommand(() =>
+            {
+                IsCastFlyoutOpen = false;
             });
 
             MainWindowClosingCommand = new RelayCommand(async () =>

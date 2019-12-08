@@ -3,6 +3,7 @@ using Popcorn.Utils;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Popcorn.Enums;
 using Popcorn.Models.Bandwidth;
 
 namespace Popcorn.Services.Download

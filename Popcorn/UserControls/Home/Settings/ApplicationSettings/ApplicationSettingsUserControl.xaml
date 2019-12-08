@@ -45,7 +45,7 @@
                     Grid.Row="0"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
                     Text="{lex:LocText LanguageLabel}" />
                 <TextBlock
                     Grid.Row="2"
@@ -77,7 +77,7 @@
                     VerticalAlignment="Center"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
                     Text="{lex:LocText BandwidthLimitLabel}" />
                 <TextBlock
                     Grid.Row="2"
@@ -121,7 +121,7 @@
                     VerticalAlignment="Center"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
                     Text="{lex:LocText DefaultQualityLabel}" />
                 <TextBlock
                     Grid.Row="2"
@@ -151,7 +151,7 @@
                     VerticalAlignment="Center"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
                     Text="{lex:LocText DefaultSubtitleLanguageLabel}" />
                 <TextBlock
                     Grid.Row="2"
@@ -168,13 +168,6 @@
                         HorizontalContentAlignment="Left"
                         ItemsSource="{Binding AvailableSubtitlesLanguages}"
                         SelectedItem="{Binding DefaultSubtitleLanguage}">
-                        <mah:SplitButton.ListBoxStyle>
-                            <Style BasedOn="{StaticResource MetroListBox}" TargetType="{x:Type ListBox}">
-                                <Setter Property="MaxHeight" Value="200" />
-                                <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
-                                <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
-                            </Style>
-                        </mah:SplitButton.ListBoxStyle>
                         <mah:SplitButton.Icon>
                             <iconPacks:PackIconMaterial Margin="6" Kind="Translate" />
                         </mah:SplitButton.Icon>
@@ -201,7 +194,7 @@
                     VerticalAlignment="Center"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}"
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}"
                     Text="{lex:LocText CacheSizeLabel}" />
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock
@@ -230,7 +223,7 @@
                         mah:ControlsHelper.ContentCharacterCasing="Normal"
                         Command="{Binding ClearCacheCommand}"
                         Content="{lex:LocText ClearButton}"
-                        Style="{DynamicResource SquareButtonStyle}" />
+                        Style="{DynamicResource MahApps.Styles.Button.Square}" />
                     <Button
                         Height="30"
                         Margin="10,0,0,0"
@@ -239,7 +232,7 @@
                         mah:ControlsHelper.ContentCharacterCasing="Normal"
                         Command="{Binding ChangeCacheLocationCommand}"
                         Content="{lex:LocText ChangeLocation}"
-                        Style="{DynamicResource SquareButtonStyle}" />
+                        Style="{DynamicResource MahApps.Styles.Button.Square}" />
                 </StackPanel>
             </Grid>
         </controls:CustomWrapPanel>

@@ -15,10 +15,11 @@ using Popcorn.Services.Shows.Trailer;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Popcorn.Enums;
 using Popcorn.Helpers;
 using Popcorn.Services.Cache;
 using Popcorn.Services.Shows.Show;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 
 namespace Popcorn.ViewModels.Pages.Home.Show.Details
 {
@@ -210,7 +211,7 @@ namespace Popcorn.ViewModels.Pages.Home.Show.Details
                 this,
                 message =>
                 {
-                    if (message.Type == Utils.MediaType.Show)
+                    if (message.Type == MediaType.Show)
                     {
                         StopPlayingTrailer();
                     }

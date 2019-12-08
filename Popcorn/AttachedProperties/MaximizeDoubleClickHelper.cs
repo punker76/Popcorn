@@ -17,12 +17,13 @@ namespace Popcorn.AttachedProperties
         private static void OnLoaded(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            var uiElement = dependencyObject as UIElement;
-            if (uiElement == null || (dependencyPropertyChangedEventArgs.NewValue is bool) == false)
+            if (!(dependencyObject is UIElement uiElement) ||
+                dependencyPropertyChangedEventArgs.NewValue is bool == false)
             {
                 return;
             }
-            if ((bool)dependencyPropertyChangedEventArgs.NewValue == true)
+
+            if ((bool) dependencyPropertyChangedEventArgs.NewValue)
             {
                 uiElement.MouseLeftButtonDown += UIElementMouseLeftButtonDown;
             }
@@ -35,8 +36,7 @@ namespace Popcorn.AttachedProperties
 
         private static void UIElementMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseEventArgs)
         {
-            var uiElement = sender as UIElement;
-            if (uiElement != null)
+            if (sender is UIElement uiElement)
             {
                 if (mouseEventArgs.ClickCount == 2)
                 {
@@ -60,7 +60,7 @@ namespace Popcorn.AttachedProperties
 
         public static bool GetMaximizeDoubleClick(DependencyObject element)
         {
-            return (bool)element.GetValue(MaximizeDoubleClickProperty);
+            return (bool) element.GetValue(MaximizeDoubleClickProperty);
         }
     }
 }

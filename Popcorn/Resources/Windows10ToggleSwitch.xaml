@@ -59,8 +59,8 @@
                                         <Setter Property="Border.Background" Value="Transparent" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type local:Windows10ToggleSwitch}}}" Value="True">
-                                                <Setter Property="Border.BorderBrush" Value="{DynamicResource AccentColorBrush}" />
-                                                <Setter Property="Border.Background" Value="{DynamicResource AccentColorBrush}" />
+                                                <Setter Property="Border.BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                                                <Setter Property="Border.Background" Value="{DynamicResource MahApps.Brushes.Accent}" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>

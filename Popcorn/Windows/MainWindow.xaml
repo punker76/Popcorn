@@ -36,8 +36,8 @@
     IconEdgeMode="Aliased"
     IgnoreTaskbarOnMaximize="{Binding IgnoreTaskbarOnMaximize}"
     KeyDown="OnKeyDown"
-    NonActiveBorderBrush="{StaticResource AccentColorBrush}"
-    NonActiveGlowBrush="{StaticResource AccentColorBrush}"
+    NonActiveBorderBrush="{StaticResource MahApps.Brushes.Accent}"
+    NonActiveGlowBrush="{StaticResource MahApps.Brushes.Accent}"
     OverlayBrush="Black"
     ShowIconOnTitleBar="True"
     ShowTitleBar="False"
@@ -82,7 +82,7 @@
     </i:Interaction.Triggers>
 
     <controls:MetroWindow.WindowButtonCommands>
-        <controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" Visibility="{Binding ApplicationService.IsMediaPlaying, Converter={StaticResource BoolToVisibilityConverter}}" />
+        <controls:WindowButtonCommands Style="{DynamicResource MahApps.Styles.WindowButtonCommands.Clean.Win10}" Visibility="{Binding ApplicationService.IsMediaPlaying, Converter={StaticResource BoolToVisibilityConverter}}" />
     </controls:MetroWindow.WindowButtonCommands>
 
     <controls:MetroWindow.RightWindowCommands>
@@ -136,6 +136,7 @@
                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
                 Margin="0.01,0,0,0"
                 AnimateOpacity="True"
+                CloseCommand="{Binding CloseCastPageCommand}"
                 Header="{Binding Cast.Person.Name, Source={StaticResource Locator}}"
                 HeaderTemplate="{Binding Source={StaticResource FlyoutHeaderTemplate}}"
                 IsOpen="{Binding IsCastFlyoutOpen}"

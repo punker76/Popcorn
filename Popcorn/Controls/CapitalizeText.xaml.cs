@@ -13,7 +13,7 @@ namespace Popcorn.Controls
         /// </summary>
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text",
-                typeof (string), typeof (CapitalizeText),
+                typeof(string), typeof(CapitalizeText),
                 new PropertyMetadata(string.Empty, OnTextChanged));
 
         /// <summary>

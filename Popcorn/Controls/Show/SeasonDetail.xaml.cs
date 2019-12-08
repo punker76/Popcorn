@@ -66,8 +66,7 @@ namespace Popcorn.Controls.Show
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedSeason = ComboSeasons.SelectedValue as Season;
-            if (selectedSeason == null) return;
+            if (!(ComboSeasons.SelectedValue is Season selectedSeason)) return;
             SelectedSeasonChanged?.Invoke(this, new SelectedSeasonChangedEventArgs(selectedSeason.Number));
         }
     }

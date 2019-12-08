@@ -23,7 +23,7 @@
                     Content="{lex:LocText ShortcutsLabel}"
                     FontSize="24"
                     FontWeight="Light"
-                    Foreground="{DynamicResource AccentColorBrush}" />
+                    Foreground="{DynamicResource MahApps.Brushes.Accent}" />
                 <StackPanel
                     Margin="5,10,0,5"
                     VerticalAlignment="Center"

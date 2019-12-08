@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Popcorn.Models.Episode;
 using Popcorn.Models.Movie;
 using Popcorn.Models.Shows;
 using Popcorn.Models.User;
@@ -105,6 +104,18 @@ namespace Popcorn.Services.User
         void SetUploadLimit(int limit);
 
         /// <summary>
+        /// Get the download limit
+        /// </summary>
+        /// <returns></returns>
+        int GetDownloadLimit();
+
+        /// <summary>
+        /// Get the upload limit
+        /// </summary>
+        /// <returns></returns>
+        int GetUploadLimit();
+
+        /// <summary>
         /// Set default HD quality
         /// </summary>
         /// <param name="hd"></param>
@@ -117,6 +128,18 @@ namespace Popcorn.Services.User
         /// <param name="englishName"></param>
         /// <returns></returns>
         void SetDefaultSubtitleLanguage(string englishName);
+
+        /// <summary>
+        /// Get default subtitle language
+        /// </summary>
+        /// <returns></returns>
+        string GetDefaultSubtitleLanguage();
+
+        /// <summary>
+        /// Get HD quality
+        /// </summary>
+        /// <returns></returns>
+        bool GetDefaultHdQuality();
 
         /// <summary>
         /// Get cache location

@@ -11,7 +11,7 @@ using OSDB;
 using Popcorn.Helpers;
 using Popcorn.Messaging;
 using Popcorn.Utils;
-using Popcorn.Utils.Exceptions;
+using Popcorn.Exceptions;
 using SubtitlesParser.Classes;
 
 namespace Popcorn.Services.Subtitles

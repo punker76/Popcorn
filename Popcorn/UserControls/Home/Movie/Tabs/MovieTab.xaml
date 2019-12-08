@@ -265,14 +265,14 @@
                                     Orientation="Horizontal">
                                     <ToggleButton
                                         x:Name="Seen"
-                                        Width="50"
-                                        Height="50"
+                                        Width="40"
+                                        Height="40"
                                         VerticalAlignment="Center"
                                         Command="{Binding DataContext.SetWatchedMovieCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tabs:MovieTab}}, Mode=OneTime}"
                                         CommandParameter="{Binding Mode=OneTime}"
                                         IsChecked="{Binding HasBeenSeen}"
                                         Opacity="0.0"
-                                        Style="{DynamicResource MetroCircleToggleButtonStyle}"
+                                        Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                         Visibility="Collapsed">
                                         <iconPacks:PackIconModern
                                             Width="30"
@@ -283,14 +283,15 @@
                                     </ToggleButton>
                                     <ToggleButton
                                         x:Name="Like"
-                                        Width="50"
-                                        Height="50"
+                                        Width="40"
+                                        Height="40"
+                                        Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Command="{Binding DataContext.SetFavoriteMovieCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tabs:MovieTab}}, Mode=OneTime}"
                                         CommandParameter="{Binding Mode=OneTime}"
                                         IsChecked="{Binding IsFavorite}"
                                         Opacity="0.0"
-                                        Style="{DynamicResource MetroCircleToggleButtonStyle}"
+                                        Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
                                         Visibility="Collapsed">
                                         <Rectangle
                                             Width="20"
@@ -413,7 +414,7 @@
                 Command="{Binding ReloadMovies}"
                 Content="{lex:LocText ReloadLabel}"
                 FontSize="18"
-                Style="{StaticResource AccentedSquareButtonStyle}" />
+                Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
         </StackPanel>
     </Grid>
 </UserControl>

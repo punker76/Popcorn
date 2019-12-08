@@ -296,7 +296,7 @@
                     Maximum="1"
                     Minimum="0"
                     SmallChange="0.05"
-                    Style="{DynamicResource FlatSlider}"
+                    Style="{StaticResource MahApps.Styles.Slider}"
                     Value="{Binding Path=Volume, ElementName=Media}" />
             </StatusBarItem>
             <StatusBarItem
@@ -335,13 +335,6 @@
                         DisplayMemberPath="LanguageName"
                         ItemsSource="{Binding Subtitles}"
                         SelectedItem="{Binding CurrentSubtitle}">
-                        <controls:SplitButton.ListBoxStyle>
-                            <Style BasedOn="{StaticResource MetroListBox}" TargetType="{x:Type ListBox}">
-                                <Setter Property="MaxHeight" Value="200" />
-                                <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
-                                <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
-                            </Style>
-                        </controls:SplitButton.ListBoxStyle>
                         <controls:SplitButton.Icon>
                             <iconPacks:PackIconMaterial Margin="6" Kind="Translate" />
                         </controls:SplitButton.Icon>
@@ -353,7 +346,7 @@
                     Width="39"
                     Height="39"
                     Command="{Binding StopPlayingMediaCommand}"
-                    Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                    Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}">
                     <Canvas Width="15" Height="15">
                         <Path
                             Width="15"
@@ -370,7 +363,7 @@
                     Width="48"
                     Height="48"
                     IsChecked="{Binding Window.ApplicationService.IsFullScreen, Source={StaticResource Locator}}"
-                    Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                    Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}">
                     <Viewbox Width="22" Height="22">
                         <Canvas Width="15" Height="15">
                             <Path

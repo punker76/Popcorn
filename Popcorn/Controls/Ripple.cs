@@ -59,6 +59,7 @@ namespace Popcorn.Controls
                     {
                         scaleXKeyFrame.KeyTime = KeyTime.FromTimeSpan(newTime);
                     }
+
                     var scaleYKeyFrame =
                         ripple.Template.FindName("MousePressedToNormalScaleYKeyFrame", ripple) as EasingDoubleKeyFrame;
                     if (scaleYKeyFrame != null)
@@ -69,6 +70,7 @@ namespace Popcorn.Controls
 
                 VisualStateManager.GoToState(ripple, TemplateStateNormal, true);
             }
+
             PressedInstances.Clear();
         }
 

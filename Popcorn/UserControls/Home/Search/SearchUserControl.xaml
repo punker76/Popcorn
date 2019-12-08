@@ -36,7 +36,7 @@
                 MaxLength="45"
                 Text="{Binding Path=SearchFilter, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Style>
-                    <Style BasedOn="{StaticResource SearchMetroTextBox}" TargetType="{x:Type TextBox}">
+                    <Style BasedOn="{StaticResource MahApps.Styles.TextBox.Search}" TargetType="{x:Type TextBox}">
                         <Style.Triggers>
                             <Trigger Property="controls:TextBoxHelper.HasText" Value="True">
                                 <Setter Property="controls:TextBoxHelper.ButtonContent" Value="r" />

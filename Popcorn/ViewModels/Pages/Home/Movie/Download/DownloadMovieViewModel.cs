@@ -13,6 +13,7 @@ using Popcorn.Services.Subtitles;
 using Popcorn.Utils;
 using Popcorn.Services.Download;
 using GalaSoft.MvvmLight.Ioc;
+using Popcorn.Enums;
 using Popcorn.Models.Bandwidth;
 using Popcorn.Services.Cache;
 using Popcorn.ViewModels.Pages.Home.Settings;
