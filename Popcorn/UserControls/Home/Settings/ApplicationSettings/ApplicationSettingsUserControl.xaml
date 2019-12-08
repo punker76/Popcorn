@@ -168,13 +168,6 @@
                         HorizontalContentAlignment="Left"
                         ItemsSource="{Binding AvailableSubtitlesLanguages}"
                         SelectedItem="{Binding DefaultSubtitleLanguage}">
-                        <mah:SplitButton.ListBoxStyle>
-                            <Style BasedOn="{StaticResource MahApps.Styles.ListBox}" TargetType="{x:Type ListBox}">
-                                <Setter Property="MaxHeight" Value="200" />
-                                <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
-                                <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
-                            </Style>
-                        </mah:SplitButton.ListBoxStyle>
                         <mah:SplitButton.Icon>
                             <iconPacks:PackIconMaterial Margin="6" Kind="Translate" />
                         </mah:SplitButton.Icon>

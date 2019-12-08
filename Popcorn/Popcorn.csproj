@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <PublishSingleFile>true</PublishSingleFile>
-    <PublishTrimmed>true</PublishTrimmed>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>Popcorn</AssemblyTitle>
@@ -42,10 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="akavache.sqlite3" Version="6.9.10" />
-    <PackageReference Include="AsyncEnumerator" Version="4.0.1" />
+    <PackageReference Include="AsyncEnumerator" Version="4.0.2" />
     <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
     <PackageReference Include="Enterwell.Clients.Wpf.Notifications" Version="1.4.2" />
-    <PackageReference Include="FFME.Windows" Version="4.1.310">
+    <PackageReference Include="FFME.Windows" Version="4.2.320">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Gu.Wpf.Adorners" Version="1.5.2" />
@@ -95,8 +93,8 @@
     <PackageReference Include="Humanizer.Core.zh-Hant" Version="2.7.9" />
     <PackageReference Include="libtorrent-net" Version="4.1.0" />
     <PackageReference Include="LoadingIndicators.WPF" Version="0.0.1" />
-    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0531" />
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="3.0.0-alpha0260" />
+    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0660" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="3.0.0-alpha0270" />
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.11.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.Agent.Intercept" Version="2.4.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.DependencyCollector" Version="2.11.2" />
@@ -109,9 +107,9 @@
     <PackageReference Include="Microsoft.WindowsAPICodePack-Shell" Version="1.1.0.0" />
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="NLog" Version="4.6.8" />
-    <PackageReference Include="Polly" Version="7.1.1" />
+    <PackageReference Include="Polly" Version="7.2.0" />
     <PackageReference Include="RestSharp" Version="106.6.10" />
     <PackageReference Include="RunProcessAsTask" Version="1.2.4" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.2" />

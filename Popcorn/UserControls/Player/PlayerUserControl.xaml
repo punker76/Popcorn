@@ -335,13 +335,6 @@
                         DisplayMemberPath="LanguageName"
                         ItemsSource="{Binding Subtitles}"
                         SelectedItem="{Binding CurrentSubtitle}">
-                        <controls:SplitButton.ListBoxStyle>
-                            <Style BasedOn="{StaticResource MahApps.Styles.ListBox}" TargetType="{x:Type ListBox}">
-                                <Setter Property="MaxHeight" Value="200" />
-                                <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
-                                <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
-                            </Style>
-                        </controls:SplitButton.ListBoxStyle>
                         <controls:SplitButton.Icon>
                             <iconPacks:PackIconMaterial Margin="6" Kind="Translate" />
                         </controls:SplitButton.Icon>

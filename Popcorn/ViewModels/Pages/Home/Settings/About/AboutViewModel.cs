@@ -34,41 +34,6 @@ namespace Popcorn.ViewModels.Pages.Home.Settings.About
         private string _copyright;
 
         /// <summary>
-        /// If an update is available
-        /// </summary>
-        private bool _updateAvailable;
-
-        /// <summary>
-        /// If an update is downloading
-        /// </summary>
-        private bool _updateDownloading;
-
-        /// <summary>
-        /// If an update is applying
-        /// </summary>
-        private bool _updateApplying;
-
-        /// <summary>
-        /// Update download progress
-        /// </summary>
-        private int _updateDownloadProgress;
-
-        /// <summary>
-        /// Update apply progress
-        /// </summary>
-        private int _updateApplyProgress;
-
-        /// <summary>
-        /// If an update has been applied
-        /// </summary>
-        private bool _updateApplied;
-
-        /// <summary>
-        /// File path of the installed update
-        /// </summary>
-        private string _updateFilePath;
-
-        /// <summary>
         /// <see cref="ShowLicenseCommand"/>
         /// </summary>
         private ICommand _showLicenseCommand;
@@ -136,60 +101,6 @@ namespace Popcorn.ViewModels.Pages.Home.Settings.About
         {
             get => _project;
             set { Set(() => Project, ref _project, value); }
-        }
-
-        /// <summary>
-        /// True if update is downloading
-        /// </summary>
-        public bool UpdateDownloading
-        {
-            get => _updateDownloading;
-            set { Set(() => UpdateDownloading, ref _updateDownloading, value); }
-        }
-
-        /// <summary>
-        /// True if update is available
-        /// </summary>
-        public bool UpdateAvailable
-        {
-            get => _updateAvailable;
-            set { Set(() => UpdateAvailable, ref _updateAvailable, value); }
-        }
-
-        /// <summary>
-        /// True if update is applying
-        /// </summary>
-        public bool UpdateApplying
-        {
-            get => _updateApplying;
-            set { Set(() => UpdateApplying, ref _updateApplying, value); }
-        }
-
-        /// <summary>
-        /// True if update has been applied
-        /// </summary>
-        public bool UpdateApplied
-        {
-            get => _updateApplied;
-            set { Set(() => UpdateApplied, ref _updateApplied, value); }
-        }
-
-        /// <summary>
-        /// The update download progress
-        /// </summary>
-        public int UpdateDownloadProgress
-        {
-            get => _updateDownloadProgress;
-            set { Set(() => UpdateDownloadProgress, ref _updateDownloadProgress, value); }
-        }
-
-        /// <summary>
-        /// The update apply progress
-        /// </summary>
-        public int UpdateApplyProgress
-        {
-            get => _updateApplyProgress;
-            set { Set(() => UpdateApplyProgress, ref _updateApplyProgress, value); }
         }
 
         /// <summary>

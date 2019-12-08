@@ -87,7 +87,7 @@ namespace Popcorn
         }
 
         /// <summary>
-        /// Handle unhandled expceptions
+        /// Handle unhandled exceptions
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
