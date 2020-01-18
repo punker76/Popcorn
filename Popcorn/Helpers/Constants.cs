@@ -29,7 +29,7 @@ namespace Popcorn.Helpers
         /// <summary>
         /// Client ID for TMDb
         /// </summary>
-        public const string TmDbClientId = "54dbd5454854772fae002a47535b994a";
+        public const string TmDbClientId = "8a0ab80688ed6a0d1e8ae75ba1c3a307";
 
         /// <summary>
         /// Path to the FFmpeg shared libs

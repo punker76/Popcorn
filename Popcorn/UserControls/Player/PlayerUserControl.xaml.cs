@@ -180,7 +180,7 @@ namespace Popcorn.UserControls.Player
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="routedEventArgs"></param>
-        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
             var window = Window.GetWindow(this);
             if (window != null)
@@ -232,10 +232,10 @@ namespace Popcorn.UserControls.Player
             }
 
             Title.Text = vm.MediaName;
-            Media.Source = new Uri(vm.MediaPath);
             Media.MediaOpening += OnMediaOpening;
             Media.MediaChanging += OnMediaChanging;
             Media.MediaChanged += OnMediaChanged;
+            await Media.Open(new Uri(vm.MediaPath));
         }
 
         private void OnMediaChanged(object sender, EventArgs e)

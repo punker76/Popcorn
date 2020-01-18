@@ -107,7 +107,7 @@
     </controls:MetroWindow.RightWindowCommands>
 
     <controls:MetroWindow.Flyouts>
-        <controls:FlyoutsControl adorners:Overlay.IsVisible="True">
+        <controls:FlyoutsControl>
             <controls:Flyout
                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
                 Margin="0.01,0,0,0"
