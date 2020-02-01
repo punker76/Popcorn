@@ -149,14 +149,14 @@ namespace Popcorn.Models.Episode
             set => Set(ref _torrents, value);
         }
 
-        [DataMember(Name = "first_aired")]
+        [DataMember(Name = "firstAired")]
         public long FirstAired
         {
             get => _firstAired;
             set => Set(ref _firstAired, value);
         }
 
-        [DataMember(Name = "date_based")]
+        [DataMember(Name = "dateBased")]
         public bool DateBased
         {
             get => _dateBased;
@@ -193,7 +193,7 @@ namespace Popcorn.Models.Episode
             set => Set(ref _season, value);
         }
 
-        [DataMember(Name = "tvdb_id")]
+        [DataMember(Name = "tvdbId")]
         public int? TvdbId
         {
             get => _tvdbId;

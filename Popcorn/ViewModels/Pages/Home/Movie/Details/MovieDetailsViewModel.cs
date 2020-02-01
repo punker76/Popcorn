@@ -316,7 +316,12 @@ namespace Popcorn.ViewModels.Pages.Home.Movie.Details
                 await LoadMovie(movie, CancellationLoadingToken.Token));
             GoToTmdbCommand = new RelayCommand<string>(e =>
             {
-                Process.Start($"https://www.themoviedb.org/movie/{e}");
+                var psi = new ProcessStartInfo
+                {
+                    FileName = $"https://www.themoviedb.org/movie/{e}",
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
             });
 
             PlayMovieCommand = new RelayCommand(async () =>

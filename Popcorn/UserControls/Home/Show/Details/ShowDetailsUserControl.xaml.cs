@@ -38,10 +38,5 @@ namespace Popcorn.UserControls.Home.Show.Details
             var episodes = vm.Show.Episodes.Where(a => a.Season == e.SelectedSeasonNumber);
             EpisodesDetails.ItemsSource = new ObservableCollection<EpisodeShowJson>(episodes.OrderBy(a => a.EpisodeNumber));
         }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView("Show Details");
-        }
     }
 }

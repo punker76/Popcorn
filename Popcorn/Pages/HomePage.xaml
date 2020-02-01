@@ -18,7 +18,6 @@
     AllowDrop="True"
     DataContext="{Binding Pages, Source={StaticResource Locator}}"
     KeepAlive="True"
-    Loaded="OnLoaded"
     mc:Ignorable="d">
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl

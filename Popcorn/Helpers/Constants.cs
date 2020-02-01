@@ -24,7 +24,7 @@ namespace Popcorn.Helpers
         /// <summary>
         /// Endpoint to API
         /// </summary>
-        public const string PopcornApi = "https://popcornapi.azurewebsites.net/api";
+        public const string PopcornApi = "https://famille.dynamic-dns.net/api";
         
         /// <summary>
         /// Client ID for TMDb

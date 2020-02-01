@@ -15,10 +15,5 @@ namespace Popcorn.UserControls.Home.Movie.Trailer
         {
             InitializeComponent();
         }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView("Trailer");
-        }
     }
 }

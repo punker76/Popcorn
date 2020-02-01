@@ -308,7 +308,7 @@
                         Width="39"
                         Height="39"
                         Command="{Binding SetLowerSubtitleSizeCommand, ElementName=PlayerUc}"
-                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        Style="{DynamicResource MahApps.Styles.Button.Circle}"
                         Visibility="{Binding IsSubtitleChosen, Converter={StaticResource BoolToInverseVisibilityConverter}}">
                         <iconPacks:PackIconFontAwesome
                             Width="12"
@@ -320,7 +320,7 @@
                         Height="39"
                         Margin="5,0,0,0"
                         Command="{Binding SetHigherSubtitleSizeCommand, ElementName=PlayerUc}"
-                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        Style="{DynamicResource MahApps.Styles.Button.Circle}"
                         Visibility="{Binding IsSubtitleChosen, Converter={StaticResource BoolToInverseVisibilityConverter}}">
                         <iconPacks:PackIconFontAwesome
                             Width="18"

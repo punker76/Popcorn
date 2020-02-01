@@ -63,7 +63,7 @@ namespace Popcorn.Models.Movie
             set { Set(() => Url, ref _url, value); }
         }
 
-        [DataMember(Name = "imdb_code")]
+        [DataMember(Name = "imdbCode")]
         public string ImdbId
         {
             get => _imdbId;
@@ -77,7 +77,7 @@ namespace Popcorn.Models.Movie
             set { Set(() => Title, ref _title, value); }
         }
 
-        [DataMember(Name = "title_long")]
+        [DataMember(Name = "titleLong")]
         public string TitleLong
         {
             get => _titleLong;
@@ -126,42 +126,42 @@ namespace Popcorn.Models.Movie
             set { Set(() => Language, ref _language, value); }
         }
 
-        [DataMember(Name = "mpa_rating")]
+        [DataMember(Name = "mpaRating")]
         public string MpaRating
         {
             get => _mpaRating;
             set { Set(() => MpaRating, ref _mpaRating, value); }
         }
 
-        [DataMember(Name = "download_count")]
+        [DataMember(Name = "downloadCount")]
         public int DownloadCount
         {
             get => _downloadCount;
             set { Set(() => DownloadCount, ref _downloadCount, value); }
         }
 
-        [DataMember(Name = "like_count")]
+        [DataMember(Name = "likeCount")]
         public int LikeCount
         {
             get => _likeCount;
             set { Set(() => LikeCount, ref _likeCount, value); }
         }
 
-        [DataMember(Name = "description_intro")]
+        [DataMember(Name = "descriptionIntro")]
         public string DescriptionIntro
         {
             get => _descriptionIntro;
             set { Set(() => DescriptionIntro, ref _descriptionIntro, value); }
         }
 
-        [DataMember(Name = "description_full")]
+        [DataMember(Name = "descriptionFull")]
         public string DescriptionFull
         {
             get => _descriptionFull;
             set { Set(() => DescriptionFull, ref _descriptionFull, value); }
         }
 
-        [DataMember(Name = "yt_trailer_code")]
+        [DataMember(Name = "ytTrailerCode")]
         public string YtTrailerCode
         {
             get => _ytTrailerCode;
@@ -182,28 +182,28 @@ namespace Popcorn.Models.Movie
             set { Set(() => Torrents, ref _torrents, value); }
         }
 
-        [DataMember(Name = "date_uploaded")]
+        [DataMember(Name = "dateUploaded")]
         public string DateUploaded
         {
             get => _dateUploaded;
             set { Set(() => DateUploaded, ref _dateUploaded, value); }
         }
 
-        [DataMember(Name = "poster_image")]
+        [DataMember(Name = "posterImage")]
         public string PosterImage
         {
             get => _posterImage;
             set { Set(() => PosterImage, ref _posterImage, value); }
         }
 
-        [DataMember(Name = "date_uploaded_unix")]
+        [DataMember(Name = "dateUploadedUnix")]
         public int DateUploadedUnix
         {
             get => _dateUploadedUnix;
             set { Set(() => DateUploadedUnix, ref _dateUploadedUnix, value); }
         }
 
-        [DataMember(Name = "background_image")]
+        [DataMember(Name = "backgroundImage")]
         public string BackgroundImage
         {
             get => _backgroundImage;

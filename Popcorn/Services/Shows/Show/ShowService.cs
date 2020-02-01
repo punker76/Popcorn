@@ -62,7 +62,10 @@ namespace Popcorn.Services.Shows.Show
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}/{show}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddUrlSegment("show", imdbId);
@@ -139,7 +142,10 @@ namespace Popcorn.Services.Shows.Show
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
                     var watch = Stopwatch.StartNew();
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}/light/{show}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddUrlSegment("show", imdbId);
@@ -198,7 +204,10 @@ namespace Popcorn.Services.Shows.Show
                 {
                     var watch = Stopwatch.StartNew();
                     var wrapper = new ShowLightResponse();
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
                     request.AddUrlSegment("segment", "shows");
                     request.AddUrlSegment("subsegment", "ids");
@@ -274,7 +283,10 @@ namespace Popcorn.Services.Shows.Show
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddParameter("limit", limit);
@@ -353,7 +365,10 @@ namespace Popcorn.Services.Shows.Show
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "shows");
                     request.AddParameter("limit", limit);

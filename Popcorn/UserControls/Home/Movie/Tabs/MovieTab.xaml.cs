@@ -27,10 +27,6 @@ namespace Popcorn.UserControls.Home.Movie.Tabs
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             if (!(DataContext is MovieTabsViewModel vm)) return;
-            const string split = "MovieTabViewModel";
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView(
-                $"Movie Tab {vm.GetType().Name.Split(new[] {split}, StringSplitOptions.None).First()}");
-
             if (vm is PopularMovieTabViewModel || vm is GreatestMovieTabViewModel || vm is RecentMovieTabViewModel ||
                 vm is FavoritesMovieTabViewModel || vm is SeenMovieTabViewModel ||
                 vm is RecommendationsMovieTabViewModel)

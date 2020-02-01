@@ -7,16 +7,16 @@ namespace Popcorn.Models.Torrent.Show
 {
     public class TorrentShowNodeJson
     {
-        [DataMember(Name = "0")]
+        [DataMember(Name = "torrent_0")]
         public TorrentShowJson Torrent_0 { get; set; }
 
-        [DataMember(Name = "480p")]
+        [DataMember(Name = "torrent_480p")]
         public TorrentShowJson Torrent_480p { get; set; }
 
-        [DataMember(Name = "720p")]
+        [DataMember(Name = "torrent_720p")]
         public TorrentShowJson Torrent_720p { get; set; }
 
-        [DataMember(Name = "1080p")]
+        [DataMember(Name = "torrent_1080p")]
         public TorrentShowJson Torrent_1080p { get; set; }
     }
 }

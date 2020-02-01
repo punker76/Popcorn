@@ -51,10 +51,5 @@ namespace Popcorn.UserControls.Home.Movie.Details
                 CultureInfo.InvariantCulture);
             ((Image) sender).Source = (DrawingImage)bitmapImage;
         }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView("Movie Details");
-        }
     }
 }

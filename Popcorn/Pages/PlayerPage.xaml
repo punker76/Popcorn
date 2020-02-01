@@ -11,7 +11,6 @@
     d:DesignWidth="300"
     DataContext="{Binding Source={StaticResource Locator}, Path=Window.MediaPlayer}"
     KeepAlive="False"
-    Loaded="OnLoaded"
     mc:Ignorable="d">
 
     <Grid>

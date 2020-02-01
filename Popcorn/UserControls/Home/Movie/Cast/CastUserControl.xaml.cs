@@ -43,10 +43,5 @@ namespace Popcorn.UserControls.Home.Movie.Cast
                 scv.TargetHorizontalOffset -= e.Delta;
             }
         }
-        
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView("Movie Cast");
-        }
     }
 }

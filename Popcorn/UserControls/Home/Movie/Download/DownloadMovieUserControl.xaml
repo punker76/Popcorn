@@ -16,7 +16,6 @@
     lex:LocalizeDictionary.DesignCulture="en"
     lex:ResxLocalizationProvider.DefaultAssembly="Popcorn"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
-    Loaded="OnLoaded"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>

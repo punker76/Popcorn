@@ -4,12 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Akavache;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
-using Microsoft.ApplicationInsights.Extensibility;
 using NLog;
 using Popcorn.Helpers;
-using Popcorn.Initializers;
 using Popcorn.Services.User;
 using Popcorn.ViewModels;
 using Popcorn.ViewModels.Windows;
@@ -65,9 +64,6 @@ namespace Popcorn
         /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
-            var config = TelemetryConfiguration.CreateDefault();
-            config.TelemetryInitializers.Add(new PopcornApplicationInsightsInitializer());
-            ApplicationInsightsHelper.Initialize(config);
             base.OnStartup(e);
             WatchStart = Stopwatch.StartNew();
             Logger.Info(

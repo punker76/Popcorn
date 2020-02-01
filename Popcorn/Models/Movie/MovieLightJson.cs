@@ -16,7 +16,7 @@ namespace Popcorn.Models.Movie
         private string _title;
         private int _year;
         
-        [DataMember(Name = "imdb_code")]
+        [DataMember(Name = "imdbCode")]
         public string ImdbId
         {
             get => _imdbCode;
@@ -51,7 +51,7 @@ namespace Popcorn.Models.Movie
             set { Set(() => Genres, ref _genres, value); }
         }
 
-        [DataMember(Name = "poster_image")]
+        [DataMember(Name = "posterImage")]
         public string PosterImage
         {
             get => _posterImage;

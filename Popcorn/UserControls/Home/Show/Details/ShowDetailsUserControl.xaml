@@ -17,7 +17,6 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     DataContext="{Binding ShowDetails, Source={StaticResource Locator}}"
-    Loaded="OnLoaded"
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:RatingPercentageToNormalizedRatingConverter x:Key="RatingPercentageToNormalizedRatingConverter" />

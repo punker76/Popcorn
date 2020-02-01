@@ -14,7 +14,6 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     DataContext="{Binding Source={StaticResource Locator}, Path=Cast}"
-    Loaded="OnLoaded"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>

@@ -15,10 +15,5 @@ namespace Popcorn.UserControls.Home.Movie.Download
         {
             InitializeComponent();
         }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView("Movie Download");
-        }
     }
 }

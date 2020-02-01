@@ -139,7 +139,11 @@ namespace Popcorn.Services.Movies.Movie
                 {
                     var watch = Stopwatch.StartNew();
 
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
+                    
                     var request = new RestRequest("/{segment}/{movie}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("movie", imdbCode);
@@ -202,7 +206,10 @@ namespace Popcorn.Services.Movies.Movie
                 {
                     var watch = Stopwatch.StartNew();
 
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}/light/{movie}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("movie", imdbCode);
@@ -326,7 +333,11 @@ namespace Popcorn.Services.Movies.Movie
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
+
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddParameter("limit", limit);
@@ -410,7 +421,10 @@ namespace Popcorn.Services.Movies.Movie
                 {
                     var watch = Stopwatch.StartNew();
                     var wrapper = new MovieLightResponse();
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("subsegment", "ids");
@@ -493,7 +507,10 @@ namespace Popcorn.Services.Movies.Movie
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
                     request.AddUrlSegment("segment", "movies");
                     request.AddUrlSegment("subsegment", "similar");
@@ -580,7 +597,10 @@ namespace Popcorn.Services.Movies.Movie
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/{segment}", Method.GET);
                     request.AddUrlSegment("segment", "movies");
                     request.AddParameter("limit", limit);
@@ -767,7 +787,10 @@ namespace Popcorn.Services.Movies.Movie
                 {
                     var watch = Stopwatch.StartNew();
                     var wrapper = new MovieLightResponse();
-                    var restClient = new RestClient(Constants.PopcornApi);
+                    var restClient = new RestClient(Constants.PopcornApi)
+                    {
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
+                    };
                     var request = new RestRequest("/movies/cast/{segment}", Method.GET);
                     request.AddUrlSegment("segment", imdbCode);
                     try

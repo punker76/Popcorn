@@ -25,10 +25,5 @@ namespace Popcorn.Pages
         {
             InitializeComponent();
         }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView("Player");
-        }
     }
 }

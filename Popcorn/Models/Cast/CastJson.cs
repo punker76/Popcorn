@@ -18,21 +18,21 @@ namespace Popcorn.Models.Cast
             set { Set(() => Name, ref _name, value); }
         }
 
-        [DataMember(Name = "character_name")]
+        [DataMember(Name = "characterName")]
         public string CharacterName
         {
             get => _characterName;
             set { Set(() => CharacterName, ref _characterName, value); }
         }
 
-        [DataMember(Name = "url_small_image")]
+        [DataMember(Name = "smallImage")]
         public string SmallImage
         {
             get => _smallImage;
             set { Set(() => SmallImage, ref _smallImage, value); }
         }
         
-        [DataMember(Name = "imdb_code")]
+        [DataMember(Name = "imdbCode")]
         public string ImdbCode
         {
             get => _imdbCode;

@@ -24,10 +24,6 @@ namespace Popcorn.UserControls.Home.Show.Tabs
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             if (!(DataContext is ShowTabsViewModel vm)) return;
-            const string split = "ShowTabViewModel";
-            ApplicationInsightsHelper.TelemetryClient.TrackPageView(
-                $"Show Tab {vm.GetType().Name.Split(new[] { split }, StringSplitOptions.None).First()}");
-
             if (vm is PopularShowTabViewModel || vm is GreatestShowTabViewModel || vm is RecentShowTabViewModel ||
                 vm is UpdatedShowTabViewModel ||
                 vm is FavoritesShowTabViewModel)

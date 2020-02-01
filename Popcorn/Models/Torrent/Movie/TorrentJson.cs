@@ -66,21 +66,21 @@ namespace Popcorn.Models.Torrent.Movie
             set { Set(() => Size, ref _size, value); }
         }
 
-        [DataMember(Name = "size_bytes")]
+        [DataMember(Name = "sizeBytes")]
         public long? SizeBytes
         {
             get => _sizeBytes;
             set { Set(() => SizeBytes, ref _sizeBytes, value); }
         }
 
-        [DataMember(Name = "date_uploaded")]
+        [DataMember(Name = "dateUploaded")]
         public string DateUploaded
         {
             get => _dateUploaded;
             set { Set(() => DateUploaded, ref _dateUploaded, value); }
         }
 
-        [DataMember(Name = "date_uploaded_unix")]
+        [DataMember(Name = "dateUploadedUnix")]
         public int DateUploadedUnix
         {
             get => _dateUploadedUnix;

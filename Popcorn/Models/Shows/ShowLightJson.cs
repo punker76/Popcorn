@@ -24,14 +24,14 @@ namespace Popcorn.Models.Shows
 
         private RatingJson _rating;
 
-        [DataMember(Name = "imdb_id")]
+        [DataMember(Name = "imdbId")]
         public string ImdbId
         {
             get => _imdbId;
             set => Set(ref _imdbId, value);
         }
 
-        [DataMember(Name = "tvdb_id")]
+        [DataMember(Name = "tvdbId")]
         public string TvdbId
         {
             get => _tvdbId;

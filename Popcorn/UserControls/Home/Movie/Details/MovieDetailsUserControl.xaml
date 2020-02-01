@@ -21,7 +21,6 @@
     lex:ResxLocalizationProvider.DefaultAssembly="Popcorn"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     DataContext="{Binding MovieDetails, Source={StaticResource Locator}}"
-    Loaded="OnLoaded"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>

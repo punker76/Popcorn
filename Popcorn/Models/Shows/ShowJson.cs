@@ -61,14 +61,14 @@ namespace Popcorn.Models.Shows
             set => Set(ref _tmdbId, value);
         }
 
-        [DataMember(Name = "imdb_id")]
+        [DataMember(Name = "imdbId")]
         public string ImdbId
         {
             get => _imdbId;
             set => Set(ref _imdbId, value);
         }
 
-        [DataMember(Name = "tvdb_id")]
+        [DataMember(Name = "tvdbId")]
         public string TvdbId
         {
             get => _tvdbId;
@@ -128,14 +128,14 @@ namespace Popcorn.Models.Shows
             set => Set(ref _network, value);
         }
 
-        [DataMember(Name = "air_day")]
+        [DataMember(Name = "airDay")]
         public string AirDay
         {
             get => _airDay;
             set => Set(ref _airDay, value);
         }
 
-        [DataMember(Name = "air_time")]
+        [DataMember(Name = "airTime")]
         public string AirTime
         {
             get => _airTime;
@@ -149,14 +149,14 @@ namespace Popcorn.Models.Shows
             set => Set(ref _status, value);
         }
 
-        [DataMember(Name = "num_seasons")]
+        [DataMember(Name = "numSeasons")]
         public int NumSeasons
         {
             get => _numSeasons;
             set => Set(ref _numSeasons, value);
         }
 
-        [DataMember(Name = "last_updated")]
+        [DataMember(Name = "lastUpdated")]
         public long LastUpdated
         {
             get => _lastUpdated;
