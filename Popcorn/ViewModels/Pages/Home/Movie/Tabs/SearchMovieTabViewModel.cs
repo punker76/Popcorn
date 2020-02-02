@@ -77,6 +77,7 @@ namespace Popcorn.ViewModels.Pages.Home.Movie.Tabs
                             MaxMoviesPerPage,
                             Genre,
                             Rating,
+                            "year",
                             CancellationLoadingMovies.Token);
 
                     DispatcherHelper.CheckBeginInvokeOnUI(() =>

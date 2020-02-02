@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -8,21 +11,24 @@ using System.Threading;
 using System.Threading.Tasks;
 using NLog;
 using Popcorn.Models.Movie;
-using RestSharp;
 using TMDbLib.Objects.Movies;
 using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Popcorn.Models.Genres;
 using Popcorn.Models.User;
 using Popcorn.Exceptions;
 using Polly;
 using Polly.Timeout;
+using Popcorn.Database;
 using Popcorn.Extensions;
 using Popcorn.Helpers;
+using Popcorn.Models.Cast;
+using Popcorn.Models.Torrent.Movie;
 using Popcorn.Services.Tmdb;
 using Popcorn.ViewModels.Pages.Home.Settings.ApplicationSettings;
 using TMDbLib.Objects.Find;
 using TMDbLib.Objects.People;
-using Utf8Json;
 using VideoLibrary;
 
 namespace Popcorn.Services.Movies.Movie
@@ -42,6 +48,9 @@ namespace Popcorn.Services.Movies.Movie
         /// </summary>
         private readonly Subject<IMovie> _moviesToTranslateObservable;
 
+        /// <summary>
+        /// <see cref="ITmdbService"/>
+        /// </summary>
         private readonly ITmdbService _tmdbService;
 
         /// <summary>
@@ -139,23 +148,27 @@ namespace Popcorn.Services.Movies.Movie
                 {
                     var watch = Stopwatch.StartNew();
 
-                    var restClient = new RestClient(Constants.PopcornApi)
-                    {
-                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-                    };
-                    
-                    var request = new RestRequest("/{segment}/{movie}", Method.GET);
-                    request.AddUrlSegment("segment", "movies");
-                    request.AddUrlSegment("movie", imdbCode);
-                    var movie = new MovieJson();
+                    var optionsBuilder = new DbContextOptionsBuilder<PopcornContext>();
+                    optionsBuilder.UseSqlServer(
+                        (ConfigurationManager.GetSection("settings") as NameValueCollection)["SQLConnectionString"],
+                        builder =>
+                        {
+                            builder.CommandTimeout(Convert.ToInt32(TimeSpan.FromSeconds(60).TotalSeconds));
+                            builder.EnableRetryOnFailure();
+                        });
+                    await using var context = new PopcornContext(optionsBuilder.Options);
 
+                    var movie = new MovieJson();
                     try
                     {
-                        var response = await restClient.ExecuteTaskAsync(request, cancellation);
-                        if (response.ErrorException != null)
-                            throw response.ErrorException;
-
-                        movie = JsonSerializer.Deserialize<MovieJson>(response.RawBytes);
+                        var movieJson =
+                            await context.MovieSet.Include(a => a.Torrents)
+                                .Include(a => a.Cast)
+                                .Include(a => a.Similars)
+                                .Include(a => a.Genres).AsQueryable()
+                                .FirstOrDefaultAsync(
+                                    document => document.ImdbCode == imdbCode, cancellation);
+                        movie = ConvertMovieToJson(movieJson);
                         movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
                         movie.TmdbId =
                             (await (await _tmdbService.GetClient).GetMovieAsync(movie.ImdbId,
@@ -206,22 +219,52 @@ namespace Popcorn.Services.Movies.Movie
                 {
                     var watch = Stopwatch.StartNew();
 
-                    var restClient = new RestClient(Constants.PopcornApi)
-                    {
-                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-                    };
-                    var request = new RestRequest("/{segment}/light/{movie}", Method.GET);
-                    request.AddUrlSegment("segment", "movies");
-                    request.AddUrlSegment("movie", imdbCode);
+                    var optionsBuilder = new DbContextOptionsBuilder<PopcornContext>();
+                    optionsBuilder.UseSqlServer(
+                        (ConfigurationManager.GetSection("settings") as NameValueCollection)["SQLConnectionString"],
+                        builder =>
+                        {
+                            builder.CommandTimeout(Convert.ToInt32(TimeSpan.FromSeconds(60).TotalSeconds));
+                            builder.EnableRetryOnFailure();
+                        });
+                    await using var context = new PopcornContext(optionsBuilder.Options);
                     var movie = new MovieLightJson();
 
                     try
                     {
-                        var response = await restClient.ExecuteTaskAsync(request, cancellation);
-                        if (response.ErrorException != null)
-                            throw response.ErrorException;
+                        var imdbParameter = new SqlParameter("@imdbCode", imdbCode);
+                        var query = @"
+                    SELECT 
+                        Movie.Title, Movie.Year, Movie.Rating, Movie.PosterImage, Movie.ImdbCode, Movie.GenreNames
+                    FROM 
+                        MovieSet AS Movie
+                    WHERE
+                        Movie.ImdbCode = @imdbCode";
 
-                        movie = JsonSerializer.Deserialize<MovieLightJson>(response.RawBytes);
+                        await using var command = context.Database.GetDbConnection().CreateCommand();
+                        command.CommandText = query;
+                        command.CommandType = CommandType.Text;
+                        command.Parameters.Add(imdbParameter);
+                        await context.Database.OpenConnectionAsync(cancellation);
+                        await using var reader = await command.ExecuteReaderAsync(cancellation);
+                        while (await reader.ReadAsync(cancellation))
+                        {
+                            movie.Title = !await reader.IsDBNullAsync(0, cancellation)
+                                ? reader.GetString(0)
+                                : string.Empty;
+                            movie.Year = !await reader.IsDBNullAsync(1, cancellation) ? reader.GetInt32(1) : 0;
+                            movie.Rating = !await reader.IsDBNullAsync(2, cancellation) ? reader.GetDouble(2) : 0d;
+                            movie.PosterImage = !await reader.IsDBNullAsync(3, cancellation)
+                                ? reader.GetString(3)
+                                : string.Empty;
+                            movie.ImdbId = !await reader.IsDBNullAsync(4, cancellation)
+                                ? reader.GetString(4)
+                                : string.Empty;
+                            movie.Genres = !await reader.IsDBNullAsync(5, cancellation)
+                                ? reader.GetString(5)
+                                : string.Empty;
+                        }
+
                         movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
                     }
                     catch (Exception exception) when (exception is TaskCanceledException)
@@ -319,75 +362,13 @@ namespace Popcorn.Services.Movies.Movie
             CancellationToken ct,
             GenreJson genre = null)
         {
-            var timeoutPolicy =
-                Policy.TimeoutAsync(Constants.DefaultRequestTimeoutInSecond, TimeoutStrategy.Optimistic);
-            try
-            {
-                return await timeoutPolicy.ExecuteAsync(async cancellation =>
-                {
-                    var watch = Stopwatch.StartNew();
-                    var wrapper = new MovieLightResponse();
-                    if (limit < 1 || limit > 50)
-                        limit = Constants.MaxMoviesPerPage;
-
-                    if (page < 1)
-                        page = 1;
-
-                    var restClient = new RestClient(Constants.PopcornApi)
-                    {
-                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-                    };
-
-                    var request = new RestRequest("/{segment}", Method.GET);
-                    request.AddUrlSegment("segment", "movies");
-                    request.AddParameter("limit", limit);
-                    request.AddParameter("page", page);
-                    request.AddParameter("genre", genre != null ? genre.EnglishName : string.Empty);
-                    request.AddParameter("minimum_rating", Convert.ToInt32(ratingFilter));
-                    request.AddParameter("sort_by", sortBy);
-                    request.AddParameter("query_term", string.Empty);
-                    try
-                    {
-                        var response = await restClient.ExecuteTaskAsync(request, cancellation);
-                        if (response.ErrorException != null)
-                            throw response.ErrorException;
-
-                        wrapper = JsonSerializer.Deserialize<MovieLightResponse>(response.RawBytes);
-                        foreach (var movie in wrapper.Movies)
-                        {
-                            movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
-                        }
-                    }
-                    catch (Exception exception) when (exception is TaskCanceledException)
-                    {
-                        Logger.Debug(
-                            "GetMoviesAsync cancelled.");
-                    }
-                    catch (Exception exception)
-                    {
-                        Logger.Error(
-                            $"GetMoviesAsync: {exception.Message}");
-                        throw;
-                    }
-                    finally
-                    {
-                        watch.Stop();
-                        var elapsedMs = watch.ElapsedMilliseconds;
-                        Logger.Trace(
-                            $"GetMoviesAsync ({page}, {limit}) in {elapsedMs} milliseconds.");
-                    }
-
-                    var result = wrapper?.Movies ?? new List<MovieLightJson>();
-                    await ProcessTranslations(result);
-                    var nbResult = wrapper?.TotalMovies ?? 0;
-                    return (result, nbResult);
-                }, ct);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-                throw;
-            }
+            return await SearchMoviesAsync(string.Empty,
+                page,
+                limit,
+                genre,
+                ratingFilter, 
+                sortBy,
+                ct);
         }
 
         /// <summary>
@@ -410,7 +391,7 @@ namespace Popcorn.Services.Movies.Movie
         /// <param name="ct">Cancellation token</param>
         /// <returns>Similar movies</returns>
         public async Task<(IEnumerable<MovieLightJson> movies, int nbMovies)> GetMoviesByIds(
-            IEnumerable<string> imdbIds,
+            IList<string> imdbIds,
             CancellationToken ct)
         {
             var timeoutPolicy =
@@ -419,27 +400,67 @@ namespace Popcorn.Services.Movies.Movie
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
-                    var watch = Stopwatch.StartNew();
-                    var wrapper = new MovieLightResponse();
-                    var restClient = new RestClient(Constants.PopcornApi)
-                    {
-                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-                    };
-                    var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
-                    request.AddUrlSegment("segment", "movies");
-                    request.AddUrlSegment("subsegment", "ids");
-                    request.AddJsonBody(imdbIds);
+                    var optionsBuilder = new DbContextOptionsBuilder<PopcornContext>();
+                    optionsBuilder.UseSqlServer(
+                        (ConfigurationManager.GetSection("settings") as NameValueCollection)["SQLConnectionString"],
+                        builder =>
+                        {
+                            builder.CommandTimeout(Convert.ToInt32(TimeSpan.FromSeconds(60).TotalSeconds));
+                            builder.EnableRetryOnFailure();
+                        });
+                    await using var context = new PopcornContext(optionsBuilder.Options);
 
+                    var watch = Stopwatch.StartNew();
+                    var query = @"
+                    SELECT DISTINCT
+                        Movie.Title, Movie.Year, Movie.Rating, Movie.PosterImage, Movie.ImdbCode, Movie.GenreNames, COUNT(*) OVER () as TotalCount
+                    FROM 
+                        MovieSet AS Movie
+                    WHERE
+                        Movie.ImdbCode IN ({0})
+                    ORDER BY Movie.Rating DESC";
+
+                    await using var command = context.Database.GetDbConnection().CreateCommand();
+                    command.CommandType = CommandType.Text;
+                    var imdbParameters = new List<string>();
+                    var index = 0;
+                    foreach (var imdb in imdbIds)
+                    {
+                        var paramName = "@imdb" + index;
+                        command.Parameters.Add(new SqlParameter(paramName, imdb));
+                        imdbParameters.Add(paramName);
+                        index++;
+                    }
+
+                    command.CommandText = string.Format(query, string.Join(",", imdbParameters));
+                    var count = 0;
+                    var movies = new List<MovieLightJson>();
                     try
                     {
-                        var response = await restClient.ExecuteTaskAsync(request, cancellation);
-                        if (response.ErrorException != null)
-                            throw response.ErrorException;
-
-                        wrapper = JsonSerializer.Deserialize<MovieLightResponse>(response.RawBytes);
-                        foreach (var movie in wrapper.Movies)
+                        await context.Database.OpenConnectionAsync(cancellation);
+                        await using var reader = await command.ExecuteReaderAsync(cancellation);
+                        while (await reader.ReadAsync(cancellation))
                         {
-                            movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
+                            var movie = new MovieLightJson
+                            {
+                                Title = !await reader.IsDBNullAsync(0, cancellation)
+                                    ? reader.GetString(0)
+                                    : string.Empty,
+                                Year = !await reader.IsDBNullAsync(1, cancellation) ? reader.GetInt32(1) : 0,
+                                Rating = !await reader.IsDBNullAsync(2, cancellation) ? reader.GetDouble(2) : 0d,
+                                PosterImage = !await reader.IsDBNullAsync(3, cancellation)
+                                    ? reader.GetString(3)
+                                    : string.Empty,
+                                ImdbId = !await reader.IsDBNullAsync(4, cancellation)
+                                    ? reader.GetString(4)
+                                    : string.Empty,
+                                Genres = !await reader.IsDBNullAsync(5, cancellation)
+                                    ? reader.GetString(5)
+                                    : string.Empty,
+                                TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage
+                            };
+                            movies.Add(movie);
+                            count = !await reader.IsDBNullAsync(6, cancellation) ? reader.GetInt32(6) : 0;
                         }
                     }
                     catch (Exception exception) when (exception is TaskCanceledException)
@@ -461,10 +482,8 @@ namespace Popcorn.Services.Movies.Movie
                             $"GetMoviesByIds ({string.Join(",", imdbIds)}) in {elapsedMs} milliseconds.");
                     }
 
-                    var result = wrapper?.Movies ?? new List<MovieLightJson>();
-                    await ProcessTranslations(result);
-                    var nbResult = wrapper?.TotalMovies ?? 0;
-                    return (result, nbResult);
+                    await ProcessTranslations(movies);
+                    return (movies, count);
                 }, ct);
             }
             catch (Exception ex)
@@ -489,7 +508,7 @@ namespace Popcorn.Services.Movies.Movie
             int limit,
             double ratingFilter,
             string sortBy,
-            IEnumerable<string> imdbIds,
+            IList<string> imdbIds,
             CancellationToken ct,
             GenreJson genre = null)
         {
@@ -499,39 +518,118 @@ namespace Popcorn.Services.Movies.Movie
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
+                    var optionsBuilder = new DbContextOptionsBuilder<PopcornContext>();
+                    optionsBuilder.UseSqlServer(
+                        (ConfigurationManager.GetSection("settings") as NameValueCollection)["SQLConnectionString"],
+                        builder =>
+                        {
+                            builder.CommandTimeout(Convert.ToInt32(TimeSpan.FromSeconds(60).TotalSeconds));
+                            builder.EnableRetryOnFailure();
+                        });
+                    await using var context = new PopcornContext(optionsBuilder.Options);
+
                     var watch = Stopwatch.StartNew();
-                    var wrapper = new MovieLightResponse();
                     if (limit < 1 || limit > 50)
                         limit = Constants.MaxMoviesPerPage;
 
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Constants.PopcornApi)
+                    var skipParameter = new SqlParameter("@skip", (page - 1) * limit);
+                    var takeParameter = new SqlParameter("@take", limit);
+                    var ratingParameter = new SqlParameter("@rating", Convert.ToInt32(ratingFilter).ToString());
+                    var queryParameter = new SqlParameter("@Keywords", string.Format(@"""{0}""", string.Empty));
+                    var genreParameter = new SqlParameter("@genre", genre != null ? genre.EnglishName : string.Empty);
+                    var query = @"
+                    SELECT DISTINCT
+                        Movie.Title, Movie.Year, Movie.Rating, Movie.PosterImage, Movie.ImdbCode, Movie.GenreNames, COUNT(*) OVER () as TotalCount
+                    FROM 
+                        MovieSet AS Movie
+                    WHERE
+                        Movie.ImdbCode IN (SELECT 
+                            Similar.TmdbId                      
+                        FROM 
+                            Similar AS Similar
+                        INNER JOIN
+					    (
+						    SELECT Movie.ID
+						    FROM 
+							    MovieSet AS Movie
+						    WHERE 
+							    Movie.ImdbCode IN ({0})
+						) Movie
+					ON Similar.MovieId = Movie.Id)
+                    AND 1 = 1";
+
+                    if (ratingFilter > 0 && ratingFilter < 10)
                     {
-                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-                    };
-                    var request = new RestRequest("/{segment}/{subsegment}", Method.POST);
-                    request.AddUrlSegment("segment", "movies");
-                    request.AddUrlSegment("subsegment", "similar");
-                    request.AddQueryParameter("limit", limit.ToString());
-                    request.AddQueryParameter("page", page.ToString());
-                    request.AddQueryParameter("genre", genre != null ? genre.EnglishName : string.Empty);
-                    request.AddQueryParameter("minimum_rating", Convert.ToInt32(ratingFilter).ToString());
-                    request.AddQueryParameter("sort_by", sortBy);
-                    request.AddQueryParameter("query_term", string.Empty);
-                    request.AddJsonBody(imdbIds);
+                        query += @" AND
+                        Rating >= @rating";
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(string.Empty))
+                    {
+                        query += @" AND
+                        (CONTAINS(Movie.Title, @Keywords) OR CONTAINS(Movie.ImdbCode, @Keywords))";
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(genre != null ? genre.EnglishName : string.Empty))
+                    {
+                        query += @" AND
+                        CONTAINS(Movie.GenreNames, @genre)";
+                    }
+
+                    query += " ORDER BY Movie.Rating DESC";
+                    query += @" OFFSET @skip ROWS 
+                    FETCH NEXT @take ROWS ONLY";
+
+                    await using var command = context.Database.GetDbConnection().CreateCommand();
+                    command.Parameters.Add(skipParameter);
+                    command.Parameters.Add(takeParameter);
+                    command.Parameters.Add(ratingParameter);
+                    command.Parameters.Add(queryParameter);
+                    command.Parameters.Add(genreParameter);
+                    var imdbParameters = new List<string>();
+                    var index = 0;
+                    foreach (var imdb in imdbIds)
+                    {
+                        var paramName = "@imdb" + index;
+                        command.Parameters.Add(new SqlParameter(paramName, imdb));
+                        imdbParameters.Add(paramName);
+                        index++;
+                    }
+
+                    command.CommandText = string.Format(query, string.Join(",", imdbParameters));
+                    var count = 0;
+                    var movies = new List<MovieLightJson>();
 
                     try
                     {
-                        var response = await restClient.ExecuteTaskAsync(request, cancellation);
-                        if (response.ErrorException != null)
-                            throw response.ErrorException;
+                        await command.Connection.OpenAsync(cancellation);
+                        await using var reader = await command.ExecuteReaderAsync(cancellation);
 
-                        wrapper = JsonSerializer.Deserialize<MovieLightResponse>(response.RawBytes);
-                        foreach (var movie in wrapper.Movies)
+                        while (await reader.ReadAsync(cancellation))
                         {
-                            movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
+                            var movie = new MovieLightJson
+                            {
+                                Title = !await reader.IsDBNullAsync(0, cancellation)
+                                    ? reader.GetString(0)
+                                    : string.Empty,
+                                Year = !await reader.IsDBNullAsync(1, cancellation) ? reader.GetInt32(1) : 0,
+                                Rating = !await reader.IsDBNullAsync(2, cancellation) ? reader.GetDouble(2) : 0d,
+                                PosterImage = !await reader.IsDBNullAsync(3, cancellation)
+                                    ? reader.GetString(3)
+                                    : string.Empty,
+                                ImdbId = !await reader.IsDBNullAsync(4, cancellation)
+                                    ? reader.GetString(4)
+                                    : string.Empty,
+                                Genres = !await reader.IsDBNullAsync(5, cancellation)
+                                    ? reader.GetString(5)
+                                    : string.Empty,
+                                TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage
+                            };
+                            movies.Add(movie);
+                            count = !await reader.IsDBNullAsync(6, cancellation) ? reader.GetInt32(6) : 0;
                         }
                     }
                     catch (Exception exception) when (exception is TaskCanceledException)
@@ -553,10 +651,8 @@ namespace Popcorn.Services.Movies.Movie
                             $"GetMoviesByIds ({string.Join(",", imdbIds)}) in {elapsedMs} milliseconds.");
                     }
 
-                    var result = wrapper?.Movies ?? new List<MovieLightJson>();
-                    await ProcessTranslations(result);
-                    var nbResult = wrapper?.TotalMovies ?? 0;
-                    return (result, nbResult);
+                    await ProcessTranslations(movies);
+                    return (movies, count);
                 }, ct);
             }
             catch (Exception ex)
@@ -574,6 +670,7 @@ namespace Popcorn.Services.Movies.Movie
         /// <param name="limit">The maximum number of movies to return</param>
         /// <param name="genre">The genre to filter</param>
         /// <param name="ratingFilter">Used to filter by rating</param>
+        /// <param name="sortBy">Sort by</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Searched movies and the number of movies found</returns>
         public async Task<(IEnumerable<MovieLightJson> movies, int nbMovies)> SearchMoviesAsync(string criteria,
@@ -581,6 +678,7 @@ namespace Popcorn.Services.Movies.Movie
             int limit,
             GenreJson genre,
             double ratingFilter,
+            string sortBy,
             CancellationToken ct)
         {
             var timeoutPolicy =
@@ -589,37 +687,141 @@ namespace Popcorn.Services.Movies.Movie
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
+                    var optionsBuilder = new DbContextOptionsBuilder<PopcornContext>();
+                    optionsBuilder.UseSqlServer(
+                        (ConfigurationManager.GetSection("settings") as NameValueCollection)["SQLConnectionString"],
+                        builder =>
+                        {
+                            builder.CommandTimeout(Convert.ToInt32(TimeSpan.FromSeconds(60).TotalSeconds));
+                            builder.EnableRetryOnFailure();
+                        });
+                    await using var context = new PopcornContext(optionsBuilder.Options);
+
                     var watch = Stopwatch.StartNew();
-                    var wrapper = new MovieLightResponse();
                     if (limit < 1 || limit > 50)
                         limit = Constants.MaxMoviesPerPage;
 
                     if (page < 1)
                         page = 1;
 
-                    var restClient = new RestClient(Constants.PopcornApi)
-                    {
-                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-                    };
-                    var request = new RestRequest("/{segment}", Method.GET);
-                    request.AddUrlSegment("segment", "movies");
-                    request.AddParameter("limit", limit);
-                    request.AddParameter("page", page);
-                    request.AddParameter("genre", genre != null ? genre.EnglishName : string.Empty);
-                    request.AddParameter("minimum_rating", Convert.ToInt32(ratingFilter));
-                    request.AddParameter("query_term", criteria);
-                    request.AddParameter("sort_by", "year");
+                    var skipParameter = new SqlParameter("@skip", (page - 1) * limit);
+                    var takeParameter = new SqlParameter("@take", limit);
+                    var ratingParameter = new SqlParameter("@rating", ratingFilter);
+                    var queryParameter = new SqlParameter("@Keywords", string.Format(@"""{0}""", criteria));
+                    var genreParameter = new SqlParameter("@genre", genre != null ? genre.EnglishName : string.Empty);
+                    var query = @"
+                    SELECT DISTINCT
+                        Movie.Title, Movie.Year, Movie.Rating, Movie.PosterImage, Movie.ImdbCode, Movie.GenreNames, Torrent.Peers, Torrent.Seeds, COUNT(*) OVER () as TotalCount, Movie.DateUploadedUnix, Movie.Id, Movie.DownloadCount, Movie.LikeCount
+                    FROM 
+                        MovieSet AS Movie
+                    CROSS APPLY
+					(
+						SELECT TOP 1 Torrent.MovieId, Torrent.Peers, Torrent.Seeds FROM TorrentMovieSet AS Torrent
+						WHERE Torrent.MovieId = Movie.Id  AND Torrent.Url <> '' AND Torrent.Url IS NOT NULL
+					) Torrent
 
+                    INNER JOIN
+                        CastSet AS Cast
+                    ON Cast.MovieId = Movie.Id
+                    WHERE 1 = 1";
+
+                    if (ratingFilter >= 0 && ratingFilter <= 10)
+                    {
+                        query += @" AND
+                        Movie.Rating >= @rating";
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(criteria))
+                    {
+                        query += @" AND
+                        (CONTAINS(Movie.Title, @Keywords) OR CONTAINS(Cast.Name, @Keywords) OR CONTAINS(Movie.ImdbCode, @Keywords) OR CONTAINS(Cast.ImdbCode, @Keywords))";
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(genre != null ? genre.EnglishName : string.Empty))
+                    {
+                        query += @" AND
+                        CONTAINS(Movie.GenreNames, @genre)";
+                    }
+
+                    query +=
+                        " GROUP BY Movie.Id, Movie.Title, Movie.Year, Movie.Rating, Movie.PosterImage, Movie.ImdbCode, Movie.GenreNames, Torrent.Peers, Torrent.Seeds, Movie.DateUploadedUnix, Movie.Id, Movie.DownloadCount, Movie.LikeCount";
+
+                    if (!string.IsNullOrWhiteSpace(sortBy))
+                    {
+                        switch (sortBy)
+                        {
+                            case "title":
+                                query += " ORDER BY Movie.Title ASC";
+                                break;
+                            case "year":
+                                query += " ORDER BY Movie.Year DESC";
+                                break;
+                            case "rating":
+                                query += " ORDER BY Movie.Rating DESC";
+                                break;
+                            case "peers":
+                                query += " ORDER BY Torrent.Peers DESC";
+                                break;
+                            case "seeds":
+                                query += " ORDER BY Torrent.Seeds DESC";
+                                break;
+                            case "download_count":
+                                query += " ORDER BY Movie.DownloadCount DESC";
+                                break;
+                            case "like_count":
+                                query += " ORDER BY Movie.LikeCount DESC";
+                                break;
+                            case "date_added":
+                                query += " ORDER BY Movie.DateUploadedUnix DESC";
+                                break;
+                            default:
+                                query += " ORDER BY Movie.DateUploadedUnix DESC";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        query += " ORDER BY Movie.DateUploadedUnix DESC";
+                    }
+                    query += @" OFFSET @skip ROWS 
+                    FETCH NEXT @take ROWS ONLY";
+
+                    var count = 0;
+                    var movies = new List<MovieLightJson>();
                     try
                     {
-                        var response = await restClient.ExecuteTaskAsync(request, cancellation);
-                        if (response.ErrorException != null)
-                            throw response.ErrorException;
-
-                        wrapper = JsonSerializer.Deserialize<MovieLightResponse>(response.RawBytes);
-                        foreach (var movie in wrapper.Movies)
+                        await using var command = context.Database.GetDbConnection().CreateCommand();
+                        command.CommandText = query;
+                        command.CommandType = CommandType.Text;
+                        command.Parameters.Add(skipParameter);
+                        command.Parameters.Add(takeParameter);
+                        command.Parameters.Add(ratingParameter);
+                        command.Parameters.Add(queryParameter);
+                        command.Parameters.Add(genreParameter);
+                        await context.Database.OpenConnectionAsync(cancellation);
+                        await using var reader = await command.ExecuteReaderAsync(cancellation);
+                        while (await reader.ReadAsync(cancellation))
                         {
-                            movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
+                            var movie = new MovieLightJson
+                            {
+                                Title = !await reader.IsDBNullAsync(0, cancellation)
+                                    ? reader.GetString(0)
+                                    : string.Empty,
+                                Year = !await reader.IsDBNullAsync(1, cancellation) ? reader.GetInt32(1) : 0,
+                                Rating = !await reader.IsDBNullAsync(2, cancellation) ? reader.GetDouble(2) : 0d,
+                                PosterImage = !await reader.IsDBNullAsync(3, cancellation)
+                                    ? reader.GetString(3)
+                                    : string.Empty,
+                                ImdbId = !await reader.IsDBNullAsync(4, cancellation)
+                                    ? reader.GetString(4)
+                                    : string.Empty,
+                                Genres = !await reader.IsDBNullAsync(5, cancellation)
+                                    ? reader.GetString(5)
+                                    : string.Empty,
+                                TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage
+                            };
+                            movies.Add(movie);
+                            count = !await reader.IsDBNullAsync(8, cancellation) ? reader.GetInt32(8) : 0;
                         }
                     }
                     catch (Exception exception) when (exception is TaskCanceledException)
@@ -641,10 +843,8 @@ namespace Popcorn.Services.Movies.Movie
                             $"SearchMoviesAsync ({criteria}, {page}, {limit}) in {elapsedMs} milliseconds.");
                     }
 
-                    var result = wrapper?.Movies ?? new List<MovieLightJson>();
-                    await ProcessTranslations(result);
-                    var nbResult = wrapper?.TotalMovies ?? 0;
-                    return (result, nbResult);
+                    await ProcessTranslations(movies);
+                    return (movies, count);
                 }, ct);
             }
             catch (Exception ex)
@@ -686,7 +886,7 @@ namespace Popcorn.Services.Movies.Movie
                     try
                     {
                         var tmdbMovie =
-                            await (await _tmdbService.GetClient).GetMovieAsync(movie.ImdbId, MovieMethods.Videos);
+                            await (await _tmdbService.GetClient).GetMovieAsync(movie.ImdbId, MovieMethods.Videos, cancellation);
                         var trailers = tmdbMovie?.Videos;
                         if (trailers != null && trailers.Results.Any())
                         {
@@ -785,24 +985,62 @@ namespace Popcorn.Services.Movies.Movie
             {
                 return await timeoutPolicy.ExecuteAsync(async cancellation =>
                 {
+                    var optionsBuilder = new DbContextOptionsBuilder<PopcornContext>();
+                    optionsBuilder.UseSqlServer(
+                        (ConfigurationManager.GetSection("settings") as NameValueCollection)["SQLConnectionString"],
+                        builder =>
+                        {
+                            builder.CommandTimeout(Convert.ToInt32(TimeSpan.FromSeconds(60).TotalSeconds));
+                            builder.EnableRetryOnFailure();
+                        });
+                    await using var context = new PopcornContext(optionsBuilder.Options);
+
                     var watch = Stopwatch.StartNew();
-                    var wrapper = new MovieLightResponse();
-                    var restClient = new RestClient(Constants.PopcornApi)
-                    {
-                        RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => true
-                    };
-                    var request = new RestRequest("/movies/cast/{segment}", Method.GET);
-                    request.AddUrlSegment("segment", imdbCode);
+                    var imdbParameter = new SqlParameter("@imdbCode", imdbCode);
+                    var query = @"
+                    SELECT 
+                        Movie.Title, Movie.Year, Movie.Rating, Movie.PosterImage, Movie.ImdbCode, Movie.GenreNames
+                    FROM 
+                        MovieSet AS Movie
+                    INNER JOIN
+                        CastSet AS Cast
+                    ON 
+                        Cast.MovieId = Movie.Id
+                    WHERE
+                        Cast.ImdbCode = @imdbCode";
+
+                    var movies = new List<MovieLightJson>();
+
                     try
                     {
-                        var response = await restClient.ExecuteTaskAsync(request, cancellation);
-                        if (response.ErrorException != null)
-                            throw response.ErrorException;
 
-                        wrapper = JsonSerializer.Deserialize<MovieLightResponse>(response.RawBytes);
-                        foreach (var movie in wrapper.Movies)
+                        await using var command = context.Database.GetDbConnection().CreateCommand();
+                        command.CommandText = query;
+                        command.CommandType = CommandType.Text;
+                        command.Parameters.Add(imdbParameter);
+                        await context.Database.OpenConnectionAsync(cancellation);
+                        await using var reader = await command.ExecuteReaderAsync(cancellation);
+                        while (await reader.ReadAsync(cancellation))
                         {
-                            movie.TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage;
+                            var movie = new MovieLightJson
+                            {
+                                Title = !await reader.IsDBNullAsync(0, cancellation)
+                                    ? reader.GetString(0)
+                                    : string.Empty,
+                                Year = !await reader.IsDBNullAsync(1, cancellation) ? reader.GetInt32(1) : 0,
+                                Rating = !await reader.IsDBNullAsync(2, cancellation) ? reader.GetDouble(2) : 0d,
+                                PosterImage = !await reader.IsDBNullAsync(3, cancellation)
+                                    ? reader.GetString(3)
+                                    : string.Empty,
+                                ImdbId = !await reader.IsDBNullAsync(4, cancellation)
+                                    ? reader.GetString(4)
+                                    : string.Empty,
+                                Genres = !await reader.IsDBNullAsync(5, cancellation)
+                                    ? reader.GetString(5)
+                                    : string.Empty,
+                                TranslationLanguage = (await _tmdbService.GetClient).DefaultLanguage
+                            };
+                            movies.Add(movie);
                         }
                     }
                     catch (Exception exception) when (exception is TaskCanceledException)
@@ -824,9 +1062,8 @@ namespace Popcorn.Services.Movies.Movie
                             $"GetMovieFromCast ({imdbCode}) in {elapsedMs} milliseconds.");
                     }
 
-                    var result = wrapper?.Movies ?? new List<MovieLightJson>();
-                    await ProcessTranslations(result);
-                    return result;
+                    await ProcessTranslations(movies);
+                    return movies;
                 }, ct);
             }
             catch (Exception ex)
@@ -844,6 +1081,58 @@ namespace Popcorn.Services.Movies.Movie
         public async Task<string> GetImagePathFromTmdb(string url)
         {
             return (await _tmdbService.GetClient).GetImageUrl("original", url, true).AbsoluteUri;
+        }
+
+        /// <summary>
+        /// Convert a <see cref="Movie"/> to a <see cref="MovieJson"/>
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
+        private MovieJson ConvertMovieToJson(Database.Movie movie)
+        {
+            return new MovieJson
+            {
+                Rating = movie.Rating,
+                Torrents = movie.Torrents.Select(torrent => new TorrentJson
+                {
+                    DateUploadedUnix = torrent.DateUploadedUnix,
+                    Peers = torrent.Peers,
+                    Seeds = torrent.Seeds,
+                    Quality = torrent.Quality,
+                    Url = torrent.Url,
+                    DateUploaded = torrent.DateUploaded,
+                    Hash = torrent.Hash,
+                    Size = torrent.Size,
+                    SizeBytes = torrent.SizeBytes
+                }).ToList(),
+                Title = movie.Title,
+                DateUploadedUnix = movie.DateUploadedUnix,
+                Genres = movie.Genres.Select(genre => genre.Name).ToList(),
+                Cast = movie.Cast.Select(cast => new CastJson
+                {
+                    CharacterName = cast.CharacterName,
+                    Name = cast.Name,
+                    ImdbCode = cast.ImdbCode,
+                    SmallImage = cast.SmallImage
+                }).ToList(),
+                Runtime = movie.Runtime,
+                Url = movie.Url,
+                Year = movie.Year,
+                Slug = movie.Slug,
+                LikeCount = movie.LikeCount,
+                DownloadCount = movie.DownloadCount,
+                ImdbId = movie.ImdbCode,
+                DateUploaded = movie.DateUploaded,
+                BackgroundImage = movie.BackgroundImage,
+                DescriptionFull = movie.DescriptionFull,
+                DescriptionIntro = movie.DescriptionIntro,
+                Language = movie.Language,
+                MpaRating = movie.MpaRating,
+                PosterImage = movie.PosterImage,
+                TitleLong = movie.TitleLong,
+                YtTrailerCode = movie.YtTrailerCode,
+                Similars = movie.Similars.Select(a => a.TmdbId).ToList()
+            };
         }
     }
 }

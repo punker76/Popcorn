@@ -74,6 +74,7 @@ namespace Popcorn.ViewModels.Pages.Home.Show.Tabs
                             MaxNumberOfShows,
                             Genre,
                             Rating * 10,
+                            "year",
                             CancellationLoadingShows.Token);
 
                     DispatcherHelper.CheckBeginInvokeOnUI(() =>

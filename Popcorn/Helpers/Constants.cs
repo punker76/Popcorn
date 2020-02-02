@@ -20,11 +20,6 @@ namespace Popcorn.Helpers
         /// Copyright
         /// </summary>
         public static readonly string Copyright = "Copyright Popcorn © 2019-" + DateTime.Now.Year;
-
-        /// <summary>
-        /// Endpoint to API
-        /// </summary>
-        public const string PopcornApi = "https://famille.dynamic-dns.net/api";
         
         /// <summary>
         /// Client ID for TMDb

@@ -37,7 +37,7 @@ namespace Popcorn.Services.Shows.Show
         /// <param name="imdbIds">The imdbIds of the shows, split by comma</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Shows</returns>
-        Task<(IEnumerable<ShowLightJson> movies, int nbMovies)> GetShowsByIds(IEnumerable<string> imdbIds,
+        Task<(IEnumerable<ShowLightJson> movies, int nbMovies)> GetShowsByIds(IList<string> imdbIds,
             CancellationToken ct);
 
         /// <summary>
@@ -65,6 +65,7 @@ namespace Popcorn.Services.Shows.Show
         /// <param name="limit">The maximum number of movies to return</param>
         /// <param name="genre">The genre to filter</param>
         /// <param name="ratingFilter">Used to filter by rating</param>
+        /// <param name="sortBy">The sort</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Searched shows and the number of movies found</returns>
         Task<(IEnumerable<ShowLightJson> shows, int nbShows)> SearchShowsAsync(string criteria,
@@ -72,6 +73,7 @@ namespace Popcorn.Services.Shows.Show
             int limit,
             GenreJson genre,
             double ratingFilter,
+            string sortBy,
             CancellationToken ct);
 
         /// <summary>

@@ -58,6 +58,7 @@ namespace Popcorn.Services.Movies.Movie
         /// <param name="limit">The maximum number of movies to return</param>
         /// <param name="genre">The genre to filter</param>
         /// <param name="ratingFilter">Used to filter by rating</param>
+        /// <param name="sortBy">Sort By</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Searched movies and the number of movies found</returns>
         Task<(IEnumerable<MovieLightJson> movies, int nbMovies)> SearchMoviesAsync(string criteria,
@@ -65,6 +66,7 @@ namespace Popcorn.Services.Movies.Movie
             int limit,
             GenreJson genre,
             double ratingFilter,
+            string sortBy,
             CancellationToken ct);
 
         /// <summary>
@@ -73,7 +75,7 @@ namespace Popcorn.Services.Movies.Movie
         /// <param name="imdbIds">The imdbIds of the movies, split by comma</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Movies</returns>
-        Task<(IEnumerable<MovieLightJson> movies, int nbMovies)> GetMoviesByIds(IEnumerable<string> imdbIds,
+        Task<(IEnumerable<MovieLightJson> movies, int nbMovies)> GetMoviesByIds(IList<string> imdbIds,
             CancellationToken ct);
 
         /// <summary>
@@ -91,7 +93,7 @@ namespace Popcorn.Services.Movies.Movie
             int limit,
             double ratingFilter,
             string sortBy,
-            IEnumerable<string> imdbIds,
+            IList<string> imdbIds,
             CancellationToken ct,
             GenreJson genre = null);
 
